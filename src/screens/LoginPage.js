@@ -1,8 +1,7 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {StyleSheet, Text, View, Dimensions} from 'react-native'
 import { Input } from 'react-native-elements';
-import Button from "../components/Button"
+import {Button, ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 
 
@@ -14,23 +13,23 @@ const LoginPage = () =>{
                 <Text style={styles.border}></Text>
             </View>
             <View style={styles.inputText}>
-                <Text style={styles.email}>Enter your email</Text>
-                    <Input style={styles.inputEmail} placeholder='email@gmaill.com' inputContainerStyle={{borderBottomColor:'#5BB1B0'}} leftIcon={{ type: 'font-awesome', name: 'envelope' }}/>       
-                <Text style={styles.password}>Enter your password</Text>
-                    <Input style={styles.inputPassword} placeholder="Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0'}} leftIcon={{type: 'font-awesome', name:'lock'}}/>
+                <Text style={styles.email}>E-mail</Text>
+                    <Input style={styles.inputEmail} placeholder='email@gmaill.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />       
+                <Text style={styles.password}>Password</Text>
+                    <Input style={styles.inputPassword} placeholder="Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash'}}/>
             </View>
             <View style={styles.buttonforgot}>
-                <ButtonText text={"Forgot password?"}/>
+                <ButtonText style={styles.text_forgot} text={"Forgot password?"}/>
             </View>
             <View style={styles.buttonContainer}>
-                <Button title={"Enter"}/>
+                <ButtonLogin text={"Enter"}/>
             </View>
             <View style={styles.buttongoogle}>
-                <ButtonGoogle logingoogle={"Login Whith Google"}/>
+                <ButtonGoogle logingoogle={"Login Google"}/>
                 
             </View>
             <View style={styles.buttonSigup}>
-                <ButtonText text={"Don't have an account? Sig up"}/>
+                <ButtonText text={"Don't have an account?"}/>
             </View>
         </View>
 
@@ -40,20 +39,19 @@ const LoginPage = () =>{
 
 const styles = StyleSheet.create({
     container:{
-        flex:2,
+       flex:1,
         justifyContent:'center',
         alignItems:'center',
+        backgroundColor:'#ecedeb'
     },
     titlecontainer:{
-        flex:1,
+       
         justifyContent: 'center',
         alignItems:'center',
     },
-    inputText:{
-        flex:3,
-        justifyContent:'center',
-    },
+  
     text_title:{
+        
         textAlign: 'center',
         fontSize:40,
     },
@@ -64,21 +62,38 @@ const styles = StyleSheet.create({
      
     },
     email:{
-        fontSize:15,
-        fontWeight:600,
+        color:'#a0a29f',
+        fontSize:12,
+       
+        
     },
-    buttongoogle:{
- 
+    password:{
+        color:'#a0a29f',
+        fontSize:12,
+     
     },
+    inputEmail:{
+        padding: 10,
+        
+    },
+    inputPassword:{
+        padding: 10,
+    },
+    inputText:{
+        marginTop:35,
+       
+    },
+   
     buttonforgot:{
-
-       marginLeft: 140,
+       marginLeft:200,
+       marginBottom:40,
        
     },
     buttonSigup:{
+        marginTop:10,
+      
+    },
    
-        marginBottom:10,
-    }
 })
 
 export default LoginPage;

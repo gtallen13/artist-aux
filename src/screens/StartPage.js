@@ -1,8 +1,7 @@
 import React from 'react'
-<<<<<<< HEAD
 import {Dimensions, StyleSheet, View, Text} from 'react-native'
 import { Image} from 'react-native-elements'
-import Button from '../components/Button'
+import {Button,ButtonLogin} from '../components/Button'
 const {width,height} = Dimensions.get('screen');
 const StartPage = () =>
 {
@@ -78,29 +77,3 @@ const styles = StyleSheet.create({
 })
 
 export default StartPage;
-=======
-import {StyleSheet, View, Text} from 'react-native'
-import {Text, Image} from 'react-native-elements'
-
-const StartPage = () => {
-    return(
-        <View style={styles.container}>
-            <Text>Artist</Text>
-        </View>
-   
-    )
-}
-const styles = StyleSheet.create ({
-    container:{
-        flex: 1,
-        justifyContent:'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-    },
-    subTitle:{
-        fontSize
-    }
-})
-
-export default homeStack;
->>>>>>> 305e427d833e1041aa1b70672c3105a9f8605a05
