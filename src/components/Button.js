@@ -6,8 +6,11 @@ const Button = ({title})=> {
         <TouchableOpacity style={styles.buttonContainer}>
             <Text style={styles.buttonText}>{title}</Text>
         </TouchableOpacity>
+        
     )
+    
 }
+
 
 const styles = StyleSheet.create({
     buttonContainer: {

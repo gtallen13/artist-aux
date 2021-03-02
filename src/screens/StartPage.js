@@ -10,7 +10,9 @@ const StartPage = () =>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Artist
                     <Text style={styles.titleTextSpan}>Aux</Text>
+                    
                 </Text>
+                <Text style={styles.border}></Text>
                 <Text style={styles.subTitle}>Record Anywhere</Text>
             </View>
             <View style={styles.logoContainer}>
@@ -39,8 +41,14 @@ const styles = StyleSheet.create({
     titleTextSpan:{
         fontWeight:'500',
         marginLeft:5,
-        textDecorationLine:'underline',
-        textDecorationColor:'#5bb1b0',
+        
+    },
+    border:{
+        height:5,
+        width:70,
+        backgroundColor:'#5BB1B0',
+        marginLeft:125,
+        
     },
     subTitle:{
         textAlign:'center',
