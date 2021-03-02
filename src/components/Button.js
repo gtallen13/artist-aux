@@ -1,9 +1,9 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Dimensions} from 'react-native'
 const {width} = Dimensions.get('screen');
-const Button = ({title})=> {
+const Button = ({title,callback})=> {
     return (
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.buttonContainer} onPress={callback}>
             <Text style={styles.buttonText}>{title}</Text>
         </TouchableOpacity>
         

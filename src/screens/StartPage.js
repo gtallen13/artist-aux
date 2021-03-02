@@ -3,8 +3,9 @@ import {Dimensions, StyleSheet, View, Text} from 'react-native'
 import { Image} from 'react-native-elements'
 import {Button,ButtonLogin} from '../components/Button'
 const {width,height} = Dimensions.get('screen');
-const StartPage = () =>
+const StartPage = ({navigation}) =>
 {
+    
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
@@ -21,8 +22,8 @@ const StartPage = () =>
                 source={require('../../assets/logo.png')}/>
             </View>
             <View style={styles.buttonContainer}>
-                <Button title={"Log in"}/>
-                <Button title={"Sign Up"}/>
+                <Button title={"Log in"} callback={()=>navigation.navigate('login')}/>
+                <Button title={"Sign Up"} callback={()=>console.log('sign up')}/>
             </View>
         </View>
     )
