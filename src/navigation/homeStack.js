@@ -5,7 +5,10 @@ import LoginPage from '../screens/LoginPage'
 
 const screens = {
     start:{
-        screen:LoginPage,
+        screen:StartPage,
+    },
+    login:{
+        screen: LoginPage
     }
 }
 
