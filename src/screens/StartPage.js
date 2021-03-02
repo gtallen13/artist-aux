@@ -16,7 +16,7 @@ const StartPage = () =>
             <View style={styles.logoContainer}>
                 <Image 
                 style={styles.logo}
-                source={{uri:'https://picsum.photos/200/300'}}/>
+                source={require('../../assets/logo.png')}/>
             </View>
             <View style={styles.buttonContainer}>
                 <Button title={"Log in"}/>
