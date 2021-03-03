@@ -3,6 +3,7 @@ import {createAppContainer} from 'react-navigation'
 import {StyleSheet} from 'react-native'
 import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
+import SignUpPage from '../screens/SignUp';
 
 const screens = {
     start:{
@@ -13,6 +14,9 @@ const screens = {
     },
     login:{
         screen: LoginPage
+    },
+    signUp: {
+        screen:SignUpPage
     }
 }
 

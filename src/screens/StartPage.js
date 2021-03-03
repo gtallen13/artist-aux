@@ -23,7 +23,7 @@ const StartPage = ({navigation}) =>
             </View>
             <View style={styles.buttonContainer}>
                 <Button title={"Log in"} callback={()=>navigation.navigate('login')}/>
-                <Button title={"Sign Up"} callback={()=>console.log('sign up')}/>
+                <Button title={"Sign Up"} callback={()=>navigation.navigate('signUp')}/>
             </View>
         </View>
     )

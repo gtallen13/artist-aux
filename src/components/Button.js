@@ -5,10 +5,8 @@ const Button = ({title,callback})=> {
     return (
         <TouchableOpacity style={styles.buttonContainer} onPress={callback}>
             <Text style={styles.buttonText}>{title}</Text>
-        </TouchableOpacity>
-        
-    )
-    
+        </TouchableOpacity>        
+    )    
 }
 
 const ButtonLogin = ({text}) => {
@@ -19,7 +17,6 @@ const ButtonLogin = ({text}) => {
     )
 }
 
-
 const styles = StyleSheet.create({
     buttonContainer: {
         width: width*.5,
@@ -29,24 +26,19 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom:20,
     },
-    buttonText:
-    {
+    buttonText: {
         textAlign:'center',
         fontSize:20,
     },
-
     buttonLogin: {
         width: width*.9,
         padding:10,
        
         backgroundColor: '#5bb1b0',
         borderRadius: 10,
-        marginBottom:20,
-
-    
+        marginBottom:20,    
     },
-    textLogin:
-    {
+    textLogin: {
         textAlign:'center',
         fontSize:20,
         color:'white'
