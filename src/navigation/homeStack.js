@@ -5,7 +5,7 @@ import {createAppContainer} from 'react-navigation'
 import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
-import { HeaderButton } from '../components/Button'
+import { ButtonText } from '../components/ButtonText'
 
 const screens = {
     start:{
@@ -19,9 +19,7 @@ const screens = {
         navigationOptions:{
             headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
             headerRight: () =>(
-                <HeaderButton
-                icon="plus"
-                callback={()=>console.log("hi")}/>
+                <ButtonText text="Logout" color="#000" fontSize={15}/>
             ),
         },
     },
@@ -37,6 +35,7 @@ const HomeStack = createStackNavigator(screens,{
             backgroundColor:"#ecedeb",
         },
         headerTransparent:true,
+
     }
 });
 const styles = StyleSheet.create({
