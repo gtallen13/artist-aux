@@ -12,7 +12,7 @@ const screens = {
         screen:StartPage,
         navigationOptions:{
             headerShown:false
-        }
+        },
     },
     login:{
         screen: LoginPage,
@@ -22,25 +22,21 @@ const screens = {
                 <HeaderButton
                 icon="plus"
                 callback={()=>console.log("hi")}/>
-            )
-        }
+            ),
+        },
     },
     signUp: {
         screen:SignUpPage
-    }
-}
+    },
+};
 
 const HomeStack = createStackNavigator(screens,{
     defaultNavigationOptions:{
         headerTitle:false,
         headerStyle:{
             backgroundColor:"#ecedeb",
-            shadowColor: 'transparent',
-            shadowRadius: 0,
-            shadowOffset: {
-                height: 0,
-            },
-        }
+        },
+        headerTransparent:true,
     }
 });
 const styles = StyleSheet.create({
