@@ -17,15 +17,15 @@ const screens = {
     },
     login:{
         screen: LoginPage,
-        navigationOptions:{
-            headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
-            headerRight: () =>(
-                <HeaderButton icon="plus" callback={()=>console.log("Add projects")}/>
-            ),
-            headerLeft: ()=>(
-                <HeaderButton icon="user" callback={()=>console.log("My Profile")}/>
-            )
-        },
+        // navigationOptions:{
+        //     headerTitle:()=>(<Text style={styles.headerTitle}>My Projects</Text>),
+        //     headerRight: () =>(
+        //         <HeaderButton icon="plus" callback={()=>console.log("Add projects")}/>
+        //     ),
+        //     headerLeft: ()=>(
+        //         <HeaderButton icon="user" callback={()=>console.log("My Profile")}/>
+        //     )
+        // },
         /* Barra superior */
         // navigationOptions:{
         //     headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
