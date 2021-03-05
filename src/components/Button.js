@@ -1,5 +1,6 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, Dimensions} from 'react-native'
+import {View,TouchableOpacity, Text, StyleSheet, Dimensions} from 'react-native'
+import { Icon } from 'react-native-elements';
 const {width} = Dimensions.get('screen');
 const Button = ({title,callback})=> {
     return (
@@ -14,6 +15,19 @@ const ButtonLogin = ({text}) => {
         <TouchableOpacity style={styles.buttonLogin}>
             <Text style={styles.textLogin}>{text}</Text>
         </TouchableOpacity>
+    )
+}
+const HeaderButton = ({icon, callback}) =>{
+    return(
+        <View>
+            <TouchableOpacity >
+                <Icon 
+                style={styles.headerButton}
+                onPress={callback}
+                name={icon}
+                type="font-awesome"/>
+            </TouchableOpacity>
+        </View>
     )
 }
 
@@ -42,7 +56,9 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:20,
         color:'white'
-    }
+    },
+    headerButton:{
+        marginRight:10,
+    },
 })
-
-export {Button, ButtonLogin};
+export {Button, ButtonLogin, HeaderButton};

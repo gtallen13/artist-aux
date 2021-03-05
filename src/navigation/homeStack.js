@@ -1,9 +1,11 @@
+import React from 'react'
+import {Text,StyleSheet} from 'react-native'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createAppContainer} from 'react-navigation'
-import {StyleSheet} from 'react-native'
 import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
+import { HeaderButton } from '../components/Button'
 
 const screens = {
     start:{
@@ -13,7 +15,15 @@ const screens = {
         }
     },
     login:{
-        screen: LoginPage
+        screen: LoginPage,
+        navigationOptions:{
+            headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
+            headerRight: () =>(
+                <HeaderButton
+                icon="plus"
+                callback={()=>console.log("hi")}/>
+            )
+        }
     },
     signUp: {
         screen:SignUpPage
@@ -22,8 +32,23 @@ const screens = {
 
 const HomeStack = createStackNavigator(screens,{
     defaultNavigationOptions:{
-        headerTitle:false
+        headerTitle:false,
+        headerStyle:{
+            backgroundColor:"#ecedeb",
+            shadowColor: 'transparent',
+            shadowRadius: 0,
+            shadowOffset: {
+                height: 0,
+            },
+        }
     }
 });
+const styles = StyleSheet.create({
 
+    headerTitle:{
+        textAlign:'center',
+        fontSize:20,
+        fontWeight:'600'
+    }
+})
 export default createAppContainer(HomeStack);
