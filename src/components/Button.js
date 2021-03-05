@@ -21,8 +21,7 @@ const HeaderButton = ({icon, callback}) =>{
     return(
         <View>
             <TouchableOpacity >
-                <Icon 
-                style={styles.headerButton}
+                <Icon
                 onPress={callback}
                 name={icon}
                 type="font-awesome"/>
@@ -56,9 +55,6 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:20,
         color:'white'
-    },
-    headerButton:{
-        marginRight:10,
     },
 })
 export {Button, ButtonLogin, HeaderButton};

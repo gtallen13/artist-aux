@@ -6,6 +6,7 @@ import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
 import { ButtonText } from '../components/ButtonText'
+import { View } from 'react-native'
 
 const screens = {
     start:{
@@ -16,12 +17,13 @@ const screens = {
     },
     login:{
         screen: LoginPage,
-        navigationOptions:{
-            headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
-            headerRight: () =>(
-                <ButtonText text="Logout" color="#000" fontSize={15}/>
-            ),
-        },
+        /* Barra superior */
+        // navigationOptions:{
+        //     headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
+        //     headerRight: () =>(
+        //         <ButtonText text="Logout" color="#000" fontSize={15}/>
+        //     ),
+        // },
     },
     signUp: {
         screen:SignUpPage
@@ -35,7 +37,7 @@ const HomeStack = createStackNavigator(screens,{
             backgroundColor:"#ecedeb",
         },
         headerTransparent:true,
-
+        
     }
 });
 const styles = StyleSheet.create({
@@ -44,6 +46,6 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:20,
         fontWeight:'600'
-    }
+    },
 })
 export default createAppContainer(HomeStack);
