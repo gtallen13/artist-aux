@@ -6,7 +6,7 @@ import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
 import { ButtonText } from '../components/ButtonText'
-import { View } from 'react-native'
+import {HeaderButton} from '../components/Button';
 
 const screens = {
     start:{
@@ -21,8 +21,11 @@ const screens = {
         // navigationOptions:{
         //     headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
         //     headerRight: () =>(
-        //         <ButtonText text="Logout" color="#000" fontSize={15}/>
+        //         <ButtonText text="Logout" color="#000" fontSize={15} callback={()=>console.log("Logout")}/>
         //     ),
+        //     headerLeft: ()=>(
+        //         <HeaderButton icon="user-circle" callback={()=>console.log("My profile")}/>
+        //     )
         // },
     },
     signUp: {

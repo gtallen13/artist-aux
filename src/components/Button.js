@@ -19,7 +19,7 @@ const ButtonLogin = ({text}) => {
 }
 const HeaderButton = ({icon, callback}) =>{
     return(
-        <View>
+        <View style={styles.headerButton}>
             <TouchableOpacity >
                 <Icon
                 onPress={callback}
@@ -56,5 +56,8 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'white'
     },
+    headerButton:{
+        margin:10
+    }
 })
 export {Button, ButtonLogin, HeaderButton};
