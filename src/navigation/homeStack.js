@@ -18,12 +18,12 @@ const screens = {
     login:{
         screen: LoginPage,
         /* Barra superior */
-        navigationOptions:{
-            headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
-            headerRight: () =>(
-                <ButtonText text="Logout" color="#000" fontSize={15} callback={()=>console.log("Logout")}/>
-            ),
-        },
+        // navigationOptions:{
+        //     headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
+        //     headerRight: () =>(
+        //         <ButtonText text="Logout" color="#000" fontSize={15} callback={()=>console.log("Logout")}/>
+        //     ),
+        // },
     },
     signUp: {
         screen:SignUpPage
