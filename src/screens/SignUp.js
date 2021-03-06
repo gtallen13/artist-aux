@@ -46,6 +46,7 @@ const SignUpPage = () =>{
             </View>
         </View>
     )
+    
 }
 
 const styles = StyleSheet.create({
