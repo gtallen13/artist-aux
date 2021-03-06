@@ -61,8 +61,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
     },
-    logoContainer:
-    {
+    logoContainer:{
         justifyContent:'flex-start',
         alignItems:'baseline',
         flex:2,

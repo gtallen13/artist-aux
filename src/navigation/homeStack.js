@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native'
 import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
-
+import MyProfilePage from '../screens/MyProfile';
 const screens = {
     start:{
         screen:StartPage,
@@ -13,7 +13,7 @@ const screens = {
         }
     },
     login:{
-        screen: LoginPage
+        screen: MyProfilePage
     },
     signUp: {
         screen:SignUpPage
