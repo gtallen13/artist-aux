@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {Input} from 'react-native-elements';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
@@ -9,29 +9,30 @@ import {ButtonPassword} from '../components/TextImputButton';
 const SignUpPage = () =>{
     return(
         <View style={styles.container}>
-            <View style={styles.titlecontainer}>
-                <Text style={styles.text_title}>Sign Up</Text>
-                <Text style={styles.border}></Text>
+            <View>
+                    <Text style={styles.text_title}>Sign Up</Text>
+                    <Text style={styles.border}></Text>
             </View>
-            <View style={styles.inputText}>
-                {/* Username */}
-                <Text style={styles.titlePlacerHolder}>Username</Text>
-                <Input style={styles.inputs} placeholder='Username' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}}/>
-                {/* Email */}
-                <Text style={styles.titlePlacerHolder}>E-mail</Text>
-                <Input style={styles.inputs} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />
-                {/* Password */}
-                <Text style={styles.titlePlacerHolder}>Password</Text>
-                    <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
-                {/* Confirm Password */}
-                <Text style={styles.titlePlacerHolder}>Confirm Paswword</Text>
-                    <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
-                {/* <SocialIcon 
-                    title='Sign In With Google'
-                    button
-                    type='google'
-                /> */}
-            </View> 
+
+                <View style={styles.inputText}>
+                    {/* Username */}
+                    <Text style={styles.titlePlacerHolder}>Username</Text>
+                        <TextInput style={styles.inputs} placeholder='Username' />
+                    {/* Email */}
+                    <Text style={styles.titlePlacerHolder}>E-mail</Text>
+                        <TextInput style={styles.inputs} placeholder='example@gmail.com' />
+                    {/* Password */}
+                    <Text style={styles.titlePlacerHolder}>Password</Text>
+                        <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
+                    {/* Confirm Password */}
+                    <Text style={styles.titlePlacerHolder}>Confirm Paswword</Text>
+                        <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
+                    {/* <SocialIcon 
+                        title='Sign In With Google'
+                        button
+                        type='google'
+                    /> */}
+                </View> 
             <View style={styles.buttonSignIn}>
                 <ButtonLogin text={"Sign In"}/>
             </View>  
@@ -54,10 +55,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ecedeb'
     },
-    titlecontainer:{
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     text_title:{
         textAlign: 'center',
         fontSize: 40
@@ -68,20 +65,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#5BB1B0'
     },
     inputText:{
-        marginTop: 35
+        marginTop: 25
     },
     titlePlacerHolder:{
         color:'#a0a29f',
-        fontSize:12,
+        fontSize:14,
     },
     inputs:{
-        padding: 10
-    },
-    buttonLogin:{
-        padding: 10
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 15,
+        height:50,
     },
     buttonSignIn:{
-        marginTop: 20
+        marginTop: 10
     }
 
 })
