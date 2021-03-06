@@ -26,7 +26,10 @@ const styles = StyleSheet.create({
     textbutton:{
         fontSize: 13,
         fontWeight: 300,
-        color:'#5BB1B0',       
+        color:'#5BB1B0',   
+        marginLeft: 5,
+        
+            
     },
     buttonGoogle:{
         fontSize: 15,

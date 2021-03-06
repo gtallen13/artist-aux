@@ -19,9 +19,8 @@ const ButtonPassword = ({iconName, callback}) => {
         </View>
        
     )
-
-
 }
+
 
 const styles = StyleSheet.create({
     styleButtonPassword:{
@@ -29,24 +28,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius:10,
+        marginBottom:10,
+       
     },
     inputPassword:{
         padding: 10,
-       
-        backgroundColor:'white',
-        borderBottomLeftRadius:8,
-        borderTopLeftRadius:8,
         width:250,
-    
+        height:50,
+       
 
     },
-    icon:{
-     
-      borderBottomRightRadius:8,
-      borderTopRightRadius:8,
-    
-
-    }
+ 
 })
 
 export {ButtonPassword};

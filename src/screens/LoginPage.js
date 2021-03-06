@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View, Input} from 'react-native'
+import {StyleSheet, Text, View, TextInput} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonPassword} from '../components/TextImputButton'
@@ -9,17 +9,17 @@ const LoginPage = () =>{
     return(
         <View style={styles.container}>
             {/* Titulo*/}
-            <View style={styles.titlecontainer}>
-              
+            <View>
+    
                 <Text style={styles.text_title}>Login</Text>
-                <Text style={styles.border}></Text>
+                    <Text style={styles.border}></Text>
            
             </View>
             {/*Input Correo y  Contraseña*/}
             <View style={styles.inputText}>
     
                 <Text style={styles.email}>E-mail</Text>
-                    <Input style={styles.inputEmail} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />    
+                    <TextInput style={styles.inputEmail} placeholder='example@gmail.com'  />    
                 
                 <Text style={styles.password}>Password</Text>
                     <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
@@ -44,7 +44,9 @@ const LoginPage = () =>{
             
             {/*Boton hacia SigUp */}
             <View style={styles.buttonSigup}>
-                <ButtonText text={"Don't have an account?"}/>
+                <Text> Don't have an account?
+                <ButtonText text={"Sign Up"}/>
+                    </Text>
             </View>
         </View>   
   
@@ -60,13 +62,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#ecedeb'
     },
-    input:{
-        display:'flex',
-    },
-    titlecontainer:{       
-        justifyContent: 'center',
-        alignItems:'center',
-    },
     text_title:{
         textAlign: 'center',
         fontSize:40,
@@ -76,24 +71,28 @@ const styles = StyleSheet.create({
         width:100,
         backgroundColor:'#5BB1B0',
     },
+    inputText:{
+        marginTop:35, 
+        
+    },
     email:{
         color:'#a0a29f',
-        fontSize:12,   
-     
+        fontSize:14,   
+        
     },
     password:{
         color:'#a0a29f',
-        fontSize:12,
+        fontSize:14,
     },
     inputEmail:{
-    
+        backgroundColor: 'white',
         padding: 10,
-        borderColor: 'none',
-      
+        borderRadius: 10,
+        marginBottom: 20,
+        height:50,
+     
     },
-    inputText:{
-        marginTop:35,  
-    },
+
     buttonforgot:{
        marginLeft:200,
        marginBottom:40,  
