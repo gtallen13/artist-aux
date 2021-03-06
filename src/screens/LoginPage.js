@@ -1,9 +1,7 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
-import { Input } from 'react-native-elements';
+import {StyleSheet, Text, View, Input} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
-import { InputSearch} from '../components/searchBar';
 import {ButtonPassword} from '../components/TextImputButton'
 
 const LoginPage = () =>{
@@ -19,9 +17,10 @@ const LoginPage = () =>{
             </View>
             {/*Input Correo y  Contraseña*/}
             <View style={styles.inputText}>
-                
+    
                 <Text style={styles.email}>E-mail</Text>
                     <Input style={styles.inputEmail} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />    
+                
                 <Text style={styles.password}>Password</Text>
                     <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
                 
@@ -47,16 +46,6 @@ const LoginPage = () =>{
             <View style={styles.buttonSigup}>
                 <ButtonText text={"Don't have an account?"}/>
             </View>
-
-            {/** */}
-            <View style={styles.input}>
-                <InputSearch iconName='search'/>
-              
-            </View>
-          
-        
-           
-            
         </View>   
   
 
@@ -97,6 +86,7 @@ const styles = StyleSheet.create({
         fontSize:12,
     },
     inputEmail:{
+    
         padding: 10,
         borderColor: 'none',
       

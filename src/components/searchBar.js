@@ -8,9 +8,8 @@ const InputSearch = ({iconName}) => {
     return(
         <View style={styles.buttonView}>
             <TextInput style={styles.textInputs}
-            placeholder="Search"/>  
-             <ButtonSearch iconName={iconName}
-              />
+             placeholder="Search"/>  
+                 <ButtonSearch iconName={iconName}/>
         </View>
     )
 }
@@ -19,13 +18,17 @@ const ButtonSearch = ({iconName}) => {
     return(
             <TouchableOpacity style={styles.buttonSearch}>
                 <Icon
-                name={iconName}
-                type='font-awesome'
-                color='black'
-              />
+                    name={iconName}
+                    type='font-awesome'
+                    color='black'
+                />
           </TouchableOpacity>
     )
 } 
+
+{/**Codigo para agregarlo en las pantallas que se necesite la barra de busqueda
+       <InputSearch iconName='search'/>
+*/}
 
 const styles = StyleSheet.create({
     buttonView:{
@@ -33,21 +36,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 10,
+       
     },
     textInputs:{
-        width: 200,
-        height: 40,
-        borderRadius: 10,
-        display:'flex',
-        justifyContent: 'flex-end',
-        padding: 20,
-        
+        width: 250,
+        height: 40, 
+        padding: 20,   
     },
-    
     buttonSearch:{
-        width:50,
-        display:'flex',
-      
+        width:50, 
+        backgroundColor: '#f3f3f3',
+        padding: 10,
+       
     }
 
 

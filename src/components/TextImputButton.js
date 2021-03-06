@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
     },
     icon:{
-      padding: 8,
+     
       borderBottomRightRadius:8,
       borderTopRightRadius:8,
     

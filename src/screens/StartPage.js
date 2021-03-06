@@ -1,8 +1,7 @@
 import React from 'react'
 import {Dimensions, StyleSheet, View, Text} from 'react-native'
 import { Image} from 'react-native-elements'
-import {Button,ButtonLogin} from '../components/Button'
-
+import {Button} from '../components/Button'
 const {width,height} = Dimensions.get('screen');
 const StartPage = ({navigation}) =>
 {
