@@ -2,10 +2,10 @@ import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native'
 import { Icon } from 'react-native-elements'
 
-const ButtonText = ({text})=> {
+const ButtonText = ({text, color,fontSize, callback})=> {
     return(
         <TouchableOpacity style={styles.textContainer}>
-            <Text style={styles.textbutton}>{text}</Text>
+            <Text style={[styles.textbutton, {color:color}, {fontSize:fontSize}]} onPress={callback}>{text}</Text>
         </TouchableOpacity>
     )
 }
@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 500,
         color:'#16307c',   
+    },
+    textContainer:{
+        margin:10,
     }
 })
 
