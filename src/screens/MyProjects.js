@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native'
-import {searchBar} from '../components/searchBar'
+import {searchBar} from '../components/SearchBar'
 
 const MyProjects = () =>{
     return(
         <View>
-
+            
         </View>
     );
 };
