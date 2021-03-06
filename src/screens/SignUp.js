@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {Input} from 'react-native-elements';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
-import {ButtonPassword} from '../components/TextImputButton';
+import {ButtonIcon} from '../components/TextImputButton';
 // import {SocialIcon} from 'react-native-elements';
 
 const SignUpPage = () =>{
@@ -23,10 +23,10 @@ const SignUpPage = () =>{
                         <TextInput style={styles.inputs} placeholder='example@gmail.com' />
                     {/* Password */}
                     <Text style={styles.titlePlacerHolder}>Password</Text>
-                        <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
+                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Password'/>
                     {/* Confirm Password */}
-                    <Text style={styles.titlePlacerHolder}>Confirm Paswword</Text>
-                        <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
+                    <Text style={styles.titlePlacerHolder}>Confirm Password</Text>
+                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Confirm Password'/>
                     {/* <SocialIcon 
                         title='Sign In With Google'
                         button
@@ -46,7 +46,7 @@ const SignUpPage = () =>{
             </View>
         </View>
     )
-    
+
 }
 
 const styles = StyleSheet.create({

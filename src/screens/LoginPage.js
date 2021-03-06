@@ -2,7 +2,7 @@ import React from 'react'
 import {StyleSheet, Text, View, TextInput} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
-import {ButtonPassword} from '../components/TextImputButton'
+import {ButtonIcon} from '../components/TextImputButton'
 
 const LoginPage = () =>{
    
@@ -22,7 +22,7 @@ const LoginPage = () =>{
                     <TextInput style={styles.inputEmail} placeholder='example@gmail.com'  />    
                 
                 <Text style={styles.password}>Password</Text>
-                    <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
+                    <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Password'/>
                 
                     
             </View>
