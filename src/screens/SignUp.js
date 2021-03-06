@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
+import {ButtonPassword} from '../components/TextImputButton';
 // import {SocialIcon} from 'react-native-elements';
 
 const SignUpPage = () =>{
@@ -21,17 +22,17 @@ const SignUpPage = () =>{
                 <Input style={styles.inputs} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />
                 {/* Password */}
                 <Text style={styles.titlePlacerHolder}>Password</Text>
-                <Input style={styles.inputs} placeholder="Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash'}}/>
+                    <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
                 {/* Confirm Password */}
                 <Text style={styles.titlePlacerHolder}>Confirm Paswword</Text>
-                <Input style={styles.inputs} placeholder="Confirm Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash'}}/>
+                    <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
                 {/* <SocialIcon 
                     title='Sign In With Google'
                     button
                     type='google'
                 /> */}
             </View> 
-            <View>
+            <View style={styles.buttonSignIn}>
                 <ButtonLogin text={"Sign In"}/>
             </View>  
             <Text style={styles.buttonLogin}>
@@ -79,6 +80,9 @@ const styles = StyleSheet.create({
     buttonLogin:{
         padding: 10
     },
+    buttonSignIn:{
+        marginTop: 20
+    }
 
 })
 

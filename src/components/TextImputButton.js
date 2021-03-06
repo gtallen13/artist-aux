@@ -7,7 +7,7 @@ import {Icon} from 'react-native-elements'
 const ButtonPassword = ({iconName, callback}) => {
     return (
         <View style={styles.styleButtonPassword}> 
-            <TextInput style = {styles.inputPassword} placeholder="Password" secureTextEntry={true} />
+            <TextInput style = {styles.inputPassword} placeholder='Password' secureTextEntry={true}/>
             <TouchableOpacity onPress={callback} style={styles.passwordInput}>
                 <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
                     name={iconName}
@@ -32,14 +32,20 @@ const styles = StyleSheet.create({
     },
     inputPassword:{
         padding: 10,
-        borderBottomColor:'#5BB1B0',
+       
         backgroundColor:'white',
-        borderRadius:8,
+        borderBottomLeftRadius:8,
+        borderTopLeftRadius:8,
         width:250,
+    
 
     },
     icon:{
-        height:20
+      padding: 8,
+      borderBottomRightRadius:8,
+      borderTopRightRadius:8,
+    
+
     }
 })
 

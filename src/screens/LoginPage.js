@@ -21,8 +21,7 @@ const LoginPage = () =>{
             <View style={styles.inputText}>
                 
                 <Text style={styles.email}>E-mail</Text>
-                    <Input style={styles.inputEmail} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />       
-               
+                    <Input style={styles.inputEmail} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />    
                 <Text style={styles.password}>Password</Text>
                     <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
                 
