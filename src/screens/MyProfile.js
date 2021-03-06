@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {Avatar, Input} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
-import {ButtonIcon} from '../components/TextImputButton'
+import {ButtonIcon} from '../components/TextInputButton'
 
 const MyProfilePage = () => {
     return(

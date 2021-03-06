@@ -2,7 +2,7 @@ import React from 'react'
 import {StyleSheet, Text, View, TextInput} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
-import {ButtonIcon} from '../components/TextImputButton'
+import {ButtonIcon} from '../components/TextInputButton'
 
 const LoginPage = () =>{
    
