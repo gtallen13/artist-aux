@@ -14,6 +14,7 @@ const screens = {
     },
     login:{
         screen: LoginPage
+        
     },
     signUp: {
         screen:SignUpPage

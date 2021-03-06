@@ -5,32 +5,53 @@ import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 
 const LoginPage = () =>{
+   
     return(
         <View style={styles.container}>
+            {/* Titulo*/}
             <View style={styles.titlecontainer}>
+              
                 <Text style={styles.text_title}>Login</Text>
                 <Text style={styles.border}></Text>
+           
             </View>
+            {/*Input Correo y  Contraseña*/}
             <View style={styles.inputText}>
+                
                 <Text style={styles.email}>E-mail</Text>
                     <Input style={styles.inputEmail} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />       
+               
                 <Text style={styles.password}>Password</Text>
                     <Input style={styles.inputPassword} placeholder="Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash', color:'#a0a29f'}}/>
+           
             </View>
+
+            {/*Forgot Password*/}
             <View style={styles.buttonforgot}>
                 <ButtonText style={styles.text_forgot} text={"Forgot password?"}/>
             </View>
+            
+            {/* Botton Log In*/}
             <View>
                 <ButtonLogin text={"Log In"}/>
             </View>
+            
+            {/*Boton para login con google*/}
             <View>
                 <ButtonGoogle logingoogle={"Login Google"}/>                
             </View>
+            
+            {/*Boton hacia SigUp */}
             <View style={styles.buttonSigup}>
                 <ButtonText text={"Don't have an account?"}/>
             </View>
-        </View>       
+
+
+        </View>   
+  
+
     )
+
 }
 
 const styles = StyleSheet.create({
@@ -56,19 +77,22 @@ const styles = StyleSheet.create({
     email:{
         color:'#a0a29f',
         fontSize:12,   
+     
     },
     password:{
         color:'#a0a29f',
         fontSize:12,
     },
     inputEmail:{
-        padding: 10,    
+        padding: 10,
+        borderColor: 'none',
+      
     },
     inputPassword:{
         padding: 10,
     },
     inputText:{
-        marginTop:35, 
+        marginTop:35,  
     },
     buttonforgot:{
        marginLeft:200,
@@ -77,7 +101,7 @@ const styles = StyleSheet.create({
     buttonSigup:{
         marginTop:10, 
     },
-   
+
 })
 
 export default LoginPage;
