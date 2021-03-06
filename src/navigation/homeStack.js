@@ -5,9 +5,8 @@ import {createAppContainer} from 'react-navigation'
 import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
-import { ButtonText } from '../components/ButtonText'
-import {HeaderButton} from '../components/Button';
-
+import MyProfilePage from '../screens/MyProfile';
+import {ButtonText} from '../components/ButtonText';
 const screens = {
     start:{
         screen:StartPage,
@@ -16,27 +15,21 @@ const screens = {
         },
     },
     login:{
-        screen: LoginPage,
-        // navigationOptions:{
-        //     headerTitle:()=>(<Text style={styles.headerTitle}>My Projects</Text>),
-        //     headerRight: () =>(
-        //         <HeaderButton icon="plus" callback={()=>console.log("Add projects")}/>
-        //     ),
-        //     headerLeft: ()=>(
-        //         <HeaderButton icon="user" callback={()=>console.log("My Profile")}/>
-        //     )
-        // },
-        /* Barra superior */
-        // navigationOptions:{
-        //     headerTitle:()=>(<Text style={styles.headerTitle}>Login</Text>),
-        //     headerRight: () =>(
-        //         <ButtonText text="Logout" color="#000" fontSize={15} callback={()=>console.log("Logout")}/>
-        //     ),
-        // },
+        screen: LoginPage
+        
     },
     signUp: {
         screen:SignUpPage
     },
+    profile: {
+        screen: MyProfilePage,
+        navigationOptions:{
+            headerTitle: () => (<Text style={styles.headerTitle}>Edit Profile</Text>),
+            headerRight: () => (
+                <ButtonText text="Logout" color="#5BB1B0" fontSize={15} callback={()=>console.log("Logout")}/>
+            )
+        }
+    }
 };
 
 const HomeStack = createStackNavigator(screens,{
@@ -45,8 +38,7 @@ const HomeStack = createStackNavigator(screens,{
         headerStyle:{
             backgroundColor:"#ecedeb",
         },
-        headerTransparent:true,
-        
+        headerTransparent:true,     
     }
 });
 const styles = StyleSheet.create({

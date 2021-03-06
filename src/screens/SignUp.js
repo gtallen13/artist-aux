@@ -1,37 +1,39 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {Input} from 'react-native-elements';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
+import {ButtonIcon} from '../components/TextInputButton';
 // import {SocialIcon} from 'react-native-elements';
 
 const SignUpPage = () =>{
     return(
         <View style={styles.container}>
-            <View style={styles.titlecontainer}>
-                <Text style={styles.text_title}>Sign Up</Text>
-                <Text style={styles.border}></Text>
-            </View>
-            <View style={styles.inputText}>
-                {/* Username */}
-                <Text style={styles.titlePlacerHolder}>Username</Text>
-                <Input style={styles.inputs} placeholder='Username' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}}/>
-                {/* Email */}
-                <Text style={styles.titlePlacerHolder}>E-mail</Text>
-                <Input style={styles.inputs} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />
-                {/* Password */}
-                <Text style={styles.titlePlacerHolder}>Password</Text>
-                <Input style={styles.inputs} placeholder="Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash'}}/>
-                {/* Confirm Password */}
-                <Text style={styles.titlePlacerHolder}>Confirm Paswword</Text>
-                <Input style={styles.inputs} placeholder="Confirm Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash'}}/>
-                {/* <SocialIcon 
-                    title='Sign In With Google'
-                    button
-                    type='google'
-                /> */}
-            </View> 
             <View>
+                    <Text style={styles.text_title}>Sign Up</Text>
+                    <Text style={styles.border}></Text>
+            </View>
+
+                <View style={styles.inputText}>
+                    {/* Username */}
+                    <Text style={styles.titlePlacerHolder}>Username</Text>
+                        <TextInput style={styles.inputs} placeholder='Username' />
+                    {/* Email */}
+                    <Text style={styles.titlePlacerHolder}>E-mail</Text>
+                        <TextInput style={styles.inputs} placeholder='example@gmail.com' />
+                    {/* Password */}
+                    <Text style={styles.titlePlacerHolder}>Password</Text>
+                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Password'/>
+                    {/* Confirm Password */}
+                    <Text style={styles.titlePlacerHolder}>Confirm Password</Text>
+                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Confirm Password'/>
+                    {/* <SocialIcon 
+                        title='Sign In With Google'
+                        button
+                        type='google'
+                    /> */}
+                </View> 
+            <View style={styles.buttonSignIn}>
                 <ButtonLogin text={"Sign In"}/>
             </View>  
             <Text style={styles.buttonLogin}>
@@ -44,6 +46,7 @@ const SignUpPage = () =>{
             </View>
         </View>
     )
+
 }
 
 const styles = StyleSheet.create({
@@ -52,10 +55,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ecedeb'
-    },
-    titlecontainer:{
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     text_title:{
         textAlign: 'center',
@@ -67,18 +66,22 @@ const styles = StyleSheet.create({
         backgroundColor: '#5BB1B0'
     },
     inputText:{
-        marginTop: 35
+        marginTop: 25
     },
     titlePlacerHolder:{
         color:'#a0a29f',
-        fontSize:12,
+        fontSize:14,
     },
     inputs:{
-        padding: 10
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 15,
+        height:50,
     },
-    buttonLogin:{
-        padding: 10
-    },
+    buttonSignIn:{
+        marginTop: 10
+    }
 
 })
 

@@ -1,36 +1,58 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
-import { Input } from 'react-native-elements';
+import {StyleSheet, Text, View, TextInput} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
+import {ButtonIcon} from '../components/TextInputButton'
 
 const LoginPage = () =>{
+   
     return(
         <View style={styles.container}>
-            <View style={styles.titlecontainer}>
+            {/* Titulo*/}
+            <View>
+    
                 <Text style={styles.text_title}>Login</Text>
-                <Text style={styles.border}></Text>
+                    <Text style={styles.border}></Text>
+           
             </View>
+            {/*Input Correo y  Contraseña*/}
             <View style={styles.inputText}>
+    
                 <Text style={styles.email}>E-mail</Text>
-                    <Input style={styles.inputEmail} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />       
+                    <TextInput style={styles.inputEmail} placeholder='example@gmail.com'  />    
+                
                 <Text style={styles.password}>Password</Text>
-                    <Input style={styles.inputPassword} placeholder="Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash', color:'#a0a29f'}}/>
+                    <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Password'/>
+                
+                    
             </View>
+
+            {/*Forgot Password*/}
             <View style={styles.buttonforgot}>
                 <ButtonText style={styles.text_forgot} text={"Forgot password?"}/>
             </View>
+            
+            {/* Botton Log In*/}
             <View>
                 <ButtonLogin text={"Log In"}/>
             </View>
+            
+            {/*Boton para login con google*/}
             <View>
                 <ButtonGoogle logingoogle={"Login Google"}/>                
             </View>
+            
+            {/*Boton hacia SigUp */}
             <View style={styles.buttonSigup}>
-                <ButtonText text={"Don't have an account?"}/>
+                <Text> Don't have an account?
+                <ButtonText text={"Sign Up"}/>
+                    </Text>
             </View>
-        </View>       
+        </View>   
+  
+
     )
+
 }
 
 const styles = StyleSheet.create({
@@ -39,10 +61,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'#ecedeb'
-    },
-    titlecontainer:{       
-        justifyContent: 'center',
-        alignItems:'center',
     },
     text_title:{
         textAlign: 'center',
@@ -53,23 +71,28 @@ const styles = StyleSheet.create({
         width:100,
         backgroundColor:'#5BB1B0',
     },
+    inputText:{
+        marginTop:35, 
+        
+    },
     email:{
         color:'#a0a29f',
-        fontSize:12,   
+        fontSize:14,   
+        
     },
     password:{
         color:'#a0a29f',
-        fontSize:12,
+        fontSize:14,
     },
     inputEmail:{
-        padding: 10,    
-    },
-    inputPassword:{
+        backgroundColor: 'white',
         padding: 10,
+        borderRadius: 10,
+        marginBottom: 20,
+        height:50,
+     
     },
-    inputText:{
-        marginTop:35, 
-    },
+
     buttonforgot:{
        marginLeft:200,
        marginBottom:40,  

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dimensions, StyleSheet, View, Text} from 'react-native'
 import { Image} from 'react-native-elements'
-import {Button,ButtonLogin} from '../components/Button'
+import {Button} from '../components/Button'
 const {width,height} = Dimensions.get('screen');
 const StartPage = ({navigation}) =>
 {
@@ -25,6 +25,8 @@ const StartPage = ({navigation}) =>
                 <Button title={"Log in"} callback={()=>navigation.navigate('login')}/>
                 <Button title={"Sign Up"} callback={()=>navigation.navigate('signUp')}/>
             </View>
+
+          
         </View>
     )
 }
@@ -61,8 +63,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
     },
-    logoContainer:
-    {
+    logoContainer:{
         justifyContent:'flex-start',
         alignItems:'baseline',
         flex:2,
