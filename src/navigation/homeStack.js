@@ -6,7 +6,9 @@ import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
 import MyProfilePage from '../screens/MyProfile';
+import MyProjects from '../screens/MyProjects'
 import {ButtonText} from '../components/ButtonText';
+import {HeaderButton} from '../components/Button'
 const screens = {
     start:{
         screen:StartPage,
@@ -20,6 +22,18 @@ const screens = {
     },
     signUp: {
         screen:SignUpPage
+    },
+    projects:{
+        screen:MyProjects,
+        navigationOptions:{
+            headerTitle:()=>(<Text style={styles.headerTitle}>My Projects</Text>),
+            headerRight: () =>(
+                <HeaderButton icon="plus" callback={()=>console.log("Add projects")}/>
+            ),
+            headerLeft: ()=>(
+                <HeaderButton icon="user" callback={()=>console.log("My Profile")}/>
+            )
+        },
     },
     profile: {
         screen: MyProfilePage,

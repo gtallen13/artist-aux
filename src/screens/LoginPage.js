@@ -4,7 +4,7 @@ import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton'
 
-const LoginPage = () =>{
+const LoginPage = ({navigation}) =>{
    
     return(
         <View style={styles.container}>
@@ -34,7 +34,7 @@ const LoginPage = () =>{
             
             {/* Botton Log In*/}
             <View>
-                <ButtonLogin text={"Log In"}/>
+                <ButtonLogin text={"Log In"} callback={()=>navigation.navigate('projects')}/>
             </View>
             
             {/*Boton para login con google*/}

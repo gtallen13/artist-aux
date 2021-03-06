@@ -10,9 +10,9 @@ const Button = ({title,callback})=> {
     )    
 }
 
-const ButtonLogin = ({text}) => {
+const ButtonLogin = ({text,callback}) => {
     return (
-        <TouchableOpacity style={styles.buttonLogin}>
+        <TouchableOpacity style={styles.buttonLogin} onPress={callback}>
             <Text style={styles.textLogin}>{text}</Text>
         </TouchableOpacity>
     )
