@@ -2,7 +2,6 @@ import React from 'react'
 import {Dimensions, StyleSheet, View, Text} from 'react-native'
 import { Image} from 'react-native-elements'
 import {Button,ButtonLogin} from '../components/Button'
-import {ButtonSearch, InputSearch} from '../components/searchBar';
 
 const {width,height} = Dimensions.get('screen');
 const StartPage = ({navigation}) =>
@@ -28,10 +27,7 @@ const StartPage = ({navigation}) =>
                 <Button title={"Sign Up"} callback={()=>navigation.navigate('signUp')}/>
             </View>
 
-            <View>
-                <InputSearch textSearch/>
-                <ButtonSearch icon/>
-            </View>
+          
         </View>
     )
 }

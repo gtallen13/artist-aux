@@ -3,6 +3,8 @@ import {StyleSheet, Text, View} from 'react-native'
 import { Input } from 'react-native-elements';
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
+import { InputSearch} from '../components/searchBar';
+import {ButtonPassword} from '../components/TextImputButton'
 
 const LoginPage = () =>{
    
@@ -22,8 +24,9 @@ const LoginPage = () =>{
                     <Input style={styles.inputEmail} placeholder='example@gmail.com' inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8}} />       
                
                 <Text style={styles.password}>Password</Text>
-                    <Input style={styles.inputPassword} placeholder="Password" secureTextEntry={true} inputContainerStyle={{borderBottomColor:'#5BB1B0', backgroundColor:'white', borderRadius:8, width:300}} rightIcon={{type: 'font-awesome', name:'eye-slash', color:'#a0a29f'}}/>
-           
+                    <ButtonPassword callback={()=> console.log("Press")} iconName='eye-slash'/>
+                
+                    
             </View>
 
             {/*Forgot Password*/}
@@ -46,7 +49,15 @@ const LoginPage = () =>{
                 <ButtonText text={"Don't have an account?"}/>
             </View>
 
-
+            {/** */}
+            <View style={styles.input}>
+                <InputSearch iconName='search'/>
+              
+            </View>
+          
+        
+           
+            
         </View>   
   
 
@@ -60,6 +71,9 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'#ecedeb'
+    },
+    input:{
+        display:'flex',
     },
     titlecontainer:{       
         justifyContent: 'center',
@@ -88,9 +102,6 @@ const styles = StyleSheet.create({
         borderColor: 'none',
       
     },
-    inputPassword:{
-        padding: 10,
-    },
     inputText:{
         marginTop:35,  
     },
@@ -101,7 +112,7 @@ const styles = StyleSheet.create({
     buttonSigup:{
         marginTop:10, 
     },
-
+   
 })
 
 export default LoginPage;

@@ -1,38 +1,53 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity,  TextInput} from 'react-native'
+import { StyleSheet, TouchableOpacity,  TextInput, View} from 'react-native'
 import { Icon } from 'react-native-elements'
 
 
-const InputSearch = ({textSearch}) => {
+
+const InputSearch = ({iconName}) => {
     return(
-        <TouchableOpacity style={styles.textInput}>
-           
-            <TextInput
-                placeholder="Search"/>
-            {textSearch}
-        </TouchableOpacity>
+        <View style={styles.buttonView}>
+            <TextInput style={styles.textInputs}
+            placeholder="Search"/>  
+             <ButtonSearch iconName={iconName}
+              />
+        </View>
     )
 }
 
-const ButtonSearch = ({icon}) => {
+const ButtonSearch = ({iconName}) => {
     return(
-        <TouchableOpacity style={styles.buttonSearch}>
-            <Icon
-            name='search'
-            type='font-awesome'
-            color='black'/>{icon}
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonSearch}>
+                <Icon
+                name={iconName}
+                type='font-awesome'
+                color='black'
+              />
+          </TouchableOpacity>
     )
 } 
 
 const styles = StyleSheet.create({
-    TextInput:{
-        fontSize:'50',
-
+    buttonView:{
+        flex:1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textInputs:{
+        width: 200,
+        height: 40,
+        borderRadius: 10,
+        display:'flex',
+        justifyContent: 'flex-end',
+        padding: 20,
+        
     },
     
     buttonSearch:{
-        backgroundColor:'white'
+        width:50,
+        display:'flex',
+      
     }
 
 
