@@ -6,7 +6,7 @@ import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton';
 // import {SocialIcon} from 'react-native-elements';
 
-const SignUpPage = () =>{
+const SignUpPage = ({navigation}) =>{
     return(
         <View style={styles.container}>
             <View>
@@ -34,7 +34,7 @@ const SignUpPage = () =>{
                     /> */}
                 </View> 
             <View style={styles.buttonSignIn}>
-                <ButtonLogin text={"Sign In"}/>
+                <ButtonLogin callback={()=>navigation.navigate('projects')} text={"Sign In"}/>
             </View>  
             <Text style={styles.buttonLogin}>
                 Already registered? <View>

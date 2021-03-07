@@ -1,12 +1,10 @@
-import React from 'react'
-import {Text,StyleSheet} from 'react-native'
 import {createStackNavigator} from 'react-navigation-stack'
-import {createAppContainer} from 'react-navigation'
+import {createAppContainer, NavigationEvents} from 'react-navigation'
 import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
 import MyProfilePage from '../screens/MyProfile';
-import {ButtonText} from '../components/ButtonText';
+import MyProjects from '../screens/MyProjects'
 import ChangePasswordPage from '../screens/ChangePasswordPage'
 
 const screens = {
@@ -26,17 +24,20 @@ const screens = {
     profile: {
         screen: MyProfilePage,
         navigationOptions:{
-            headerTitle: () => (<Text style={styles.headerTitle}>Edit Profile</Text>),
-            headerRight: () => (
-                <ButtonText text="Logout" color="#5BB1B0" fontSize={15} callback={()=>console.log("Logout")}/>
-            )
+            headerShown:false,
+        },
+    },
+    projects:{
+        screen:MyProjects,
+
+        navigationOptions:{
+            headerShown:false,
         }
     },
     changepassword: {
         screen:ChangePasswordPage,
         navigationOptions:{
-            headerTitle: () => (<Text style={styles.headerTitle} >Edit Password</Text>),
-            headerTitleAlign: 'center'
+           headerShown:false,
         }
     }
    
@@ -47,15 +48,8 @@ const HomeStack = createStackNavigator(screens,{
         headerStyle:{
             backgroundColor:"#ecedeb",
         },
-        headerTransparent:true,     
-    }
-});
-const styles = StyleSheet.create({
-
-    headerTitle:{
-        textAlign:'center',
-        fontSize:20,
-        fontWeight:'600'
+        headerTransparent:true,
     },
-})
+});
+
 export default createAppContainer(HomeStack);
