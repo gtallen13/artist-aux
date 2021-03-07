@@ -44,6 +44,7 @@ const screens = {
 }
 const HomeStack = createStackNavigator(screens,{
     defaultNavigationOptions:{
+        headerBackImage: <Icon name='chevron-left' type='font-awesome'/>,
         headerTitle:false,
         headerStyle:{
             backgroundColor:"#ecedeb",
