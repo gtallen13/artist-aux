@@ -27,11 +27,12 @@ const screens = {
     profile: {
         screen: MyProfilePage,
         navigationOptions:{
-            headerTitle: () => (<Text style={styles.headerTitle}>Edit Profile</Text>),
-            headerRight: ({navigation}) => (
-                <ButtonText text="Logout" color="#5BB1B0" fontSize={15} callback={()=>navigation.navigate('start')}/>
-            )
-        }
+            // headerTitle: () => (<Text style={styles.headerTitle}>Edit Profile</Text>),
+            // headerRight: ({navigation}) => (
+            //     <ButtonText text="Logout" color="#5BB1B0" fontSize={15} callback={()=>navigation.navigate('start')}/>
+            // )
+            headerShown:false,
+        },
     },
     projects:{
         screen:MyProjects,

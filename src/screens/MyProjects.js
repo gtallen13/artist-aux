@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:25,
         fontWeight:'600',
-    }
+    },
 })
 
 export default MyProjects;
