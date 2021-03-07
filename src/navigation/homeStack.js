@@ -7,6 +7,8 @@ import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
 import MyProfilePage from '../screens/MyProfile';
 import {ButtonText} from '../components/ButtonText';
+import ChangePasswordPage from '../screens/ChangePasswordPage'
+
 const screens = {
     start:{
         screen:StartPage,
@@ -15,8 +17,8 @@ const screens = {
         },
     },
     login:{
-        screen: LoginPage
-        
+        screen:LoginPage,
+      
     },
     signUp: {
         screen:SignUpPage
@@ -29,9 +31,16 @@ const screens = {
                 <ButtonText text="Logout" color="#5BB1B0" fontSize={15} callback={()=>console.log("Logout")}/>
             )
         }
+    },
+    changepassword: {
+        screen:ChangePasswordPage,
+        navigationOptions:{
+            headerTitle: () => (<Text style={styles.headerTitle} >Edit Password</Text>),
+            headerTitleAlign: 'center'
+        }
     }
-};
-
+   
+}
 const HomeStack = createStackNavigator(screens,{
     defaultNavigationOptions:{
         headerTitle:false,
