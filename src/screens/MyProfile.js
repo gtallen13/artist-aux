@@ -9,7 +9,7 @@ const MyProfilePage = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <Icon style={styles.headerIcons} size={40} name="user" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
+                <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
                 <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback={()=> navigation.navigate('start')}/>
             </View>
