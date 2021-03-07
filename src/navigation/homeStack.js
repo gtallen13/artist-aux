@@ -34,7 +34,7 @@ const screens = {
             headerShown:false,
         }
     },
-    changepassword: {
+    changePassword: {
         screen:ChangePasswordPage,
         navigationOptions:{
            headerShown:false,

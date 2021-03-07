@@ -27,7 +27,7 @@ const MyProfilePage = ({navigation}) => {
                             <ButtonIcon callback={()=> console.log("Press")} iconName='edit' placeholderName='Email'/>
                         {/* Change Password */}
                         <Text style={styles.titlePlacerHolder}>Change Password:</Text>
-                            <ButtonIcon callback={()=> console.log("Press")} iconName='edit' placeholderName='Password'/>
+                            <ButtonIcon callback={()=> navigation.navigate('changePassword')} iconName='edit' placeholderName='Password'/>
                     </View>
                 <View>
                     <ButtonLogin text={"Save"}/>
