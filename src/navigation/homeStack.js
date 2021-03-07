@@ -9,6 +9,7 @@ import MyProfilePage from '../screens/MyProfile';
 import MyProjects from '../screens/MyProjects'
 import {ButtonText} from '../components/ButtonText';
 import {HeaderButton} from '../components/Button'
+import { Icon } from 'react-native-elements'
 const screens = {
     start:{
         screen:StartPage,
@@ -34,26 +35,25 @@ const screens = {
     },
     projects:{
         screen:MyProjects,
+        // navigationOptions:{
+        //     headerTitle:()=>(<Text style={styles.headerTitle}>My Projects</Text>),
+        //     headerRight: () =>(
+        //         <HeaderButton icon="plus" callback={()=>console.log("Add projects")}/>
+        //     ),
+        // },
         navigationOptions:{
-            headerTitle:()=>(<Text style={styles.headerTitle}>My Projects</Text>),
-            headerRight: () =>(
-                <HeaderButton icon="plus" callback={()=>console.log("Add projects")}/>
-            ),
-            headerLeft: ()=>(
-                <HeaderButton icon="user" callback={()=> console.log('My Profile')}/>
-            )
-        },
+            headerShown:false,
+        }
     },
 };
-
 const HomeStack = createStackNavigator(screens,{
     defaultNavigationOptions:{
         headerTitle:false,
         headerStyle:{
             backgroundColor:"#ecedeb",
         },
-        headerTransparent:true,     
-    }
+        headerTransparent:true,
+    },
 });
 const styles = StyleSheet.create({
 

@@ -20,9 +20,8 @@ const ButtonLogin = ({text,callback}) => {
 const HeaderButton = ({icon, callback}) =>{
     return(
         <View style={styles.headerButton}>
-            <TouchableOpacity >
+            <TouchableOpacity onPress={callback}>
                 <Icon
-                onPress={callback}
                 name={icon}
                 type="font-awesome"/>
             </TouchableOpacity>
