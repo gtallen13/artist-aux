@@ -11,7 +11,7 @@ const MyProfilePage = ({navigation}) => {
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} size={40} name="user" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
-                <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback={()=> console.log('Logout')}/>
+                <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback={()=> navigation.navigate('start')}/>
             </View>
             <View style={styles.editContainer}>
                 <Avatar size="xlarge" rounded source={require('../../assets/pp.jpg')}/>
