@@ -26,13 +26,8 @@ const ButtonSearch = ({iconName}) => {
     )
 } 
 
-{/**Codigo para agregarlo en las pantallas que se necesite la barra de busqueda
-       <InputSearch iconName='search'/>
-*/}
-
 const styles = StyleSheet.create({
     buttonView:{
-        flex:1,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
