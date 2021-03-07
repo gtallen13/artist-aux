@@ -5,7 +5,7 @@ import {ButtonIcon} from '../components/TextInputButton'
 import {ButtonLogin} from '../components/Button'
 
 
-const ChangePasswordPage = () => {
+const ChangePasswordPage = ({navigation}) => {
    return(
 
     <View style={styles.container}>
