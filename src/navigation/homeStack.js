@@ -7,6 +7,8 @@ import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
 import MyProfilePage from '../screens/MyProfile';
 import {ButtonText} from '../components/ButtonText';
+import {Icon} from 'react-native-elements';
+
 const screens = {
     start:{
         screen:StartPage,
@@ -16,7 +18,6 @@ const screens = {
     },
     login:{
         screen: LoginPage
-        
     },
     signUp: {
         screen:SignUpPage
@@ -34,6 +35,7 @@ const screens = {
 
 const HomeStack = createStackNavigator(screens,{
     defaultNavigationOptions:{
+        headerBackImage: <Icon name='chevron-left' type='font-awesome'/>,
         headerTitle:false,
         headerStyle:{
             backgroundColor:"#ecedeb",
@@ -41,8 +43,8 @@ const HomeStack = createStackNavigator(screens,{
         headerTransparent:true,     
     }
 });
-const styles = StyleSheet.create({
 
+const styles = StyleSheet.create({
     headerTitle:{
         textAlign:'center',
         fontSize:20,
