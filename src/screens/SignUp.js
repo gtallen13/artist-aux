@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, Text, View, TextInput} from 'react-native';
-import {Input} from 'react-native-elements';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton';
@@ -34,7 +33,7 @@ const SignUpPage = ({navigation}) =>{
                     /> */}
                 </View> 
             <View style={styles.buttonSignIn}>
-                <ButtonLogin callback={()=>navigation.navigate('projects')} text={"Sign In"}/>
+                <ButtonLogin callback={()=>navigation.navigate('login')} text={"Sign In"}/>
             </View>  
             <Text style={styles.buttonLogin}>
                 Already registered? <View>
@@ -42,7 +41,7 @@ const SignUpPage = ({navigation}) =>{
                 </View>
             </Text>
             <View >
-                <ButtonGoogle logingoogle={"Sign In With Google"}/>                
+                <ButtonGoogle logingoogle={"Sign In With Google"} />                
             </View>
         </View>
     )
