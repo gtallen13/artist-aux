@@ -10,6 +10,7 @@
   "dependencies": {
     "@react-native-masked-view/masked-view": "^0.2.2",
     "@react-navigation/native": "^5.9.3",
+    "email-validator": "^2.0.4",
     "expo": "~40.0.0",
     "expo-constants": "~9.3.3",
     "expo-status-bar": "~1.0.3",

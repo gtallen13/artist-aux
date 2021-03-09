@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {StyleSheet, View, TouchableOpacity, TextInput} from 'react-native'
 import {Icon} from 'react-native-elements'
 
@@ -10,16 +10,25 @@ const ButtonIcon = (
         callback, 
         placeholderName,
         onChangeText,
-        value
+        value,
+        onBlur,
     }) => {
+        const [secureText, setSecureText] = useState(true);
     return (
         <View style={styles.styleButtonPassword}> 
-            <TextInput style = {styles.inputPassword} placeholder={placeholderName} secureTextEntry={true} onChangeText={onChangeText} value={value}/>
+            <TextInput 
+            style = {styles.inputPassword} 
+            placeholder={placeholderName} 
+            secureTextEntry={secureText} 
+            onChangeText={onChangeText} 
+            value={value}
+            onBlur={onBlur}/>
             <TouchableOpacity onPress={callback} style={styles.passwordInput}>
                 <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
                     name={iconName}
                     type='font-awesome'
                     color='black'
+                    onPress={()=>{secureText ? setSecureText(false):setSecureText(true)}}
                    
             />
             </TouchableOpacity>
