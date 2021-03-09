@@ -4,10 +4,17 @@ import {Icon} from 'react-native-elements'
 
 
 
-const ButtonIcon = ({iconName, callback, placeholderName}) => {
+const ButtonIcon = (
+    {
+        iconName, 
+        callback, 
+        placeholderName,
+        onChangeText,
+        value
+    }) => {
     return (
         <View style={styles.styleButtonPassword}> 
-            <TextInput style = {styles.inputPassword} placeholder={placeholderName} secureTextEntry={true}/>
+            <TextInput style = {styles.inputPassword} placeholder={placeholderName} secureTextEntry={true} onChangeText={onChangeText} value={value}/>
             <TouchableOpacity onPress={callback} style={styles.passwordInput}>
                 <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
                     name={iconName}

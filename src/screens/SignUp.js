@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton';
-// import {SocialIcon} from 'react-native-elements';
+import {firebase} from '../firebase'
 
 const SignUpPage = ({navigation}) =>{
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const handlerSignUp = ()=>{
+        firebase.auth()
+        .createUserWithEmailAndPassword(email,password)
+        .then((response)=>{
+            console.log('Exito!!')
+            navigation.navigate('start');
+        })
+        .catch((error)=>{
+            console.log(error)
+        });
+    };
     return(
         <View style={styles.container}>
             <View>
@@ -16,16 +32,16 @@ const SignUpPage = ({navigation}) =>{
                 <View style={styles.inputText}>
                     {/* Username */}
                     <Text style={styles.titlePlacerHolder}>Username</Text>
-                        <TextInput style={styles.inputs} placeholder='Username' />
+                        <TextInput style={styles.inputs} placeholder='Username' value={username} onChangeText={setUsername}/>
                     {/* Email */}
                     <Text style={styles.titlePlacerHolder}>E-mail</Text>
-                        <TextInput style={styles.inputs} placeholder='example@gmail.com' />
+                        <TextInput style={styles.inputs} placeholder='example@gmail.com' value={email} onChangeText={setEmail}/>
                     {/* Password */}
                     <Text style={styles.titlePlacerHolder}>Password</Text>
-                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Password'/>
+                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Password' value={password} onChangeText={setPassword}/>
                     {/* Confirm Password */}
                     <Text style={styles.titlePlacerHolder}>Confirm Password</Text>
-                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Confirm Password'/>
+                        <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Confirm Password' value={confirmPassword} onChangeText={setConfirmPassword}/>
                     {/* <SocialIcon 
                         title='Sign In With Google'
                         button
@@ -33,7 +49,7 @@ const SignUpPage = ({navigation}) =>{
                     /> */}
                 </View> 
             <View style={styles.buttonSignIn}>
-                <ButtonLogin callback={()=>navigation.navigate('login')} text={"Sign In"}/>
+                <ButtonLogin callback={handlerSignUp} text={"Sign Up"}/>
             </View>  
             <Text style={styles.buttonLogin}>
                 Already registered? <View>
@@ -41,7 +57,7 @@ const SignUpPage = ({navigation}) =>{
                 </View>
             </Text>
             <View >
-                <ButtonGoogle logingoogle={"Sign In With Google"} />                
+                <ButtonGoogle logingoogle={"Sign Up With Google"} />                
             </View>
         </View>
     )
