@@ -9,12 +9,12 @@ const ButtonIcon = (
         iconName, 
         callback, 
         placeholderName,
-        onChange,
+        onChangeText,
         value
     }) => {
     return (
         <View style={styles.styleButtonPassword}> 
-            <TextInput style = {styles.inputPassword} placeholder={placeholderName} secureTextEntry={true} onChange={onChange} value={value}/>
+            <TextInput style = {styles.inputPassword} placeholder={placeholderName} secureTextEntry={true} onChangeText={onChangeText} value={value}/>
             <TouchableOpacity onPress={callback} style={styles.passwordInput}>
                 <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
                     name={iconName}
