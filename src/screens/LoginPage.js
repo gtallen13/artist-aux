@@ -5,6 +5,9 @@ import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton'
 import {validate} from 'email-validator'
 import {firebase} from '../firebase'
+import {Alert} from '../components/Alert'
+
+
 const LoginPage = ({navigation}) =>{
    const [email,setEmail] = useState('');
    const [emailError,setEmailError] = useState('');
@@ -77,7 +80,7 @@ const LoginPage = ({navigation}) =>{
                     value={email}
                     onBlur={()=>handleValidEmail(email)}
                     />    
-                
+                {emailError ? <Alert type="error" title="Enter validate username" />:null}
                 <Text style={styles.password}>Password</Text>
                     <ButtonIcon 
                     iconName='eye-slash' 
@@ -85,7 +88,7 @@ const LoginPage = ({navigation}) =>{
                     onChangeText={setPassword}
                     value={password}
                     onBlur={()=>handleValidPassword(password)}/>
-                
+                {passwordError ? <Alert type="error" title="The password is no validate" />:null}
                     
             </View>
 
@@ -152,7 +155,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 10,
         borderRadius: 10,
-        marginBottom: 20,
+       
         height:50,
      
     },
