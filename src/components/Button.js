@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     textLogin: {
         textAlign:'center',
         fontSize:20,
-        color:'white'
+        color:'white',
+        fontWeight:'600'
     },
     headerButton:{
         margin:10

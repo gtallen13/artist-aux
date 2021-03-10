@@ -121,15 +121,16 @@ const SignUpPage = ({navigation}) =>{
                 </View> 
             <View style={styles.buttonSignIn}>
                 <ButtonLogin callback={handlerSignUp} text={"Sign Up"}/>
+            </View>
+            <View >
+                <ButtonGoogle logingoogle={"Sign Up With Google"} />                
             </View>  
             <Text style={styles.buttonLogin}>
                 Already registered? <View>
                 <ButtonText text={"Log In"} callback={()=> navigation.navigate('login')} color="#5bb1b0"/>
                 </View>
             </Text>
-            <View >
-                <ButtonGoogle logingoogle={"Sign Up With Google"} />                
-            </View>
+            
         </View>
     )
 
@@ -144,7 +145,12 @@ const styles = StyleSheet.create({
     },
     text_title:{
         textAlign: 'center',
-        fontSize: 40
+        fontSize: 40,
+        color:'#5bb1b0',
+        fontWeight:'600',
+        textShadowColor:'#585858',
+        textShadowOffset:{width: 1, height: 1},
+        textShadowRadius:1,
     },
     border:{
         height: 3,

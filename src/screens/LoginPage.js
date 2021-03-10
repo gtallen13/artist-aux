@@ -104,7 +104,7 @@ const LoginPage = ({navigation}) =>{
 
             {/*Forgot Password*/}
             <View style={styles.buttonforgot}>
-                <ButtonText callback={handlePasswordReset} style={styles.text_forgot} text={"Forgot password?"}/>
+                <ButtonText callback={handlePasswordReset} color={"#5BB1B0"}style={styles.text_forgot} text={"Forgot password?"}/>
             </View>
             
             {/* Botton Log In*/}
@@ -139,11 +139,18 @@ const styles = StyleSheet.create({
     text_title:{
         textAlign: 'center',
         fontSize:40,
+        color:'#5bb1b0',
+        fontWeight:'600',
+        textShadowColor:'#585858',
+        textShadowOffset:{width: 1, height: 1},
+        textShadowRadius:1,
     },
     border:{
         height:3,
         width:100,
         backgroundColor:'#5BB1B0',
+  
+        
     },
     inputText:{
         marginTop:35,         
@@ -169,7 +176,7 @@ const styles = StyleSheet.create({
     },
     buttonforgot:{
        marginLeft:180,
-       marginBottom:40,  
+       marginBottom:30,  
     },
     buttonSigup:{
         marginTop:10, 
