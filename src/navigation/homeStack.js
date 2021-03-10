@@ -54,7 +54,7 @@ const HomeStack = createStackNavigator(screens,{
             backgroundColor:"#ecedeb",
         },
         headerTransparent:true,
-    },
+    },  
 });
 const styles = StyleSheet.create({
 

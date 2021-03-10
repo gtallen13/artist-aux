@@ -5,6 +5,7 @@ import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton'
 import {validate} from 'email-validator'
 import {firebase} from '../firebase'
+
 const LoginPage = ({navigation}) =>{
    const [email,setEmail] = useState('');
    const [emailError,setEmailError] = useState('');
@@ -18,6 +19,7 @@ const LoginPage = ({navigation}) =>{
     else if (!validate(val)) setEmailError(true)
     else setEmailError(false);
    }
+
    const handleValidPassword = (val) =>{
        if (val === '') setPasswordError(true);
        else if (val.length <= 6) setPasswordError(true);
@@ -57,18 +59,29 @@ const LoginPage = ({navigation}) =>{
            });
        }
    };
+
+   const handlePasswordReset = async () => {
+    await firebase
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then((response) => {
+        console.log('exito')
+        navigation.navigate('start')
+    })
+    .catch((error) => {
+        console.log(error.message)
+    })
+  }
+
     return(
         <View style={styles.container}>
             {/* Titulo*/}
-            <View>
-    
+            <View>    
                 <Text style={styles.text_title}>Login</Text>
-                    <Text style={styles.border}></Text>
-           
+                <Text style={styles.border}></Text>           
             </View>
             {/*Input Correo y  Contraseña*/}
-            <View style={styles.inputText}>
-    
+            <View style={styles.inputText}>    
                 <Text style={styles.email}>E-mail</Text>
                     <TextInput 
                     style={styles.inputEmail} 
@@ -76,22 +89,19 @@ const LoginPage = ({navigation}) =>{
                     onChangeText={setEmail}
                     value={email}
                     onBlur={()=>handleValidEmail(email)}
-                    />    
-                
+                    />                    
                 <Text style={styles.password}>Password</Text>
                     <ButtonIcon 
                     iconName='eye-slash' 
                     placeholderName='Password'
                     onChangeText={setPassword}
                     value={password}
-                    onBlur={()=>handleValidPassword(password)}/>
-                
-                    
+                    onBlur={()=>handleValidPassword(password)}/>                    
             </View>
 
             {/*Forgot Password*/}
             <View style={styles.buttonforgot}>
-                <ButtonText style={styles.text_forgot} text={"Forgot password?"}/>
+                <ButtonText callback={handlePasswordReset} style={styles.text_forgot} text={"Forgot password?"}/>
             </View>
             
             {/* Botton Log In*/}
@@ -110,12 +120,11 @@ const LoginPage = ({navigation}) =>{
                 <ButtonText text={"Sign Up"}/>
                     </Text>
             </View>
-        </View>   
-  
-
+        </View> 
     )
-
 }
+
+
 
 const styles = StyleSheet.create({
     container:{
@@ -134,13 +143,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#5BB1B0',
     },
     inputText:{
-        marginTop:35, 
-        
+        marginTop:35,         
     },
     email:{
         color:'#a0a29f',
-        fontSize:14,   
-        
+        fontSize:14,           
     },
     password:{
         color:'#a0a29f',
@@ -151,10 +158,8 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
-        height:50,
-     
+        height:50,     
     },
-
     buttonforgot:{
        marginLeft:200,
        marginBottom:40,  
