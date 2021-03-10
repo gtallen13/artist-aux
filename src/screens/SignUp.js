@@ -6,6 +6,7 @@ import {ButtonIcon} from '../components/TextInputButton';
 import {firebase} from '../firebase'
 import {validate} from 'email-validator'
 import { event } from 'react-native-reanimated';
+import {Alert} from '../components/Alert'
 
 const SignUpPage = ({navigation}) =>{
     const [username, setUsername] = useState('');
@@ -70,7 +71,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setUsername}
                         onBlur={()=> handleValidUsername(username)}
                         />
-                        {usernameError ? <Text style={styles.errorMessage}>Error</Text>:null}
+                        {usernameError ? <Alert type="error" title="Enter username" />:null}
                         
                     {/* Email */}
                     <Text style={styles.titlePlacerHolder}>E-mail</Text>
@@ -81,7 +82,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setEmail}
                         onBlur={()=>handleValidEmail(email)}
                         />
-                        {emailError ? <Text style={styles.errorMessage}>Error</Text>:null}
+                        {emailError ?  <Alert type="error" title="The email is no validate" />:null}
                     {/* Password */}
                     <Text style={styles.titlePlacerHolder}>Password</Text>
                         <ButtonIcon 
@@ -91,7 +92,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setPassword}
                         onBlur={()=>handleValidPassword (password)}
                         />
-                        {passwordError ? <Text style={styles.errorMessage}>Error</Text>:null}
+                        {passwordError ?  <Alert type="error" title="The password is no validate" />:null}
                     {/* Confirm Password */}
                     <Text style={styles.titlePlacerHolder}>Confirm Password</Text>
                         <ButtonIcon 
@@ -102,7 +103,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setConfirmPassword}
                         onBlur={()=> handleValidConfirmPassword(confirmPassword)}
                         />
-                        {confirmPasswordError ? <Text style={styles.errorMessage}>Error</Text>:null}
+                        {confirmPasswordError ?  <Alert type="error" title="The password does not match" />:null}
                 </View> 
             <View style={styles.buttonSignIn}>
                 <ButtonLogin callback={handlerSignUp} text={"Sign Up"}/>
@@ -147,7 +148,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 10,
         borderRadius: 10,
-        marginBottom: 15,
         height:50,
     },
     buttonSignIn:{

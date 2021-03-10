@@ -1,3 +1,4 @@
+import React from 'react'
 import { StyleSheet, View, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -9,10 +10,11 @@ const Alert = ({ type, title }) => {
   // success --> check-circle-outline #edf7ed
   let background = "";
   let icon = "";
+  let color = "";
 
   if (type === "error") {
-    background = "#fdecea";
-    icon = "times-circle";
+   
+   
   } else if (type === "warning") {
     background = "#fff4e5";
     icon = "warning";
@@ -25,22 +27,25 @@ const Alert = ({ type, title }) => {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <View style={[styles.container, { backgroundColor: background}]}>
       <Icon name={icon} style={styles.icon} />
-      <Text>{title}</Text>
+      <Text style={styles.textColor}>{title}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    padding: 10,
     flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "flex-end"
   },
   icon: {
-    marginRight: 10,
+
   },
+  textColor:{
+    color:'#97221f'
+  }
 });
 
-export default Alert;
+export {Alert};
