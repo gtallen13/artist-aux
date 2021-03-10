@@ -30,8 +30,6 @@ const ChangePasswordPage = ({navigation}) => {
         });
     }
 
-
-
    return(
     <View style={styles.container}>
         <View style={styles.inputText}> 
