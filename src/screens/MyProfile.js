@@ -8,7 +8,7 @@ import {firebase} from '../firebase';
 
 
 const MyProfilePage = ({navigation}) => {
-    const handlerLogup = async () => {
+    const handlerLogout = async () => {
         await firebase.auth().signOut()
         navigation.navigate('start');
     }
@@ -18,7 +18,7 @@ const MyProfilePage = ({navigation}) => {
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
-                    <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {handlerLogup}/>
+                    <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {handlerLogout}/>
             </View>
             <View style={styles.editContainer}>
                 <Avatar size="xlarge" rounded source={require('../../assets/pp.jpg')}/>
