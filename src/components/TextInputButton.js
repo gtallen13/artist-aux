@@ -36,6 +36,35 @@ const ButtonIcon = (
     )
 }
 
+const ToggleTextInput = (
+    {
+        onChangeText,
+        value,
+        onBlur,
+        callback
+    }) => {
+        const [editable, setEditable] = useState(false);
+    return (
+        <View style={styles.styleButtonPassword}> 
+            <TextInput 
+            editable={editable}
+            style = {styles.inputPassword}   
+            onChangeText={onChangeText} 
+            value={value}
+            onBlur={onBlur}/>
+            <TouchableOpacity style={styles.passwordInput}>
+                <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
+                    name='edit'
+                    type='font-awesome'
+                    color='black'
+                    onPress={callback}
+            />
+            </TouchableOpacity>
+        </View>
+       
+    )
+}
+
 
 
 
@@ -59,4 +88,4 @@ const styles = StyleSheet.create({
  
 })
 
-export {ButtonIcon};
+export {ButtonIcon, ToggleTextInput};

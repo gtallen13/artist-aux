@@ -3,16 +3,15 @@ import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {Avatar, Input, Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
-import {ButtonIcon} from '../components/TextInputButton'
-import {firebase} from '../firebase';
-
+import {ButtonIcon, ToggleTextInput} from '../components/TextInputButton'
+import {firebase} from '../firebase'
 
 const MyProfilePage = ({navigation}) => {
     const handlerLogout = async () => {
         await firebase.auth().signOut()
         navigation.navigate('start');
     }
-
+    const user = navigation.getParam('user')
     return(
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -28,13 +27,13 @@ const MyProfilePage = ({navigation}) => {
                     <View style={styles.inputText}>
                             {/* Username */}
                         <Text style={styles.titlePlacerHolder}>Username:</Text>
-                            <ButtonIcon callback={()=> console.log("Press")} iconName='edit' placeholderName='Username'/>
+                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={user.username}/>
                         {/* Email */}
                         <Text style={styles.titlePlacerHolder}>Email:</Text>
-                            <ButtonIcon callback={()=> console.log("Press")} iconName='edit' placeholderName='Email'/>
+                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={user.email}/>
                         {/* Change Password */}
                         <Text style={styles.titlePlacerHolder}>Change Password:</Text>
-                            <ButtonIcon callback={()=> navigation.navigate('changePassword')} iconName='edit' placeholderName='Password'/>
+                            <ToggleTextInput callback={()=> navigation.navigate('changePassword')} iconName='edit' value='*******'/>
                     </View>
                 <View>
                     <ButtonLogin text={"Save"}/>

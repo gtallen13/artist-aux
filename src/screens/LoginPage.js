@@ -49,6 +49,7 @@ const LoginPage = ({navigation}) =>{
                    }
                    const user = firestoreDocument.data();
                    navigation.navigate("projects", {user});
+                   console.log(user);
                })
             navigation.navigate('projects');
            })
