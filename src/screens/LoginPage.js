@@ -31,7 +31,6 @@ const LoginPage = ({navigation}) =>{
    const handlerSignIn = ()=>{
        if (passwordError === false && emailError === false)
        {
-           console.log('aqui toy')
            firebase
            .auth()
            .signInWithEmailAndPassword(email,password)
@@ -49,10 +48,8 @@ const LoginPage = ({navigation}) =>{
                        return;
                    }
                    const user = firestoreDocument.data();
-                   console.log('todo bien');
                    navigation.navigate("projects", {user});
                })
-            console.log('salut');
             navigation.navigate('projects');
            })
            .catch((error)=>{
