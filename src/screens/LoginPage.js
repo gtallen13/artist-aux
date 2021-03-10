@@ -120,8 +120,8 @@ const LoginPage = ({navigation}) =>{
             {/*Boton hacia SigUp */}
             <View style={styles.buttonSigup}>
                 <Text> Don't have an account?
-                <ButtonText text={"Sign Up"}/>
-                    </Text>
+                <ButtonText text={"Sign Up"}  callback={()=> navigation.navigate('signUp')} color="#5BB1B0"/>
+                </Text>
             </View>
         </View> 
     )
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
      
     },
     buttonforgot:{
-       marginLeft:200,
+       marginLeft:180,
        marginBottom:40,  
     },
     buttonSigup:{
