@@ -7,7 +7,6 @@ import {Icon} from 'react-native-elements'
 const ButtonIcon = (
     {
         iconName, 
-        callback, 
         placeholderName,
         onChangeText,
         value,
@@ -23,7 +22,7 @@ const ButtonIcon = (
             onChangeText={onChangeText} 
             value={value}
             onBlur={onBlur}/>
-            <TouchableOpacity onPress={callback} style={styles.passwordInput}>
+            <TouchableOpacity style={styles.passwordInput}>
                 <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
                     name={iconName}
                     type='font-awesome'
