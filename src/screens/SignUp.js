@@ -124,7 +124,7 @@ const SignUpPage = ({navigation}) =>{
             </View>  
             <Text style={styles.buttonLogin}>
                 Already registered? <View>
-                <ButtonText text={"Log In"}/>
+                <ButtonText text={"Log In"} callback={()=> navigation.navigate('login')} color="#5bb1b0"/>
                 </View>
             </Text>
             <View >
