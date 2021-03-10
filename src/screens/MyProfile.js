@@ -4,14 +4,21 @@ import {Avatar, Input, Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
 import {ButtonIcon} from '../components/TextInputButton'
+import {firebase} from '../firebase';
+
 
 const MyProfilePage = ({navigation}) => {
+    const handlerLogup = async () => {
+        await firebase.auth().signOut()
+        navigation.navigate('start');
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
-                <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback={()=> navigation.navigate('start')}/>
+                    <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {handlerLogup}/>
             </View>
             <View style={styles.editContainer}>
                 <Avatar size="xlarge" rounded source={require('../../assets/pp.jpg')}/>
@@ -35,7 +42,11 @@ const MyProfilePage = ({navigation}) => {
             </View>
         </View> 
     )
+    
 }
+
+
+    
 
 const styles = StyleSheet.create({
     container:{
