@@ -1,11 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {StyleSheet, Text, View, TextInput} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton'
-
+import {validate} from 'email-validator'
+import {firebase} from '../firebase'
 const LoginPage = ({navigation}) =>{
+   const [email,setEmail] = useState('');
+   const [emailError,setEmailError] = useState('');
+   const [password, setPassword] = useState('');
+   const [passwordError, setPasswordError] = useState('');
+   const [error, setError] = useState('');
+
+
+   const handleValidEmail = (val)=> {
+    if (val === '') setEmailError(true);
+    else if (!validate(val)) setEmailError(true)
+    else setEmailError(false);
+   }
+   const handleValidPassword = (val) =>{
+       if (val === '') setPasswordError(true);
+       else if (val.length <= 6) setPasswordError(true);
+       else setPasswordError(false);
+   }
+
+   const handlerSignIn = ()=>{
+       if (passwordError === false && emailError === false)
+       {
+           console.log('aqui toy')
+           firebase
+           .auth()
+           .signInWithEmailAndPassword(email,password)
+           .then((response)=>{
+               const uid = response.user.uid;
+               const usersRef = firebase.firestore().collection("users");
    
+               usersRef
+               .doc(uid)
+               .get()
+               .then((firestoreDocument) =>{
+                   if (!firestoreDocument.exists){
+                       console.log('User does not exist')
+                       setError('User does not exist')
+                       return;
+                   }
+                   const user = firestoreDocument.data();
+                   console.log('todo bien');
+                   navigation.navigate("projects");
+               })
+            console.log('salut');
+            navigation.navigate('projects');
+           })
+           .catch((error)=>{
+               setError(error.message);
+               console.log(error);
+           });
+       }
+   };
     return(
         <View style={styles.container}>
             {/* Titulo*/}
@@ -19,10 +70,21 @@ const LoginPage = ({navigation}) =>{
             <View style={styles.inputText}>
     
                 <Text style={styles.email}>E-mail</Text>
-                    <TextInput style={styles.inputEmail} placeholder='example@gmail.com'  />    
+                    <TextInput 
+                    style={styles.inputEmail} 
+                    placeholder='example@gmail.com'
+                    onChangeText={setEmail}
+                    value={email}
+                    onBlur={()=>handleValidEmail(email)}
+                    />    
                 
                 <Text style={styles.password}>Password</Text>
-                    <ButtonIcon callback={()=> console.log("Press")} iconName='eye-slash' placeholderName='Password'/>
+                    <ButtonIcon 
+                    iconName='eye-slash' 
+                    placeholderName='Password'
+                    onChangeText={setPassword}
+                    value={password}
+                    onBlur={()=>handleValidPassword(password)}/>
                 
                     
             </View>
@@ -34,7 +96,7 @@ const LoginPage = ({navigation}) =>{
             
             {/* Botton Log In*/}
             <View>
-                <ButtonLogin text={"Log In"} callback={()=>navigation.navigate('projects')}/>
+                <ButtonLogin text={"Log In"} callback={handlerSignIn}/>
             </View>
             
             {/*Boton para login con google*/}

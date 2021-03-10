@@ -101,7 +101,6 @@ const SignUpPage = ({navigation}) =>{
                     {/* Password */}
                     <Text style={styles.titlePlacerHolder}>Password</Text>
                         <ButtonIcon 
-                        callback={()=> console.log("Press")} 
                         iconName='eye-slash' placeholderName='Password' 
                         value={password} 
                         onChangeText={setPassword}
@@ -110,8 +109,7 @@ const SignUpPage = ({navigation}) =>{
                         {passwordError ? <Text style={styles.errorMessage}>Error</Text>:null}
                     {/* Confirm Password */}
                     <Text style={styles.titlePlacerHolder}>Confirm Password</Text>
-                        <ButtonIcon 
-                        callback={()=> console.log("Press")} 
+                        <ButtonIcon  
                         iconName='eye-slash' 
                         placeholderName='Confirm Password' 
                         value={confirmPassword} 
