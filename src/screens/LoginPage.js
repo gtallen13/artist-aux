@@ -78,11 +78,13 @@ const styles = StyleSheet.create({
     email:{
         color:'#a0a29f',
         fontSize:14,   
+        marginTop:10,
         
     },
     password:{
         color:'#a0a29f',
         fontSize:14,
+        marginTop:10,
     },
     inputEmail:{
         backgroundColor: 'white',
