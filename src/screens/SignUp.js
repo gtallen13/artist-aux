@@ -87,7 +87,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setUsername}
                         onBlur={()=> handleValidUsername(username)}
                         />
-                        {usernameError ? <Alert type="error" title="Enter username" />:null}
+                        {usernameError ? <Alert type="error" title="Enter a username" />:null}
                         
                     {/* Email */}
                     <Text style={styles.titlePlacerHolder}>E-mail</Text>
@@ -98,7 +98,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setEmail}
                         onBlur={()=>handleValidEmail(email)}
                         />
-                        {emailError ?  <Alert type="error" title="The email is no validate" />:null}
+                        {emailError ?  <Alert type="error" title="The email is  invalid" />:null}
                     {/* Password */}
                     <Text style={styles.titlePlacerHolder}>Password</Text>
                         <ButtonIcon 
@@ -107,7 +107,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setPassword}
                         onBlur={()=>handleValidPassword (password)}
                         />
-                        {passwordError ?  <Alert type="error" title="The password is no validate" />:null}
+                        {passwordError ?  <Alert type="error" title="The password is invalid" />:null}
                     {/* Confirm Password */}
                     <Text style={styles.titlePlacerHolder}>Confirm Password</Text>
                         <ButtonIcon  
@@ -117,7 +117,7 @@ const SignUpPage = ({navigation}) =>{
                         onChangeText={setConfirmPassword}
                         onBlur={()=> handleValidConfirmPassword(confirmPassword)}
                         />
-                        {confirmPasswordError ?  <Alert type="error" title="The password does not match" />:null}
+                        {confirmPasswordError ?  <Alert type="error" title="The passwords don't match" />:null}
                 </View> 
             <View style={styles.buttonSignIn}>
                 <ButtonLogin callback={handlerSignUp} text={"Sign Up"}/>

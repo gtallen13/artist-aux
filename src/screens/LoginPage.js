@@ -92,7 +92,7 @@ const LoginPage = ({navigation}) =>{
                     value={email}
                     onBlur={()=>handleValidEmail(email)}
                     />    
-                {emailError ? <Alert type="error" title="Enter validate username" />:null}
+                {emailError ? <Alert type="error" title="Enter a username" />:null}
                 <Text style={styles.password}>Password</Text>
                     <ButtonIcon 
                     iconName='eye-slash' 
@@ -100,7 +100,7 @@ const LoginPage = ({navigation}) =>{
                     onChangeText={setPassword}
                     value={password}
                     onBlur={()=>handleValidPassword(password)}/>
-                {passwordError ? <Alert type="error" title="The password is no validate" />:null}
+                {passwordError ? <Alert type="error" title="The password is invalid" />:null}
                     
             </View>
 
