@@ -41,14 +41,14 @@ const ToggleTextInput = (
         onChangeText,
         value,
         onBlur,
+        callback
     }) => {
         const [editable, setEditable] = useState(false);
     return (
         <View style={styles.styleButtonPassword}> 
             <TextInput 
             editable={editable}
-            style = {styles.inputPassword}  
-            secureTextEntry={secureText} 
+            style = {styles.inputPassword}   
             onChangeText={onChangeText} 
             value={value}
             onBlur={onBlur}/>
@@ -57,8 +57,7 @@ const ToggleTextInput = (
                     name='edit'
                     type='font-awesome'
                     color='black'
-                    onPress={()=>{editable ? setEditable(true):setEditable(false)}}
-                   
+                    onPress={callback}
             />
             </TouchableOpacity>
         </View>
