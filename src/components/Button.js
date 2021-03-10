@@ -33,10 +33,16 @@ const styles = StyleSheet.create({
     buttonContainer: {
         width: width*.5,
         padding:10,
-        borderWidth: 2,
+        borderWidth: 3,
         borderColor: '#5bb1b0',
         borderRadius: 10,
         marginBottom:20,
+
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.9,
+        shadowRadius: 2,
+  
     },
     buttonText: {
         textAlign:'center',
