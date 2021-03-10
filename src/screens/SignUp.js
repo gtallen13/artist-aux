@@ -47,11 +47,27 @@ const SignUpPage = ({navigation}) =>{
                 firebase.auth()
                 .createUserWithEmailAndPassword(email,password)
                 .then((response)=>{
-                    console.log('Exito!!')
-                    navigation.navigate('start');
+                    const uid = response.user.uid;
+                    const data = {
+                        id:uid,
+                        email,
+                        username,
+                    }
+                    const usersRef = firebase.firestore().collection("users");
+                    usersRef
+                    .doc(uid)
+                    .set(data)
+                    .then(()=>{
+                        console.log('todo bien');
+                        navigation.navigate('start');
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                        setError(error.message);
+                    });
                 })
                 .catch((error)=>{
-                    console.log(error)
+                    console.log(error.message);
                 });
             }
     };
@@ -61,7 +77,7 @@ const SignUpPage = ({navigation}) =>{
                     <Text style={styles.text_title}>Sign Up</Text>
                     <Text style={styles.border}></Text>
             </View>
-
+                
                 <View style={styles.inputText}>
                     {/* Username */}
                     <Text style={styles.titlePlacerHolder}>Username</Text>
