@@ -1,5 +1,5 @@
 import React from 'react'
-import {Dimensions, StyleSheet, View, Text} from 'react-native'
+import {Dimensions, StyleSheet, View, Text,ScrollView} from 'react-native'
 import { Image} from 'react-native-elements'
 import { color } from 'react-native-reanimated';
 import {Button} from '../components/Button'
@@ -8,7 +8,7 @@ const StartPage = ({navigation}) =>
 {
     
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Artist
                     <Text style={styles.titleTextSpan}>Aux</Text>
@@ -28,7 +28,7 @@ const StartPage = ({navigation}) =>
             </View>
             <View style={styles.LineBottomPage}/>
           
-        </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({

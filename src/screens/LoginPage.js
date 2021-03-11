@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {StyleSheet, Text, View, TextInput} from 'react-native'
+import {StyleSheet, Text, View, TextInput,  ScrollView} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton'
@@ -74,68 +74,75 @@ const LoginPage = ({navigation}) =>{
   }
 
     return(
-        <View style={styles.container}>
-            {/* Titulo*/}
-            <View>    
-                <Text style={styles.text_title}>Login</Text>
-                <Text style={styles.border}></Text>           
-            </View>
-            {/*Input Correo y  Contraseña*/}
-            <View style={styles.inputText}>    
-                <Text style={styles.email}>E-mail</Text>
-                    <TextInput 
-                    style={styles.inputEmail} 
-                    placeholder='example@gmail.com'
-                    onChangeText={setEmail}
-                    value={email}
-                    onBlur={()=>handleValidEmail(email)}
-                    />    
-                {emailError ? <Alert type="error" title="Enter a username" />:null}
-                <Text style={styles.password}>Password</Text>
-                    <ButtonIcon 
-                    iconName='eye-slash' 
-                    placeholderName='Password'
-                    onChangeText={setPassword}
-                    value={password}
-                    onBlur={()=>handleValidPassword(password)}/>
-                {passwordError ? <Alert type="error" title="The password is invalid" />:null}
-                    
-            </View>
+        <ScrollView contentContainerStyle={styles.container}>
+                {/* Titulo*/}
+                <View>    
+                    <Text style={styles.text_title}>Login</Text>
+                    <Text style={styles.border}></Text>           
+                </View>
+                {/*Input Correo y  Contraseña*/}
+                <View style={styles.inputText}>    
+                    <Text style={styles.email}>E-mail</Text>
+                        <TextInput 
+                        style={styles.inputEmail} 
+                        placeholder='example@gmail.com'
+                        onChangeText={setEmail}
+                        value={email}
+                        onBlur={()=>handleValidEmail(email)}
+                        />    
+                    {emailError ? <Alert type="error" title="Enter a username" />:null}
+                    <Text style={styles.password}>Password</Text>
+                        <ButtonIcon 
+                        iconName='eye-slash' 
+                        placeholderName='Password'
+                        onChangeText={setPassword}
+                        value={password}
+                        onBlur={()=>handleValidPassword(password)}/>
+                    {passwordError ? <Alert type="error" title="The password is invalid" />:null}
+                        
+                </View>
 
-            {/*Forgot Password*/}
-            <View style={styles.buttonforgot}>
-                <ButtonText callback={handlePasswordReset} color={"#5BB1B0"}style={styles.text_forgot} text={"Forgot password?"}/>
-            </View>
-            
-            {/* Botton Log In*/}
-            <View>
-                <ButtonLogin text={"Log In"} callback={handlerSignIn}/>
-            </View>
-            
-            {/*Boton para login con google*/}
-            <View>
-                <ButtonGoogle logingoogle={"Login Google"}/>                
-            </View>
-            
-            {/*Boton hacia SigUp */}
-            <View style={styles.buttonSigup}>
-                <Text> Don't have an account?
-                <ButtonText text={"Sign Up"}  callback={()=> navigation.navigate('signUp')} color="#5BB1B0"/>
-                </Text>
-            </View>
-        </View> 
+                {/*Forgot Password*/}
+                <View style={styles.buttonforgot}>
+                    <ButtonText callback={handlePasswordReset} color={"#5BB1B0"}style={styles.text_forgot} text={"Forgot password?"}/>
+                </View>
+                
+                {/* Botton Log In*/}
+                <View>
+                    <ButtonLogin text={"Log In"} callback={handlerSignIn}/>
+                </View>
+                
+                {/*Boton para login con google*/}
+                <View>
+                    <ButtonGoogle logingoogle={"Login Google"}/>                
+                </View>
+                {/*Boton hacia SigUp */}
+                <View style={styles.buttonSigup}>
+                    <Text> Don't have an account?
+                    <ButtonText text={"Sign Up"}  callback={()=> navigation.navigate('signUp')} color="#5BB1B0"/>
+                    </Text>
+                    </View>
+           
+        </ScrollView> 
+     
     )
 }
 
 
 
 const styles = StyleSheet.create({
+    
     container:{
        flex:1,
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'#ecedeb'
     },
+    scrollView:{
+     
+        backgroundColor:'ecedeb',
+    },
+   
     text_title:{
         textAlign: 'center',
         fontSize:40,
@@ -149,7 +156,8 @@ const styles = StyleSheet.create({
         height:3,
         width:100,
         backgroundColor:'#5BB1B0',
-  
+        justifyContent:'center',
+        alignItems:'center',
         
     },
     inputText:{

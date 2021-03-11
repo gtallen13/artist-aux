@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton';
@@ -73,7 +73,7 @@ const SignUpPage = ({navigation}) =>{
             }
     };
     return(
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <View>
                     <Text style={styles.text_title}>Sign Up</Text>
                     <Text style={styles.border}></Text>
@@ -131,7 +131,7 @@ const SignUpPage = ({navigation}) =>{
                 </View>
             </Text>
             
-        </View>
+        </ScrollView>
     )
 
 }

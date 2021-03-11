@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Avatar, Input, Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
@@ -13,7 +13,7 @@ const MyProfilePage = ({navigation}) => {
     }
     const user = navigation.getParam('user')
     return(
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
@@ -39,7 +39,7 @@ const MyProfilePage = ({navigation}) => {
                     <ButtonLogin text={"Save"}/>
                 </View>
             </View>
-        </View> 
+        </ScrollView> 
     )
     
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {StyleSheet, Text, View,ScrollView} from 'react-native'
 import {ButtonIcon} from '../components/TextInputButton'
 import {ButtonLogin} from '../components/Button'
 import {firebase} from '../firebase';
@@ -57,7 +57,7 @@ const ChangePasswordPage = ({navigation}) => {
     }
 
    return(
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.inputText}> 
             <Text style={styles.email}>Old Password</Text>
                 <ButtonIcon  
@@ -100,7 +100,7 @@ const ChangePasswordPage = ({navigation}) => {
             text={"Change password"}
             />
         </View>
-    </View>   
+    </ScrollView>   
    )
 }
 
