@@ -69,6 +69,7 @@ const LoginPage = ({navigation}) =>{
         navigation.navigate('start')
     })
     .catch((error) => {
+        setError(error.message);
         console.log(error.message)
     })
   }
@@ -81,7 +82,8 @@ const LoginPage = ({navigation}) =>{
                     <Text style={styles.border}></Text>           
                 </View>
                 {/*Input Correo y  Contraseña*/}
-                <View style={styles.inputText}>    
+                <View style={styles.inputText}>  
+                    {error ? <Alert type="error" title={error}/>:null}  
                     <Text style={styles.email}>E-mail</Text>
                         <TextInput 
                         style={styles.inputEmail} 

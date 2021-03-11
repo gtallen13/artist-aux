@@ -1,6 +1,7 @@
 import React from 'react'
+import { Dimensions } from 'react-native';
 import { StyleSheet, View, Text } from "react-native";
-
+const {width} = Dimensions.get('screen');
 
 const Alert = ({ type, title }) => {
 
@@ -31,15 +32,12 @@ const Alert = ({ type, title }) => {
 
 const styles = StyleSheet.create({
   container: {
+    maxWidth: width*.8,
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "flex-end"
     
-  },
-  icon: {
-
-  },
- 
+  }, 
 });
 
 export {Alert};

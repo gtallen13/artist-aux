@@ -68,6 +68,7 @@ const SignUpPage = ({navigation}) =>{
                     });
                 })
                 .catch((error)=>{
+                    setError(error.message)
                     console.log(error.message);
                 });
             }
@@ -80,6 +81,7 @@ const SignUpPage = ({navigation}) =>{
             </View>
                 
                 <View style={styles.inputText}>
+                    {error ? <Alert type="error" title={error}/>:null}
                     {/* Username */}
                     <Text style={styles.titlePlacerHolder}>Username</Text>
                         <TextInput style={styles.inputs} 

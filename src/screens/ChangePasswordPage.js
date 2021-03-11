@@ -12,6 +12,8 @@ const ChangePasswordPage = ({navigation}) => {
     const [newPasswordError, setNewPasswordError] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('')
 
     const handleValidCurrentPassword = (val) => {
         if (val === '') setCurrentPasswordError(true)
@@ -45,13 +47,15 @@ const ChangePasswordPage = ({navigation}) => {
                 handleReauthenticate(currentPassword).then(() => {
                     let user = firebase.auth().currentUser;
                     user.updatePassword(newPassword).then(() => {
-                    console.log('Password was changed');
-                        navigation.navigate('start');
+                    setSuccess('Password was changed');
+                    navigation.navigate('start');
                     }).catch ((error) => {
+                        setError(error.message)
                         console.log(error.message);
                     });
                 }).catch((error) => {
                     console.log(error.message)
+                    setError(error.message)
                 });
             }   
     }
@@ -59,6 +63,8 @@ const ChangePasswordPage = ({navigation}) => {
    return(
     <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.inputText}> 
+            {error ? <Alert type="error" title={error}/>:null}
+            {success ? <Alert type="success" title={success}/>:null}
             <Text style={styles.email}>Old Password</Text>
                 <ButtonIcon  
                 callback={()=> console.log("Press")} 
