@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton';
 import {firebase} from '../firebase'
 import {validate} from 'email-validator'
-import { event } from 'react-native-reanimated';
 import {Alert} from '../components/Alert'
+import {Context as AuthContext} from "../providers/AuthContext";
 
-const SignUpPage = ({navigation}) =>{
+
+const SignUp = ({navigation}) =>{
+    const {state, signup} = useContext(AuthContext);
     const [username, setUsername] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [email, setEmail] = useState('');
@@ -19,6 +21,17 @@ const SignUpPage = ({navigation}) =>{
     const [confirmPasswordError,setConfirmPasswordError] = useState('');
     const [error, setError] = useState('');
 
+    useEffect(()=>{
+        if (state.errorMessage) clearErrorMessage()
+    },[]);
+    useEffect(()=>{
+        if (state.errorMessage) setError(state.errorMessage);
+    },[state.errorMessage]);
+    useEffect(()=>{
+        if (state.registered) navigation.navigate('start')
+    },[state]);
+
+    //Validaciones
     const handleValidUsername = (val)=>{
         if (val ==='') setUsernameError(true)
         else setUsernameError(false)
@@ -40,38 +53,39 @@ const SignUpPage = ({navigation}) =>{
     }
     const handlerSignUp = ()=>{
         
-        if (usernameError === false && 
-            emailError === false &&
-            passwordError === false &&
-            confirmPasswordError === false)
-            {
-                firebase.auth()
-                .createUserWithEmailAndPassword(email,password)
-                .then((response)=>{
-                    const uid = response.user.uid;
-                    const data = {
-                        id:uid,
-                        email,
-                        username,
-                    }
-                    const usersRef = firebase.firestore().collection("users");
-                    usersRef
-                    .doc(uid)
-                    .set(data)
-                    .then(()=>{
-                        console.log('todo bien');
-                        navigation.navigate('start');
-                    })
-                    .catch((error)=>{
-                        console.log(error);
-                        setError(error.message);
-                    });
-                })
-                .catch((error)=>{
-                    setError(error.message)
-                    console.log(error.message);
-                });
-            }
+        signup(email, password, username);
+        // if (usernameError === false && 
+        //     emailError === false &&
+        //     passwordError === false &&
+        //     confirmPasswordError === false)
+        //     {
+        //         firebase.auth()
+        //         .createUserWithEmailAndPassword(email,password)
+        //         .then((response)=>{
+        //             const uid = response.user.uid;
+        //             const data = {
+        //                 id:uid,
+        //                 email,
+        //                 username,
+        //             }
+        //             const usersRef = firebase.firestore().collection("users");
+        //             usersRef
+        //             .doc(uid)
+        //             .set(data)
+        //             .then(()=>{
+        //                 console.log('todo bien');
+        //                 navigation.navigate('start');
+        //             })
+        //             .catch((error)=>{
+        //                 console.log(error);
+        //                 setError(error.message);
+        //             });
+        //         })
+        //         .catch((error)=>{
+        //             setError(error.message)
+        //             console.log(error.message);
+        //         });
+        //     }
     };
     return(
         <ScrollView contentContainerStyle={styles.container}>
@@ -183,4 +197,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default SignUpPage;
+export default SignUp;
