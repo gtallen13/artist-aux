@@ -20,7 +20,7 @@ const MyProfilePage = ({navigation}) => {
                     <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {handlerLogout}/>
             </View>
             <View style={styles.editContainer}>
-                <Avatar size="xlarge" rounded source={require('../../assets/pp.jpg')}/>
+                <Avatar size="xlarge" source={require('../../assets/pp.png')}/>
                 <View style={styles.ChangeImg}>
                     <ButtonText text={"Change Image"}/> 
                 </View>
