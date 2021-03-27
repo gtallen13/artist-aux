@@ -3,7 +3,6 @@ import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {ButtonLogin} from '../components/Button';
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton';
-import {firebase} from '../firebase'
 import {validate} from 'email-validator'
 import {Alert} from '../components/Alert'
 import {Context as AuthContext} from "../providers/AuthContext";
@@ -54,38 +53,6 @@ const SignUp = ({navigation}) =>{
     const handlerSignUp = ()=>{
         
         signup(email, password, username);
-        // if (usernameError === false && 
-        //     emailError === false &&
-        //     passwordError === false &&
-        //     confirmPasswordError === false)
-        //     {
-        //         firebase.auth()
-        //         .createUserWithEmailAndPassword(email,password)
-        //         .then((response)=>{
-        //             const uid = response.user.uid;
-        //             const data = {
-        //                 id:uid,
-        //                 email,
-        //                 username,
-        //             }
-        //             const usersRef = firebase.firestore().collection("users");
-        //             usersRef
-        //             .doc(uid)
-        //             .set(data)
-        //             .then(()=>{
-        //                 console.log('todo bien');
-        //                 navigation.navigate('start');
-        //             })
-        //             .catch((error)=>{
-        //                 console.log(error);
-        //                 setError(error.message);
-        //             });
-        //         })
-        //         .catch((error)=>{
-        //             setError(error.message)
-        //             console.log(error.message);
-        //         });
-        //     }
     };
     return(
         <ScrollView contentContainerStyle={styles.container}>
