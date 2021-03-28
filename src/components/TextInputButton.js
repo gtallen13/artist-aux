@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {StyleSheet, View, TouchableOpacity, TextInput} from 'react-native'
 import {Icon} from 'react-native-elements'
 
@@ -41,9 +41,12 @@ const ToggleTextInput = (
         onChangeText,
         value,
         onBlur,
-        callback
+        callback,
     }) => {
         const [editable, setEditable] = useState(false);
+        //al darle al icono de modificar posicionara al usario en el textinput
+        //https://es.reactjs.org/docs/hooks-reference.html#useref
+        const textInput = useRef(null);
     return (
         <View style={styles.styleButtonPassword}> 
             <TextInput 
@@ -51,13 +54,18 @@ const ToggleTextInput = (
             style = {styles.inputPassword}   
             onChangeText={onChangeText} 
             value={value}
-            onBlur={onBlur}/>
+            onBlur={onBlur}
+            placeholder="text"
+            ref={textInput}/>
             <TouchableOpacity style={styles.passwordInput}>
                 <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
                     name='edit'
                     type='font-awesome'
                     color='black'
-                    onPress={callback}
+                    onPress={()=>{
+                        textInput.current.focus()
+                        setEditable(!editable)
+                    }}
             />
             </TouchableOpacity>
         </View>

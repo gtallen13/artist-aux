@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Avatar, Input, Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
@@ -10,6 +10,12 @@ import {Context as AuthContext} from '../providers/AuthContext';
 const MyProfilePage = ({navigation}) => {
     
     const {signout, state} = useContext(AuthContext);
+    const [username, setUsername] = useState(state.user.username);
+    const [email, setEmail] = useState(state.user.email);
+
+    const handlerUpateProfile = ()=>{
+        
+    }
     return(
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.headerContainer}>
@@ -25,10 +31,14 @@ const MyProfilePage = ({navigation}) => {
                     <View style={styles.inputText}>
                             {/* Username */}
                         <Text style={styles.titlePlacerHolder}>Username:</Text>
-                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={state.user.username}/>
+                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={username}/>
                         {/* Email */}
                         <Text style={styles.titlePlacerHolder}>Email:</Text>
-                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={state.user.email}/>
+                            <ToggleTextInput  
+                            iconName='edit' 
+                            value={email}
+                            onChangeText={setEmail}
+                            />
                         {/* Change Password */}
                         <Text style={styles.titlePlacerHolder}>Change Password:</Text>
                             <ToggleTextInput callback={()=> navigation.navigate('changePassword')} iconName='edit' value='*******'/>
