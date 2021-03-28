@@ -7,6 +7,7 @@ const Navigation = ()=>{
     const {state, persistLogin} = useContext(AuthContext);
     useEffect(()=>{
         persistLogin();
+        
     },[]);
 
     SplashScreen.preventAutoHideAsync();
@@ -15,10 +16,12 @@ const Navigation = ()=>{
 
     if (!state.loading && state.loggedIn)
     {
+      console.log("home")
       return(
         <NavigatorHome/>
       )
     }
+    console.log("reg")
     return(
       <NavigatorReg/>
     )

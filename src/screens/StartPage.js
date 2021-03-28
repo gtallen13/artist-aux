@@ -1,7 +1,6 @@
 import React from 'react'
 import {Dimensions, StyleSheet, View, Text,ScrollView} from 'react-native'
 import { Image} from 'react-native-elements'
-import { color } from 'react-native-reanimated';
 import {Button} from '../components/Button'
 const {width,height} = Dimensions.get('screen');
 const StartPage = ({navigation}) =>
@@ -23,8 +22,8 @@ const StartPage = ({navigation}) =>
                 source={require('../../assets/logo.png')}/>
             </View>
             <View style={styles.buttonContainer}>
-                <Button title={"Log in"} callback={()=>navigation.navigate('login')}/>
-                <Button title={"Sign Up"} callback={()=>navigation.navigate('signUp')}/>
+                <Button title={"Log in"} callback={()=>navigation.navigate('Login')}/>
+                <Button title={"Sign Up"} callback={()=>navigation.navigate('SignUp')}/>
             </View>
             <View style={styles.LineBottomPage}/>
           

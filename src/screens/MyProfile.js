@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Avatar, Input, Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
-import {ButtonIcon, ToggleTextInput} from '../components/TextInputButton'
-import {firebase} from '../firebase'
+import { ToggleTextInput} from '../components/TextInputButton'
+import {Context as AuthContext} from '../providers/AuthContext';
+
 
 const MyProfilePage = ({navigation}) => {
-    const handlerLogout = async () => {
-        await firebase.auth().signOut()
-        navigation.navigate('start');
-    }
-    const user = navigation.getParam('user')
+    
+    const {signout, state} = useContext(AuthContext);
     return(
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
-                    <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {handlerLogout}/>
+                    <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {()=>{signout()}}/>
             </View>
             <View style={styles.editContainer}>
                 <Avatar size="xlarge" source={require('../../assets/pp.png')}/>
@@ -27,10 +25,10 @@ const MyProfilePage = ({navigation}) => {
                     <View style={styles.inputText}>
                             {/* Username */}
                         <Text style={styles.titlePlacerHolder}>Username:</Text>
-                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={user.username}/>
+                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={state.user.username}/>
                         {/* Email */}
                         <Text style={styles.titlePlacerHolder}>Email:</Text>
-                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={user.email}/>
+                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={state.user.email}/>
                         {/* Change Password */}
                         <Text style={styles.titlePlacerHolder}>Change Password:</Text>
                             <ToggleTextInput callback={()=> navigation.navigate('changePassword')} iconName='edit' value='*******'/>

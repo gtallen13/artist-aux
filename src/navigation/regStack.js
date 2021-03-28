@@ -10,7 +10,7 @@ const screens ={
     Start:{
         screen:StartPage,
         navigationOptions:{
-            headerShown:false
+            headerShown:false,
         },
     },
     Login:{
@@ -20,8 +20,7 @@ const screens ={
         screen:SignUpPage
     },
 }
-const RegStack = createStackNavigator(screens)
-export default createAppContainer(RegStack, {
+const RegStack = createStackNavigator(screens,{
     defaultNavigationOptions:{
         headerBackImage: <Icon name='chevron-left' type='font-awesome'/>,
         headerTitle:false,
@@ -29,5 +28,6 @@ export default createAppContainer(RegStack, {
             backgroundColor:"#ecedeb",
         },
         headerTransparent:true,
-    },
-})
+    },  
+});
+export default createAppContainer(RegStack)

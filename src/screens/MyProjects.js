@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React from 'react';
 import {View, StyleSheet,Text,ScrollView} from 'react-native'
 import { Icon } from 'react-native-elements';
 import {InputSearch} from '../components/SearchBar'
-import {firebase} from '../firebase'
+
 const MyProjects = ({navigation}) =>{
 
-    const [user, setUser] = useState({})
-
     const handleOpenProfile = () =>{
-        const user = navigation.getParam('user');
-        navigation.navigate('profile', {user})
+        navigation.navigate('profile')
     }
     return(
         <ScrollView contentContainerStyle={styles.container}>

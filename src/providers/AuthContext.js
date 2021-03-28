@@ -69,7 +69,7 @@ const signout = (dispatch)=> ()=>{
     })
 }
 const persistLogin = (dispatch) =>()=>{
-    const usersRef = firebase.firestore().collection("user");
+    const usersRef = firebase.firestore().collection("users");
 
     firebase.auth().onAuthStateChanged((user)=>{
         if (user)
