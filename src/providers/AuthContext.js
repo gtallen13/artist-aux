@@ -135,7 +135,7 @@ const signup = (dispatch) => (email, password, username)=>{
     })
 }
 
-const clearErrorMessage = (dispatch)=>()=>{
+const ClearErrorMessage = (dispatch)=>()=>{
     dispatch({type:"errorMessage", payload:""});
 }
 
@@ -146,7 +146,7 @@ export const {Provider, Context} = createDataContext(
         signout,
         signup,
         persistLogin,
-        clearErrorMessage,
+        ClearErrorMessage,
     },
     {
         user:{},

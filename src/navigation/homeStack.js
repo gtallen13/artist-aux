@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack'
-import {createAppContainer, NavigationEvents} from 'react-navigation'
+import {createAppContainer} from 'react-navigation'
 import {Icon} from 'react-native-elements'
 import {StyleSheet,Text} from 'react-native'
 import StartPage from '../screens/StartPage'
@@ -12,30 +12,17 @@ import ChangePasswordPage from '../screens/ChangePasswordPage'
 
 
 const screens = {
-    start:{
-        screen:StartPage,
+    projects:{
+        screen:MyProjects,
         navigationOptions:{
-            headerShown:false
-        },
-    },
-    login:{
-        screen:LoginPage,
-      
-    },
-    signUp: {
-        screen:SignUpPage
+            headerShown:false,
+        }
     },
     profile: {
         screen: MyProfilePage,
         navigationOptions:{
             headerShown:false,
         },
-    },
-    projects:{
-        screen:MyProjects,
-        navigationOptions:{
-            headerShown:false,
-        }
     },
     changePassword: {
         screen:ChangePasswordPage,

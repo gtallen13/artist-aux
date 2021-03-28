@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {StyleSheet, Text, View, TextInput,  ScrollView} from 'react-native'
 import {ButtonLogin} from "../components/Button"
 import {ButtonText, ButtonGoogle} from '../components/ButtonText';
@@ -6,16 +6,27 @@ import {ButtonIcon} from '../components/TextInputButton'
 import {validate} from 'email-validator'
 import {firebase} from '../firebase'
 import {Alert} from '../components/Alert'
-
+import {Context as AuthContext} from '../providers/AuthContext'
 
 const LoginPage = ({navigation}) =>{
+
    const [email,setEmail] = useState('');
    const [emailError,setEmailError] = useState('');
    const [password, setPassword] = useState('');
    const [passwordError, setPasswordError] = useState('');
    const [error, setError] = useState('');
+   const {state, signin, ClearErrorMessage} = useContext(AuthContext);
 
+    useEffect(()=>{
+        if (state.errorMessage) ClearErrorMessage();
+    },[]);
 
+    useEffect(()=>{
+        if (state.errorMessage) setError(state.errorMessage)
+    },[state.errorMessage]);
+    useEffect(()=>{
+        if (state.loggedIn) navigation.navigate('start')
+    },[state])
    const handleValidEmail = (val)=> {
     if (val === '') setEmailError(true);
     else if (!validate(val)) setEmailError(true)
@@ -31,32 +42,8 @@ const LoginPage = ({navigation}) =>{
    const handlerSignIn = ()=>{
        if (passwordError === false && emailError === false)
        {
-           firebase
-           .auth()
-           .signInWithEmailAndPassword(email,password)
-           .then((response)=>{
-               const uid = response.user.uid;
-               const usersRef = firebase.firestore().collection("users");
-   
-               usersRef
-               .doc(uid)
-               .get()
-               .then((firestoreDocument) =>{
-                   if (!firestoreDocument.exists){
-                       console.log('User does not exist')
-                       setError('User does not exist')
-                       return;
-                   }
-                   const user = firestoreDocument.data();
-                   navigation.navigate("projects", {user});
-                   console.log(user);
-               })
-            navigation.navigate('projects');
-           })
-           .catch((error)=>{
-               setError(error.message);
-               console.log(error);
-           });
+           console.log('hi');
+           signin(email,password);
        }
    };
 
