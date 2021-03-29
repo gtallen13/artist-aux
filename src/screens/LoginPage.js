@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     scrollView:{
      
-        backgroundColor:'ecedeb',
+        backgroundColor:'#ecedeb',
     },
    
     text_title:{
