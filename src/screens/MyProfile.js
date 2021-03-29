@@ -1,10 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Avatar, Input, Icon} from 'react-native-elements';
+import {Avatar, Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
 import { ToggleTextInput} from '../components/TextInputButton'
 import {Context as AuthContext} from '../providers/AuthContext';
+import {firebase} from '../firebase'
+import Prompt from 'react-native-prompt-crossplatform';
+import { State } from 'react-native-gesture-handler';
+import { useSafeArea } from 'react-native-safe-area-context';
 
 
 const MyProfilePage = ({navigation}) => {
@@ -12,9 +16,35 @@ const MyProfilePage = ({navigation}) => {
     const {signout, state} = useContext(AuthContext);
     const [username, setUsername] = useState(state.user.username);
     const [email, setEmail] = useState(state.user.email);
-
-    const handlerUpateProfile = ()=>{
+    const [emailCredentials, setEmailCredentials] = useState('');
+    const [passwordCredentials, setPasswordCredntials] = useState('');
+    const [visiblePrompt, setVisiblePrompt] = useState(false);
+    const handlerUpdateProfile = (email, username)=>{
         
+        //Actualizacion de email
+        //https://firebase.google.com/docs/auth/web/manage-users 
+        const user = firebase.auth().currentUser
+        const credentials =
+        user.updateEmail(email)
+        .then(()=>{
+            console.log('updatedEmail')
+            const usersRef = firebase.firestore().collection("users")
+            usersRef
+            .doc(state.user.id)
+            .update({
+                "username": username
+            })
+            .then(()=>{
+                console.log('updatedUsername')
+            })
+            .catch((error)=>{
+                console.log(error.message)
+            })
+        })
+        .catch((error)=>{
+            console.log(error.message)
+        })
+    
     }
     return(
         <ScrollView contentContainerStyle={styles.container}>
@@ -31,7 +61,11 @@ const MyProfilePage = ({navigation}) => {
                     <View style={styles.inputText}>
                             {/* Username */}
                         <Text style={styles.titlePlacerHolder}>Username:</Text>
-                            <ToggleTextInput callback={()=> console.log("Press")} iconName='edit' value={username}/>
+                            <ToggleTextInput 
+                            iconName='edit' 
+                            value={username}
+                            onChangeText={setUsername}
+                            />
                         {/* Email */}
                         <Text style={styles.titlePlacerHolder}>Email:</Text>
                             <ToggleTextInput  
@@ -44,8 +78,19 @@ const MyProfilePage = ({navigation}) => {
                             <ToggleTextInput callback={()=> navigation.navigate('changePassword')} iconName='edit' value='*******'/>
                     </View>
                 <View>
-                    <ButtonLogin text={"Save"}/>
+                    <ButtonLogin text={"Save"} callback={()=>setVisiblePrompt(true)}/>
                 </View>
+                <Prompt
+                title="hi"
+                inputPlaceholder="dsd"
+                isVisible={visiblePrompt}
+                onChangeText={setEmailCredentials}
+                onCancel={()=>{
+                }}
+                onSubmit={()=>{
+
+                }}
+                />
             </View>
         </ScrollView> 
     )
