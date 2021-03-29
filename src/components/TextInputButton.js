@@ -78,7 +78,6 @@ const ToggleTextInput = (
 
 const styles = StyleSheet.create({
     styleButtonPassword:{
-        flex:1,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

@@ -16,12 +16,10 @@ const Navigation = ()=>{
 
     if (!state.loading && state.loggedIn)
     {
-      console.log("home")
       return(
         <NavigatorHome/>
       )
     }
-    console.log("reg")
     return(
       <NavigatorReg/>
     )
