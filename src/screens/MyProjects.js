@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet,Text,ScrollView} from 'react-native'
 import { Icon } from 'react-native-elements';
-import {InputSearch} from '../components/SearchBar'
+import {InputSearch} from '../components/searchBar'
 
 const MyProjects = ({navigation}) =>{
 
