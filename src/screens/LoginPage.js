@@ -42,7 +42,6 @@ const LoginPage = ({navigation}) =>{
    const handlerSignIn = ()=>{
        if (passwordError === false && emailError === false)
        {
-           console.log('hi');
            signin(email,password);
        }
    };
