@@ -5,28 +5,25 @@ import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
 import { ToggleTextInput} from '../components/TextInputButton'
 import {Context as AuthContext} from '../providers/AuthContext';
-import {firebase} from '../firebase'
 import DialogInput from 'react-native-dialog-input'
-import { color } from 'react-native-reanimated';
 
 
 
 const MyProfilePage = ({navigation}) => {
     
-    const {signout, update ,state} = useContext(AuthContext);
+    const {signout, update ,state, ClearErrorMessage} = useContext(AuthContext);
     const [newUsername, setNewUsername] = useState(state.user.username);
     const [newEmail, setNewEmail] = useState(state.user.email);
     const [visiblePrompt, setVisiblePrompt] = useState(false);
-    const handlerUpdateProfile = (currentPassword)=>{
-        update(newEmail, newUsername, currentPassword, state.user.email, state.user.id)
-        setVisiblePrompt(false)
-        console.log(state)
-        if (state.updated) 
-        {
-            console.log("hi")
-            signout()
 
+    const handlerUpdateProfile = (currentPassword)=>{
+        update(newEmail, newUsername, currentPassword, state.user.email, state.user.id) 
+        if (!state.errorMessage)
+        {
+            ClearErrorMessage()
+            signout()
         }
+
     }
     return(
         <ScrollView contentContainerStyle={styles.container}>

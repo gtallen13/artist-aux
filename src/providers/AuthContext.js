@@ -6,6 +6,8 @@ const authReducer = (state,action)=>{
     {
         case "errorMessage":
             return {...state, errorMessage: action.payload}
+        case "successMessage":
+            return{...state, successMessage: action.payload}
         case "signin":
             return {...state, user:action.payload, loggedIn:true};
         case "signout":
@@ -14,15 +16,14 @@ const authReducer = (state,action)=>{
             return{
                 ...state,
                 user: action.payload.user,
-                loggedIn: action.payload.loggedIn, 
-                loading: false,
+                loggedIn: action.payload.loggedIn,
             };
         case "update":
             return{
                 ...state,
                 user: action.payload,
-                updated: false
-            }
+                updated: false,
+            };
         case "signup":
             return{
                 ...state,
@@ -50,7 +51,8 @@ const update = (dispatch) =>
 )=>{
     //Actualizacion de email
     //https://firebase.google.com/docs/auth/web/manage-users 
-    reauthenticate(currentPassword,currentEmail).then(()=>{
+    reauthenticate(currentPassword,currentEmail)
+    .then(()=>{
         const user = firebase.auth().currentUser
         
         user.updateEmail(newEmail)
@@ -63,26 +65,34 @@ const update = (dispatch) =>
                 "email": newEmail
             })
             .then(()=>{
-                console.log('updatedUsername')
-            })
-                .catch((error)=>{
-                    console.log(error.message)
-                })
+                const data ={
+                    username: newUsername,
+                    email: newEmail
+                }
+                
+                dispatch({type:"update",payload:{user:data}})
+                dispatch({type:"successMessage",payload:"User info updated!"})
             })
             .catch((error)=>{
                 console.log(error.message)
+                dispatch({type:"errorMessage",payload:error.message})
             })
-            console.log("updatedEmail")
-            const data ={
-                username: newUsername,
-                email: newEmail
-            }
-            dispatch({type:"update",payload:{user:data, updated: true}})
+            
         })
         .catch((error)=>{
-            dispatch({type:"errorMessage",payload:error.message})
             console.log(error.message)
+            dispatch({type:"errorMessage",payload:error.message})
+            
         })
+        console.log("updatedEmail")
+        return true
+    })
+    .catch((error)=>{
+        dispatch({type:"errorMessage",payload:error.message})
+        console.log(error.message)
+        return false
+    })
+
 }
 const signin = (dispatch) => (email,password)=>{
     firebase
@@ -212,7 +222,6 @@ export const {Provider, Context} = createDataContext(
         loggedIn:false,
         loading:true,
         registered:false,
-        updated:false
     }
 
 )
