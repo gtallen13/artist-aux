@@ -47,8 +47,7 @@ const screens = {
     note: {
         screen: Note,
         navigationOptions:{
-            headerTitle: () => (<Text style={styles.headerTitle} >Hola</Text>),
-            headerTitleAlign: 'center'
+            headerShown:false,
         }
     }
 

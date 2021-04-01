@@ -2,7 +2,7 @@ import React from 'react'
 import {View, TextInput, ScrollView,StyleSheet, Text} from 'react-native'
 import { ButtonStopNote } from '../components/Button'
 import { ButtonText } from '../components/ButtonText'
-
+import {Icon} from 'react-native-elements'
 
 const Note = ({navigation}) => {
     const note = navigation.getParam('note')
@@ -10,7 +10,8 @@ const Note = ({navigation}) => {
         
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
-                    <Text style={styles.headerTitle}>Note</Text>
+              <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
+                <Text style={styles.headerTitle}>Note</Text>
               </View>
               
               <View style={styles.noteContainer}>
@@ -25,11 +26,13 @@ const Note = ({navigation}) => {
                     <ButtonText text = 'Recordings' fontSize={12} color = 'white'/>
                         <View style={styles.leftbar}/>
                           <ButtonStopNote
-                            icon='stop-circle'
+                            icon='play-circle'
+                            color='white'
                           />
                           
                           <ButtonStopNote
-                            icon='play-circle'
+                            icon='circle'
+                            color='red'
                           />
 
                     </View>
@@ -48,24 +51,34 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
     },
+    headerContainer:{
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'space-around',
+        alignItems:'center',
+    },
+    headerIcons:{
+        flex:1,
+        paddingLeft:10,
+    },
     headerTitle:{
+        flex:1,
         textAlign:'center',
         fontSize:25,
         fontWeight:'600',
-        
     },
     noteContainer: {
-        flex: 12,
+        flex: 11,
         backgroundColor: '#E9E9E9',
         textAlignVertical: 'top',
         color: 'white',
        
     },
     note:{
-        flex: 12,
-        padding: 5,
-        
-
+        flex: 11,
+        padding: 20,
+        fontSize: 16,
+        fontFamily: "Noto Sans JP",
     },
     barButtom:{
         flex: 2,
@@ -77,7 +90,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'flex-end',
         alignItems:'center',
-        height: 50
+        height: 51
     },
     leftbar:{
       borderLeftWidth:3,
