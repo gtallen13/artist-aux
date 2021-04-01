@@ -16,7 +16,7 @@ const MyProfilePage = ({navigation}) => {
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
-                <Text style={styles.headerTitle}>My Projects</Text>
+                <Text style={styles.headerTitle}>My Profile</Text>
                     <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {handlerLogout}/>
             </View>
             <View style={styles.editContainer}>

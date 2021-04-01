@@ -8,16 +8,23 @@ const MyProjects = ({navigation}) =>{
 
     const [user, setUser] = useState({})
 
+
     const handleOpenProfile = () =>{
         const user = navigation.getParam('user');
-        navigation.navigate('profile', {user})
+           navigation.navigate('profile', {user})
+     
     }
+    const handleOpenNote = () => {
+        const notes = navigation.getParam('plus');
+        navigation.navigate('note', {notes})
+    }
+
     return(
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} size={40} name="user" type="font-awesome" onPress={handleOpenProfile}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
-                <Icon style={styles.headerIcons} size={40}  name="plus" type="font-awesome" onPress={()=>console.log("New Project")}/>
+                <Icon style={styles.headerIcons} size={40}  name="plus" type="font-awesome" onPress={handleOpenNote}/>
             </View>
             <View style={styles.searchContainer}>
                 <InputSearch iconName='search'/>

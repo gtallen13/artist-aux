@@ -7,15 +7,15 @@ import StartPage from '../screens/StartPage'
 import LoginPage from '../screens/LoginPage'
 import SignUpPage from '../screens/SignUp';
 import MyProfilePage from '../screens/MyProfile';
-import MyProjects from '../screens/MyProjects'
-import ChangePasswordPage from '../screens/ChangePasswordPage'
-
+import MyProjects from '../screens/MyProjects';
+import ChangePasswordPage from '../screens/ChangePasswordPage';
+import Note from '../screens/Note';
 
 const screens = {
     start:{
-        screen:StartPage,
+        screen:Note,  
         navigationOptions:{
-            headerShown:false
+            headerShown:false,
         },
     },
     login:{
@@ -43,7 +43,15 @@ const screens = {
             headerTitle: () => (<Text style={styles.headerTitle} >Edit Password</Text>),
             headerTitleAlign: 'center'
         }
+    },
+    note: {
+        screen: Note,
+        navigationOptions:{
+            headerTitle: () => (<Text style={styles.headerTitle} >Hola</Text>),
+            headerTitleAlign: 'center'
+        }
     }
+
    
 }
 const HomeStack = createStackNavigator(screens,{
@@ -52,6 +60,7 @@ const HomeStack = createStackNavigator(screens,{
         headerTitle:false,
         headerStyle:{
             backgroundColor:"#ecedeb",
+            
         },
         headerTransparent:true,
     },  
