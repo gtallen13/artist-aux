@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, TextInput, ScrollView,StyleSheet, Text} from 'react-native'
 import { ButtonStopNote } from '../components/Button'
+import { ButtonText } from '../components/ButtonText'
 
 
 const Note = ({navigation}) => {
@@ -19,8 +20,9 @@ const Note = ({navigation}) => {
                             placeholder={"Escribe una nota"}
                         /> 
               </View>
-              <View style={styles.barBottom}>
+              <View style={styles.barButtom}>
                     <View style={styles.viewPlay}>
+                    <ButtonText text = 'Recordings' fontSize={12} color = 'white'/>
                         <View style={styles.leftbar}/>
                           <ButtonStopNote
                             icon='stop-circle'
@@ -31,6 +33,7 @@ const Note = ({navigation}) => {
                           />
 
                     </View>
+
               </View>
                
         </View>  
@@ -52,39 +55,38 @@ const styles = StyleSheet.create({
         
     },
     noteContainer: {
-        flex: 10,
+        flex: 12,
         backgroundColor: '#E9E9E9',
         textAlignVertical: 'top',
         color: 'white',
        
     },
     note:{
-        flex: 10,
+        flex: 12,
         padding: 5,
-        height:200,
+        
 
     },
-    barBottom:{
-        flex: 3,
-        backgroundColor:'#E9E9E9'
+    barButtom:{
+        flex: 2,
+        backgroundColor: '#E9E9E9',
     },
-
-    leftbar:{
-      borderLeftWidth:3,
-      borderLeftColor:'#5BB1B0',
-      width:10,
-      height:50,
-
-    },
-    viewPlay:{
+     viewPlay:{
         backgroundColor:'black',
         marginTop: 40,
         flexDirection:'row',
         justifyContent:'flex-end',
         alignItems:'center',
         height: 50
-    }
-
+    },
+    leftbar:{
+      borderLeftWidth:3,
+      borderLeftColor:'white',
+      width:10,
+      height:50,
+       
+    },
+  
 })
 
 export default Note;

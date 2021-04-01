@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     },
     buttonStop:{
         marginRight:10,
+        marginLeft:5,
    
     }
 })

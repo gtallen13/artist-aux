@@ -13,7 +13,7 @@ import Note from '../screens/Note';
 
 const screens = {
     start:{
-        screen:Note,  
+        screen:StartPage,  
         navigationOptions:{
             headerShown:false,
         },
