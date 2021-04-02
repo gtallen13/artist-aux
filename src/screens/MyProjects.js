@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
 import {View, StyleSheet,Text,ScrollView} from 'react-native'
 import { Icon } from 'react-native-elements';
 import {InputSearch} from '../components/SearchBar'
@@ -15,7 +14,7 @@ const MyProjects = ({navigation}) =>{
      
     }
     const handleOpenNote = () => {
-        const notes = navigation.getParam('plus');
+        const notes = navigation.getParam('plu');
         navigation.navigate('note', {notes})
     }
 
