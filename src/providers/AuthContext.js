@@ -191,7 +191,6 @@ const update = (dispatch) =>
                 console.log(error.message)
                 dispatch({type:"errorMessage",payload:error.message})
             })
-            console.log("updatedEmail")
         })
         .catch((error)=>{
             console.log(error.message)

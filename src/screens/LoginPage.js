@@ -17,7 +17,7 @@ const LoginPage = ({navigation}) =>{
    const [password, setPassword] = useState('');
    const [passwordError, setPasswordError] = useState('');
    const [error, setError] = useState('');
-   const [isLoading, setIsLoading] = useState(false)
+   const [isLoading, setIsLoading] = useState(false) //indicador de carga cuando el usuario le de a Login
    const {state, signin, ClearErrorMessage} = useContext(AuthContext);
 
    
@@ -25,7 +25,11 @@ const LoginPage = ({navigation}) =>{
        if (state.errorMessage) ClearErrorMessage();
     },[]);
     useEffect(()=>{
-        if (state.errorMessage) setError(state.errorMessage)
+        if (state.errorMessage) 
+        {
+            setError(state.errorMessage)
+            setIsLoading(false)
+        }
     },[state.errorMessage]);
 
    const handleValidEmail = (val)=> {
@@ -44,9 +48,8 @@ const LoginPage = ({navigation}) =>{
        setIsLoading(true)
        if (passwordError === false && emailError === false)
        {
-           
            signin(email,password);
-       }
+        }
 
    };
 
