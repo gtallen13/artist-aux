@@ -64,6 +64,7 @@ const MyProfilePage = ({navigation}) => {
                 isDialogVisible={visiblePrompt}
                 message={"Enter your current password"}
                 hintInput ={"*****"}
+                textInputProps={{secureTextEntry:true}}
                 submitInput={ (passwordCred) => {
                     handlerUpdateProfile(passwordCred)
                 } }
