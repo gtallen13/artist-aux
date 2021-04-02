@@ -1,12 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {View, TextInput, ScrollView,StyleSheet, Text} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
 import { ButtonText, TextNote } from '../components/ButtonText'
-
+import {Audio} from 'expo-av'
+import { Sound } from 'expo-av/build/Audio'
+import { ScreenStackHeaderBackButtonImage } from 'react-native-screens'
 const Recordings = ({navigation}) =>{
+    const [sound, setSound] = useState();
+    const [recording, setRecording] = useState();
     
-    const recording = navigation.getParam('recording')
+
+    useEffect(()=>{
+        return sound ? ()=>{
+            console.log("Unloading Sound");
+            //desmontando el sonido para evitar fugas de memoria
+            sound.unloadAsync();
+        }:undefined
+    },[sound])
+    const playSound = async ()=>{
+        console.log("loading sound")
+        //cargando el audio
+        const {sound} = await Sound.createAsync(
+            require('../recordings/test.ogg')
+        )
+        setSound(sound)
+        // reproduciendo el audio
+        console.log("playing sound")
+        await sound.playAsync()
+    } 
+
     return(
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
@@ -45,6 +68,7 @@ const Recordings = ({navigation}) =>{
                             icon='play-circle'
                             color='white'
                             size={40}
+                            callback={playSound}
                         />
 
                         <ButtonStopNote
