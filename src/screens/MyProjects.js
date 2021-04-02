@@ -10,7 +10,7 @@ const MyProjects = ({navigation}) =>{
         navigation.navigate('profile')
     }
     const handleOpenNote = ()=>{
-        navigation.navigate
+        navigation.navigate('note')
     }
 
     return(
