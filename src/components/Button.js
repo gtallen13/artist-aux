@@ -70,6 +70,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom:20,  
         marginTop:30, 
+        
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.9,
+        shadowRadius: 2,
+
+        textShadowColor:'#585858',
+        textShadowOffset:{width: 1, height: 1},
+        textShadowRadius:1,
     },
     textLogin: {
         textAlign:'center',
