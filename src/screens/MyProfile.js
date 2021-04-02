@@ -18,7 +18,8 @@ const MyProfilePage = ({navigation}) => {
 
 
     useEffect(()=>{
-        if (state.updated) signout()
+        console.log(state)
+        if (state.updated && state.loggedIn) signout()
     },[state.updated])
     const handlerUpdateProfile = (currentPassword)=>{
         update(newEmail, newUsername, currentPassword, state.user.email, state.user.id) 

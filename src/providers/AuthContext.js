@@ -26,13 +26,14 @@ const authReducer = (state,action)=>{
         case "update":
             return{
                 ...state,
-                updated:true
+                updated:action.payload.updated
             };
         default:
             return state;
     }
 }
 const signin = (dispatch) => (email,password)=>{
+    dispatch({type:"update", payload:{updated:false}})
     firebase
     .auth()
     .signInWithEmailAndPassword(email,password)
@@ -202,7 +203,6 @@ const update = (dispatch) =>
         dispatch({type:"errorMessage",payload:error.message})
         console.log(error.message)
     })
-
 }
 
 export const {Provider, Context} = createDataContext(
