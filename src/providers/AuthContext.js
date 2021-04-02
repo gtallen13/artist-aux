@@ -6,8 +6,6 @@ const authReducer = (state,action)=>{
     {
         case "errorMessage":
             return {...state, errorMessage: action.payload}
-        case "successMessage":
-            return{...state, successMessage: action.payload}
         case "signin":
             return {...state, user:action.payload, loggedIn:true};
         case "signout":
@@ -16,13 +14,8 @@ const authReducer = (state,action)=>{
             return{
                 ...state,
                 user: action.payload.user,
-                loggedIn: action.payload.loggedIn,
-            };
-        case "update":
-            return{
-                ...state,
-                user: action.payload,
-                updated: false,
+                loggedIn: action.payload.loggedIn, 
+                loading: false,
             };
         case "signup":
             return{
@@ -30,74 +23,19 @@ const authReducer = (state,action)=>{
                 user: action.payload.user,
                 registered:true,
             };
+        case "update":
+            return{
+                ...state,
+                user: action.payload,
+            };
         default:
             return state;
     }
 }
-//reautenticando el usario para cambiar correo
-const reauthenticate = (credPassword, credEmail)=>{
-    const user = firebase.auth().currentUser
-    const credential = firebase.auth.EmailAuthProvider.credential(credEmail,credPassword);
-    return user.reauthenticateWithCredential(credential)
-}
-const update = (dispatch) => 
-(
-    newEmail, 
-    newUsername, 
-    currentPassword, 
-    currentEmail,
-    id
-
-)=>{
-    //Actualizacion de email
-    //https://firebase.google.com/docs/auth/web/manage-users 
-    reauthenticate(currentPassword,currentEmail)
-    .then(()=>{
-        const user = firebase.auth().currentUser
-        
-        user.updateEmail(newEmail)
-        .then(()=>{
-            const usersRef = firebase.firestore().collection("users")
-            usersRef
-            .doc(id)
-            .update({
-                "username": newUsername,
-                "email": newEmail
-            })
-            .then(()=>{
-                const data ={
-                    username: newUsername,
-                    email: newEmail
-                }
-                
-                dispatch({type:"update",payload:{user:data}})
-                dispatch({type:"successMessage",payload:"User info updated!"})
-            })
-            .catch((error)=>{
-                console.log(error.message)
-                dispatch({type:"errorMessage",payload:error.message})
-            })
-            
-        })
-        .catch((error)=>{
-            console.log(error.message)
-            dispatch({type:"errorMessage",payload:error.message})
-            
-        })
-        console.log("updatedEmail")
-        return true
-    })
-    .catch((error)=>{
-        dispatch({type:"errorMessage",payload:error.message})
-        console.log(error.message)
-        return false
-    })
-
-}
 const signin = (dispatch) => (email,password)=>{
     firebase
     .auth()
-    .signInWithEmailAndPassword(email,password, )
+    .signInWithEmailAndPassword(email,password)
     .then((response) =>{
         const uid = response.user.uid;
         const usersRef = firebase.firestore().collection("users");
@@ -206,6 +144,68 @@ const ClearErrorMessage = (dispatch)=>()=>{
     dispatch({type:"errorMessage", payload:""});
 }
 
+
+//reautenticando el usario para cambiar correo
+const reauthenticate = (credPassword, credEmail)=>{
+    const user = firebase.auth().currentUser
+    const credential = firebase.auth.EmailAuthProvider.credential(credEmail,credPassword);
+    return user.reauthenticateWithCredential(credential)
+}
+const update = (dispatch) => 
+(
+    newEmail, 
+    newUsername, 
+    currentPassword, 
+    currentEmail,
+    id
+
+)=>{
+    //Actualizacion de email
+    //https://firebase.google.com/docs/auth/web/manage-users 
+    reauthenticate(currentPassword,currentEmail)
+    .then(()=>{
+        const user = firebase.auth().currentUser
+        
+        user.updateEmail(newEmail)
+        .then(()=>{
+            const usersRef = firebase.firestore().collection("users")
+            usersRef
+            .doc(id)
+            .update({
+                "username": newUsername,
+                "email": newEmail
+            })
+            .then(()=>{
+                const data ={
+                    username: newUsername,
+                    email: newEmail
+                }
+                
+                dispatch({type:"update",payload:{user:data}})
+                dispatch({type:"successMessage",payload:"User info updated!"})
+            })
+            .catch((error)=>{
+                console.log(error.message)
+                dispatch({type:"errorMessage",payload:error.message})
+            })
+            
+        })
+        .catch((error)=>{
+            console.log(error.message)
+            dispatch({type:"errorMessage",payload:error.message})
+            
+        })
+        console.log("updatedEmail")
+        return true
+    })
+    .catch((error)=>{
+        dispatch({type:"errorMessage",payload:error.message})
+        console.log(error.message)
+        return false
+    })
+
+}
+
 export const {Provider, Context} = createDataContext(
     authReducer,
     {
@@ -213,8 +213,8 @@ export const {Provider, Context} = createDataContext(
         signout,
         signup,
         persistLogin,
-        update,
         ClearErrorMessage,
+        update,
     },
     {
         user:{},
