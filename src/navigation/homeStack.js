@@ -13,7 +13,7 @@ import Note from '../screens/Note';
 import Recordings from '../screens/Recordings';
 const screens = {
     start:{
-        screen:Recordings,  
+        screen:StartPage,  
         navigationOptions:{
             headerShown:false,
         },

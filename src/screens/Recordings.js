@@ -2,7 +2,7 @@ import React from 'react'
 import {View, TextInput, ScrollView,StyleSheet, Text} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
-import { ButtonText } from '../components/ButtonText'
+import { ButtonText, TextNote } from '../components/ButtonText'
 
 const Recordings = ({navigation}) =>{
     
@@ -32,33 +32,36 @@ const Recordings = ({navigation}) =>{
                         <ButtonStopNote
                             icon='step-backward'
                             color='white'
+                            size={30}
                         />
 
                         <ButtonStopNote
                             icon='retweet'
                             color='white'
-                        
+                            size={30}
                         />
 
                         <ButtonStopNote
                             icon='play-circle'
                             color='white'
+                            size={40}
                         />
 
                         <ButtonStopNote
                            icon='circle'
                            color='red'
+                           size={30}
                         />
 
                         <ButtonStopNote 
                             icon='step-forward'
                             color='white'
-                            
+                            size={30}
                         />
                
 
                     </View>
-                    <ButtonText text = 'Note' fontSize={16} color = 'white' />
+                    <TextNote text = 'Note' fontSize={16} color = 'white' callback={()=> navigation.navigate('note')}/>
               </View>
                
         </View>  
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     },
   
     buttomRecorging:{
-        flex: 3,
+        flex: 4,
         backgroundColor: 'black',
       
     },

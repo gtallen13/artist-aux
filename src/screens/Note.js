@@ -22,9 +22,9 @@ const Note = ({navigation}) => {
               <View style={styles.noteContainer}>
                        <ScrollView>
                             <TextInput
-                                multiline={true}
-                                style={styles.note}
-                                placeholder={"Escribe una nota"}
+                            multiline={true}
+                            style={styles.note}
+                            placeholder={"Escribe una nota"}
                             /> 
                        </ScrollView>
                        
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
        
     },
     note:{
-        height:500,
+        height:400,
         padding: 20,
         fontSize: 16,
         fontFamily: "Noto Sans JP",

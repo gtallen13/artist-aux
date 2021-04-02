@@ -10,6 +10,14 @@ const ButtonText = ({text, color,fontSize, callback})=> {
     )
 }
 
+const TextNote = ({text, color, fontSize, callback}) => {
+    return (
+        <TouchableOpacity style={styles.textContainer}>
+           <Text style={[styles.textbutto, {color:color}, {fontSize:fontSize}]} onPress={callback}>{text}</Text>
+        </TouchableOpacity>
+    )
+}
+
 const ButtonGoogle = ({logingoogle})=>{
     return (
         <TouchableOpacity styles={styles.iconGoogle}>
@@ -30,11 +38,20 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color:'#5BB1B0',   
         marginLeft: 5,
-        textAlign:'right',
-        marginRight:20
-
+        marginRight:20,
+        borderBottomWidth:2,
+        borderBottomColor: '#5bb1b0'
             
     },
+    textbutto:{
+        fontSize: 13,
+        fontWeight: '700',
+        color:'#5BB1B0',     
+        marginRight:20,
+        textAlign:'right'
+        
+    },
+
     buttonGoogle:{
         fontSize: 15,
         fontWeight: 500,
@@ -46,4 +63,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export {ButtonText,ButtonGoogle}
+export {ButtonText,ButtonGoogle, TextNote}
