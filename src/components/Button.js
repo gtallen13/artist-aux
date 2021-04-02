@@ -29,14 +29,16 @@ const HeaderButton = ({icon, callback}) =>{
     )
 }
  {/**Button de stop en pantalla nota*/}
-const ButtonStopNote = ({icon, color, callback}) =>{
+const ButtonStopNote = ({icon, color, size, callback}) =>{
     return(
         <View style={styles.buttonStop}>
             <TouchableOpacity onPress={callback}>
                 <Icon
                     name={icon}
                     type="font-awesome"
-                    color={color}/>
+                    color={color}
+                    size={size}
+                />
             </TouchableOpacity>
         </View>
     )
@@ -68,6 +70,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom:20,  
         marginTop:30, 
+        
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.9,
+        shadowRadius: 2,
+
+        textShadowColor:'#585858',
+        textShadowOffset:{width: 1, height: 1},
+        textShadowRadius:1,
     },
     textLogin: {
         textAlign:'center',
@@ -81,7 +92,8 @@ const styles = StyleSheet.create({
     buttonStop:{
         marginRight:10,
         marginLeft:5,
-   
+        justifyContent: 'center',
+      
     }
 })
 export {Button, ButtonLogin, HeaderButton, ButtonStopNote};

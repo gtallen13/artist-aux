@@ -7,7 +7,7 @@ import MyProfilePage from '../screens/MyProfile';
 import MyProjects from '../screens/MyProjects';
 import ChangePasswordPage from '../screens/ChangePasswordPage';
 import Note from '../screens/Note';
-
+import Recordings from '../screens/Recordings';
 const screens = {
     projects:{
         screen:MyProjects,
@@ -30,6 +30,12 @@ const screens = {
     },
     note: {
         screen: Note,
+        navigationOptions:{
+            headerShown:false,
+        }
+    },
+    recording:{
+        screen:Recordings,
         navigationOptions:{
             headerShown:false,
         }

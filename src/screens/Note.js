@@ -5,6 +5,11 @@ import { ButtonText } from '../components/ButtonText'
 import {Icon} from 'react-native-elements'
 
 const Note = ({navigation}) => {
+    const note = navigation.getParam('note')
+   
+    const handleOpenRecordings = () =>{
+        navigation.navigate('recording')
+    }
     return(
         
         <View style={styles.container}>
@@ -14,15 +19,18 @@ const Note = ({navigation}) => {
               </View>
               
               <View style={styles.noteContainer}>
-                        <TextInput
+                       <ScrollView>
+                            <TextInput
                             multiline={true}
                             style={styles.note}
                             placeholder={"Escribe una nota"}
-                        /> 
+                            /> 
+                       </ScrollView>
+                       
               </View>
               <View style={styles.barButtom}>
                     <View style={styles.viewPlay}>
-                    <ButtonText text = 'Recordings' fontSize={12} color = 'white'/>
+                    <ButtonText text = 'Recordings' fontSize={12} color = 'white' callback={()=> navigation.navigate('recording')}/>
                         <View style={styles.leftbar}/>
                           <ButtonStopNote
                             icon='play-circle'
@@ -53,18 +61,18 @@ const styles = StyleSheet.create({
     headerContainer:{
         flex:1,
         flexDirection:'row',
-        justifyContent:'space-around',
         alignItems:'center',
     },
     headerIcons:{
         flex:1,
-        paddingLeft:10,
+        paddingLeft:5,
     },
     headerTitle:{
         flex:1,
         textAlign:'center',
         fontSize:25,
         fontWeight:'600',
+        paddingRight:30,
     },
     noteContainer: {
         flex: 11,
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
        
     },
     note:{
-        flex: 11,
+        height:400,
         padding: 20,
         fontSize: 16,
         fontFamily: "Noto Sans JP",
