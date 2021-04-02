@@ -43,7 +43,6 @@ const Recordings = ({navigation}) =>{
                         <ButtonStopNote
                             icon='play-circle'
                             color='white'
-                            
                         />
 
                         <ButtonStopNote
@@ -56,9 +55,10 @@ const Recordings = ({navigation}) =>{
                             color='white'
                             
                         />
-                  <Text style={styles.textButton}>Notes</Text>
+               
 
                     </View>
+                    <ButtonText text = 'Note' fontSize={16} color = 'white' />
               </View>
                
         </View>  
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
   
     buttomRecorging:{
-        flex: 4,
+        flex: 3,
         backgroundColor: 'black',
       
     },
@@ -103,22 +103,13 @@ const styles = StyleSheet.create({
     },
 
     buttomBar:{
-        flex:2,
+
         flexDirection:'row',
         justifyContent: 'center',
+        borderColor:'#5bb1b0',     
+    },
   
-        
-        borderColor:'#5bb1b0',
-        padding: 5,
-        
-    },
-
-    textButton:{
-     
-        color:'white',
-        textAlign:'right',
-              
-    },
+    
    
    
 })

@@ -29,7 +29,7 @@ const HeaderButton = ({icon, callback}) =>{
     )
 }
  {/**Button de stop en pantalla nota*/}
-const ButtonStopNote = ({icon, color, callback, size}) =>{
+const ButtonStopNote = ({icon, color, callback}) =>{
     return(
         <View style={styles.buttonStop}>
             <TouchableOpacity onPress={callback}>
@@ -37,7 +37,7 @@ const ButtonStopNote = ({icon, color, callback, size}) =>{
                     name={icon}
                     type="font-awesome"
                     color={color}
-                    size={size}/>
+                />
             </TouchableOpacity>
         </View>
     )
