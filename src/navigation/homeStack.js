@@ -4,9 +4,9 @@ import {createAppContainer} from 'react-navigation'
 import {Icon} from 'react-native-elements'
 import {StyleSheet,Text} from 'react-native'
 import MyProfilePage from '../screens/MyProfile';
-import MyProjects from '../screens/MyProjects'
-import ChangePasswordPage from '../screens/ChangePasswordPage'
-
+import MyProjects from '../screens/MyProjects';
+import ChangePasswordPage from '../screens/ChangePasswordPage';
+import Note from '../screens/Note';
 
 const screens = {
     projects:{
@@ -27,7 +27,14 @@ const screens = {
             headerTitle: () => <Text style={styles.headerTitle} >Edit Password</Text>,
             headerTitleAlign: 'center'
         }
+    },
+    note: {
+        screen: Note,
+        navigationOptions:{
+            headerShown:false,
+        }
     }
+
    
 }
 const HomeStack = createStackNavigator(screens,{
@@ -36,6 +43,7 @@ const HomeStack = createStackNavigator(screens,{
         headerTitle:false,
         headerStyle:{
             backgroundColor:"#ecedeb",
+            
         },
         headerTransparent:true,
     },  

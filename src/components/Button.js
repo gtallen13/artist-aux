@@ -28,6 +28,19 @@ const HeaderButton = ({icon, callback}) =>{
         </View>
     )
 }
+ {/**Button de stop en pantalla nota*/}
+const ButtonStopNote = ({icon, color, callback}) =>{
+    return(
+        <View style={styles.buttonStop}>
+            <TouchableOpacity onPress={callback}>
+                <Icon
+                    name={icon}
+                    type="font-awesome"
+                    color={color}/>
+            </TouchableOpacity>
+        </View>
+    )
+}
 
 const styles = StyleSheet.create({
     buttonContainer: {
@@ -64,6 +77,11 @@ const styles = StyleSheet.create({
     },
     headerButton:{
         margin:10
+    },
+    buttonStop:{
+        marginRight:10,
+        marginLeft:5,
+   
     }
 })
-export {Button, ButtonLogin, HeaderButton};
+export {Button, ButtonLogin, HeaderButton, ButtonStopNote};

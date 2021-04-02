@@ -5,15 +5,20 @@ import {InputSearch} from '../components/searchBar'
 
 const MyProjects = ({navigation}) =>{
 
+
     const handleOpenProfile = () =>{
         navigation.navigate('profile')
     }
+    const handleOpenNote = ()=>{
+        navigation.navigate
+    }
+
     return(
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.headerContainer}>
                 <Icon style={styles.headerIcons} size={40} name="user" type="font-awesome" onPress={handleOpenProfile}/>
                 <Text style={styles.headerTitle}>My Projects</Text>
-                <Icon style={styles.headerIcons} size={40}  name="plus" type="font-awesome" onPress={()=>console.log("New Project")}/>
+                <Icon style={styles.headerIcons} size={40}  name="plus" type="font-awesome" onPress={handleOpenNote}/>
             </View>
             <View style={styles.searchContainer}>
                 <InputSearch iconName='search'/>

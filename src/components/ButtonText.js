@@ -22,14 +22,13 @@ const ButtonGoogle = ({logingoogle})=>{
     )
 }
 
+
 const styles = StyleSheet.create({    
     textbutton:{
         fontSize: 13,
-        fontWeight: '600',
+        fontWeight: '700',
         color:'#5BB1B0',   
-        marginLeft: 5,
-        
-            
+        marginLeft: 5,      
     },
     buttonGoogle:{
         fontSize: 15,
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
     },
     textContainer:{
         margin:10,
+        
     }
 })
 
