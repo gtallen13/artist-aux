@@ -7,6 +7,7 @@ import {validate} from 'email-validator'
 import {firebase} from '../firebase'
 import {Alert} from '../components/Alert'
 import {Context as AuthContext} from '../providers/AuthContext'
+import { ActivityIndicator } from 'react-native';
 
 const LoginPage = ({navigation}) =>{
 
@@ -15,6 +16,7 @@ const LoginPage = ({navigation}) =>{
    const [password, setPassword] = useState('');
    const [passwordError, setPasswordError] = useState('');
    const [error, setError] = useState('');
+   const [isLoading, setIsLoading] = useState(false)
    const {state, signin, ClearErrorMessage} = useContext(AuthContext);
 
     useEffect(()=>{
@@ -40,10 +42,13 @@ const LoginPage = ({navigation}) =>{
    }
 
    const handlerSignIn = ()=>{
+       setIsLoading(true)
        if (passwordError === false && emailError === false)
        {
+           console.log("hi")
            signin(email,password);
        }
+
    };
 
    const handlePasswordReset = async () => {
@@ -98,6 +103,9 @@ const LoginPage = ({navigation}) =>{
                 {/* Botton Log In*/}
                 <View>
                     <ButtonLogin text={"Log In"} callback={handlerSignIn}/>
+                    {isLoading ? 
+                    (<ActivityIndicator size="small" color="#5BB1B0"/>)
+                    :null}
                 </View>
                 
                 {/*Boton para login con google*/}
@@ -107,9 +115,9 @@ const LoginPage = ({navigation}) =>{
                 {/*Boton hacia SigUp */}
                 <View style={styles.buttonSigup}>
                     <Text> Don't have an account?
-                    <ButtonText text={"Sign Up"}  callback={()=> navigation.navigate('signUp')} color="#5BB1B0"/>
+                        <ButtonText text={"Sign Up"}  callback={()=> navigation.navigate('signUp')} color="#5BB1B0"/>
                     </Text>
-                    </View>
+                </View>
            
         </ScrollView> 
      
