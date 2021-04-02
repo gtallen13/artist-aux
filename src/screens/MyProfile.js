@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Avatar, Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
@@ -11,19 +11,17 @@ import DialogInput from 'react-native-dialog-input'
 
 const MyProfilePage = ({navigation}) => {
     
-    const {signout, update ,state, ClearErrorMessage} = useContext(AuthContext);
+    const {signout, update ,state } = useContext(AuthContext);
     const [newUsername, setNewUsername] = useState(state.user.username);
     const [newEmail, setNewEmail] = useState(state.user.email);
     const [visiblePrompt, setVisiblePrompt] = useState(false);
 
+
+    useEffect(()=>{
+        if (state.updated) signout()
+    },[state.updated])
     const handlerUpdateProfile = (currentPassword)=>{
         update(newEmail, newUsername, currentPassword, state.user.email, state.user.id) 
-        if (!state.errorMessage)
-        {
-            ClearErrorMessage()
-            signout()
-        }
-
     }
     return(
         <ScrollView contentContainerStyle={styles.container}>

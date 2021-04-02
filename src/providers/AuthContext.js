@@ -26,7 +26,7 @@ const authReducer = (state,action)=>{
         case "update":
             return{
                 ...state,
-                user: action.payload,
+                updated:true
             };
         default:
             return state;
@@ -141,7 +141,10 @@ const signup = (dispatch) => (email, password, username)=>{
 }
 
 const ClearErrorMessage = (dispatch)=>()=>{
-    dispatch({type:"errorMessage", payload:""});
+    dispatch({
+        type:"errorMessage",
+        payload: ""
+    });
 }
 
 
@@ -164,6 +167,7 @@ const update = (dispatch) =>
     //https://firebase.google.com/docs/auth/web/manage-users 
     reauthenticate(currentPassword,currentEmail)
     .then(()=>{
+        dispatch({type:"update" , payload:{updated: true}})
         const user = firebase.auth().currentUser
         
         user.updateEmail(newEmail)
@@ -181,27 +185,23 @@ const update = (dispatch) =>
                     email: newEmail
                 }
                 
-                dispatch({type:"update",payload:{user:data}})
-                dispatch({type:"successMessage",payload:"User info updated!"})
+                // dispatch({type:"update",payload:{user:data,updated:true}})
             })
             .catch((error)=>{
                 console.log(error.message)
                 dispatch({type:"errorMessage",payload:error.message})
             })
-            
+            console.log("updatedEmail")
         })
         .catch((error)=>{
             console.log(error.message)
             dispatch({type:"errorMessage",payload:error.message})
             
         })
-        console.log("updatedEmail")
-        return true
     })
     .catch((error)=>{
         dispatch({type:"errorMessage",payload:error.message})
         console.log(error.message)
-        return false
     })
 
 }
@@ -222,6 +222,7 @@ export const {Provider, Context} = createDataContext(
         loggedIn:false,
         loading:true,
         registered:false,
+        updated:false
     }
 
 )

@@ -9,6 +9,7 @@ import {Alert} from '../components/Alert'
 import {Context as AuthContext} from '../providers/AuthContext'
 import { ActivityIndicator } from 'react-native';
 
+
 const LoginPage = ({navigation}) =>{
 
    const [email,setEmail] = useState('');
@@ -19,16 +20,14 @@ const LoginPage = ({navigation}) =>{
    const [isLoading, setIsLoading] = useState(false)
    const {state, signin, ClearErrorMessage} = useContext(AuthContext);
 
-    useEffect(()=>{
-        if (state.errorMessage) ClearErrorMessage();
+   
+   useEffect(()=>{
+       if (state.errorMessage) ClearErrorMessage();
     },[]);
-
     useEffect(()=>{
         if (state.errorMessage) setError(state.errorMessage)
     },[state.errorMessage]);
-    useEffect(()=>{
-        if (state.loggedIn) navigation.navigate('start')
-    },[state])
+
    const handleValidEmail = (val)=> {
     if (val === '') setEmailError(true);
     else if (!validate(val)) setEmailError(true)
@@ -45,7 +44,7 @@ const LoginPage = ({navigation}) =>{
        setIsLoading(true)
        if (passwordError === false && emailError === false)
        {
-           console.log("hi")
+           
            signin(email,password);
        }
 

@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Dimensions, StyleSheet, View, Text,ScrollView} from 'react-native'
 import { Image} from 'react-native-elements'
 import {Button} from '../components/Button'
 const {width,height} = Dimensions.get('screen');
 const StartPage = ({navigation}) =>
 {
-    
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.titleContainer}>
