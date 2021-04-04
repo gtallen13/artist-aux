@@ -17,7 +17,7 @@ const Recordings = ({navigation}) =>{
     const [recordingdSecs, setRecordingSecs] = useState(0);
     const [recordingTime, setRecordingTime] = useState('00:00:00');
     const [currentPositionSec, setCurrentPositionSec] = useState(0);
-    const [currentDurationSec, setCurrentPositionSec] = useState(0);
+    const [currentDurationSec, setCurrentDurationSec] = useState(0);
     const [playtime, setPlaytime] = useState('00:00:00')
     const [duration, setDuration] = useState('00:00:00')
     
@@ -41,9 +41,44 @@ const Recordings = ({navigation}) =>{
             setRecordingSecs(e.current_position)
             setRecordingTime(audioRecorderPlayer.mmssss(Math.floor(e.current_position)))
         })
-
         console.log(`uri: ${uri}`);
     }
+    const onStopRecord = async ()=>{
+        const result = await audioRecorderPlayer.stopRecorder();
+        audioRecorderPlayer.removePlayBackListener();
+        setRecordingSecs(0)
+        console.log(result);
+    }
+
+    const onStartPlay = async (e)=>{
+        console.log('onStartPlay')
+        const path = 'hello.m4a'
+        const msg = await audioRecorderPlayer.startPlayer(path)
+        audioRecorderPlayer.setVolume(1.0)
+        console.log(msg)
+
+
+        audioRecorderPlayer.addPlayBackListener((e)=>{
+            if (e.current_position === e.duration)
+            {
+                console.log('finished');
+                audioRecorderPlayer.stopPlayer();
+            }
+        })
+        setCurrentPositionSec(e.current_position);
+        setCurrentDurationSec(e.duration);
+        setPlaytime(audioRecorderPlayer.mmssss(Math.floor(e.current_position)));
+        setDuration(audioRecorderPlayer.mmssss(Math.floor(e.duration)))
+    }
+    const onPausePlay = async(e)=>{
+        await audioRecorderPlayer.pausePlayer();
+    }
+    const onStopPlay = async ()=>{
+        console.log('onStopPlay')
+        audioRecorderPlayer.stopPlayer()
+        audioRecorderPlayer.removePlayBackListener()
+    }
+
     
     return(
         <View style={styles.container}>
