@@ -1,35 +1,50 @@
 import React, { useEffect, useState } from 'react'
-import {View, TextInput, ScrollView,StyleSheet, Text} from 'react-native'
+import {View, TextInput, ScrollView,StyleSheet, Text, useColorScheme} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
-import { ButtonText, TextNote } from '../components/ButtonText'
-import {Audio} from 'expo-av'
-import { Sound } from 'expo-av/build/Audio'
-import { ScreenStackHeaderBackButtonImage } from 'react-native-screens'
+import { TextNote } from '../components/ButtonText'
+
+//https://dzone.com/articles/react-native-record-audio-tutorial
+import AudioRecorderPlayer, {
+ AVEncoderAudioQualityIOSType,
+ AVEncodingOption,
+ AudioEncoderAndroidType,
+ AudioSet,
+ AudioSourceAndroidType,
+} from 'react-native-audio-recorder-player'
 const Recordings = ({navigation}) =>{
-    const [sound, setSound] = useState();
-    const [recording, setRecording] = useState();
+    const [isRecording, setIsRecording] = useState(false)
+    const [recordingdSecs, setRecordingSecs] = useState(0);
+    const [recordingTime, setRecordingTime] = useState('00:00:00');
+    const [currentPositionSec, setCurrentPositionSec] = useState(0);
+    const [currentDurationSec, setCurrentPositionSec] = useState(0);
+    const [playtime, setPlaytime] = useState('00:00:00')
+    const [duration, setDuration] = useState('00:00:00')
     
 
-    useEffect(()=>{
-        return sound ? ()=>{
-            console.log("Unloading Sound");
-            //desmontando el sonido para evitar fugas de memoria
-            sound.unloadAsync();
-        }:undefined
-    },[sound])
-    const playSound = async ()=>{
-        console.log("loading sound")
-        //cargando el audio
-        const {sound} = await Sound.createAsync(
-            require('../recordings/test.ogg')
-        )
-        setSound(sound)
-        // reproduciendo el audio
-        console.log("playing sound")
-        await sound.playAsync()
-    } 
+    const audioRecorderPlayer = new AudioRecorderPlayer();
+    audioRecorderPlayer.setSubscriptionDuration(0.09)
 
+    const onStartRecord = async ()=>{
+        const path = 'hello.m4a'
+        const audioSet = {
+            AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
+            AudioSourceAndroid: AudioSourceAndroidType.MIC,
+            AVEncoderAudioQualityIOS: AVEncoderAudioQualityIOSType.high,
+            AVNumberofChannelsKeyIOS:2,
+            AVFormatIDKeyIOS: AVEncodingOption.aac,
+        }
+        console.log('audioSet',audioSet);
+        const uri = await audioRecorderPlayer.startRecorder(path, audioSet);
+        
+        audioRecorderPlayer.addPlayBackListener((e) => {
+            setRecordingSecs(e.current_position)
+            setRecordingTime(audioRecorderPlayer.mmssss(Math.floor(e.current_position)))
+        })
+
+        console.log(`uri: ${uri}`);
+    }
+    
     return(
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
@@ -43,7 +58,7 @@ const Recordings = ({navigation}) =>{
               
               <View style={styles.recording}>
                     <ScrollView>
-
+                        {/* recordings space */}
                     </ScrollView>
               </View>
               
@@ -67,14 +82,14 @@ const Recordings = ({navigation}) =>{
                         <ButtonStopNote
                             icon='play-circle'
                             color='white'
-                            size={40}
-                            callback={playSound}
+                            size={40}                
                         />
 
                         <ButtonStopNote
-                           icon='circle'
+                           icon={isRecording ?  'stop' :'circle'}
                            color='red'
                            size={30}
+                           callback={recordSound}
                         />
 
                         <ButtonStopNote 
