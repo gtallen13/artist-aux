@@ -12,8 +12,10 @@ import AudioRecorderPlayer, {
  AudioSet,
  AudioSourceAndroidType,
 } from 'react-native-audio-recorder-player'
+import { Platform } from 'react-native'
 const Recordings = ({navigation}) =>{
     const [isRecording, setIsRecording] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(false)
     const [recordingdSecs, setRecordingSecs] = useState(0);
     const [recordingTime, setRecordingTime] = useState('00:00:00');
     const [currentPositionSec, setCurrentPositionSec] = useState(0);
@@ -23,10 +25,15 @@ const Recordings = ({navigation}) =>{
     
 
     const audioRecorderPlayer = new AudioRecorderPlayer();
-    audioRecorderPlayer.setSubscriptionDuration(0.09)
+    audioRecorderPlayer.setSubscriptionDuration()
 
     const onStartRecord = async ()=>{
-        const path = 'hello.m4a'
+        setIsRecording(true)
+        console.log ('recording')
+        const path = Platform.select({
+            ios:'hello.m4a',
+            android: 'Music/hello.m4a', 
+        })
         const audioSet = {
             AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
             AudioSourceAndroid: AudioSourceAndroidType.MIC,
@@ -41,9 +48,12 @@ const Recordings = ({navigation}) =>{
             setRecordingSecs(e.current_position)
             setRecordingTime(audioRecorderPlayer.mmssss(Math.floor(e.current_position)))
         })
+        console.log(uri)
         console.log(`uri: ${uri}`);
     }
     const onStopRecord = async ()=>{
+        setIsRecording(false)
+        console.log('not recording');
         const result = await audioRecorderPlayer.stopRecorder();
         audioRecorderPlayer.removePlayBackListener();
         setRecordingSecs(0)
@@ -51,13 +61,12 @@ const Recordings = ({navigation}) =>{
     }
 
     const onStartPlay = async (e)=>{
+        setIsPlaying(true)
         console.log('onStartPlay')
         const path = 'hello.m4a'
-        const msg = await audioRecorderPlayer.startPlayer(path)
+        const msg = await audioRecorderPlayer.startPlayer(path);
         audioRecorderPlayer.setVolume(1.0)
         console.log(msg)
-
-
         audioRecorderPlayer.addPlayBackListener((e)=>{
             if (e.current_position === e.duration)
             {
@@ -71,7 +80,14 @@ const Recordings = ({navigation}) =>{
         setDuration(audioRecorderPlayer.mmssss(Math.floor(e.duration)))
     }
     const onPausePlay = async(e)=>{
-        await audioRecorderPlayer.pausePlayer();
+        setIsPlaying(false)
+        await audioRecorderPlayer.pausePlayer()
+        .then(()=>{
+            console.log("Pause");
+        })
+        .catch(()=>{
+            console.log("couldn't pause");
+        })
     }
     const onStopPlay = async ()=>{
         console.log('onStopPlay')
@@ -115,16 +131,21 @@ const Recordings = ({navigation}) =>{
                         />
 
                         <ButtonStopNote
-                            icon='play-circle'
+                            icon={isPlaying ? 'pause-circle':'play-circle'}
                             color='white'
-                            size={40}                
+                            size={40}     
+                            callback= {()=>{
+                                isPlaying ? onPausePlay():onStartPlay()
+                            }}           
                         />
 
                         <ButtonStopNote
                            icon={isRecording ?  'stop' :'circle'}
                            color='red'
                            size={30}
-                           callback={recordSound}
+                           callback={()=>
+                            isRecording ? onStopRecord() : onStartRecord()
+                        }
                         />
 
                         <ButtonStopNote 

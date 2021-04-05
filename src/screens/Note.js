@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
         height:400,
         padding: 20,
         fontSize: 16,
-        fontFamily: "Noto Sans JP",
     },
     barButtom:{
         flex: 2,
