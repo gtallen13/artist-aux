@@ -3,14 +3,16 @@ import {View,  ScrollView,StyleSheet, Text} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
 import { TextNote } from '../components/ButtonText'
+import {firebase} from '../firebase'
 //https://docs.expo.io/versions/latest/sdk/audio/
 import {Audio} from 'expo-av'
+import { block, event } from 'react-native-reanimated'
 const Recordings = ({navigation}) =>{
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [sound, setSound] = useState();
     const [recording, setRecording] = useState();
-    const [recordings, setRecordings] = useState('../../assets/jeff.mp3')
+    const [recordings, setRecordings] = useState('')
     const playSound = async()=>{
         console.log('Loading Sound');
         const {sound} = await Audio.Sound.createAsync(require('../../assets/jeff.mp3'))
@@ -61,6 +63,43 @@ const Recordings = ({navigation}) =>{
         const uri = recording.getURI(); 
         setRecordings(uri)
         console.log('Recording stopped and stored at', uri);
+        uploadFile()
+    }
+
+    const uploadFile = ()=>{
+        //Upload file
+        const storage = firebase.storage()
+        const storageRef = storage.ref()
+        const audioRef = storageRef.child('jeffUpload.m4a');
+        console.log(`Audioref: ${audioRef}`)
+        const metadata = {
+            contentType:'audio/m4a'
+        }
+        audioRef.put(recordings,metadata).then((snapshot)=>{
+            console.log('Uploaded a blob or a file')
+        })
+        
+    }
+    const downloadFile = ()=>{
+        const storage = firebase.storage()
+        const pathReference = storage.ref('jeffUpload.m4a')
+        const storageRef = storage.ref()
+        storageRef.child('jeffUpload.m4a').getDownloadURL()
+        .then((url)=>{
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = (event)=>{
+                const blob = xhr.response
+            }
+            xhr.open('GET',url)
+            xhr.send()
+            console.log(url)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+        
+
     }
     return(
         <View style={styles.container}>
@@ -87,6 +126,7 @@ const Recordings = ({navigation}) =>{
                             icon='step-backward'
                             color='white'
                             size={30}
+                            callback={()=>downloadFile()}
                         />
 
                         <ButtonStopNote
