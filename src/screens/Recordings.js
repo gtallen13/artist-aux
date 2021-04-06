@@ -3,20 +3,26 @@ import {View,  ScrollView,StyleSheet, Text} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
 import { TextNote } from '../components/ButtonText'
+//https://docs.expo.io/versions/latest/sdk/audio/
 import {Audio} from 'expo-av'
 const Recordings = ({navigation}) =>{
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
-    const  [sound, setSound] = useState();
-
+    const [sound, setSound] = useState();
+    const [recording, setRecording] = useState();
+    const [recordings, setRecordings] = useState('../../assets/jeff.mp3')
     const playSound = async()=>{
         console.log('Loading Sound');
-        const {sound} = await Audio.Sound.createAsync(
-            require('../../assets/jeff.mp3')
-        )
+        const {sound} = await Audio.Sound.createAsync(require('../../assets/jeff.mp3'))
         setSound(sound)
+        setIsPlaying(true)
         console.log('Playing Sound')
         await sound.playAsync();
+    }
+    const stopSound = async ()=>{
+        console.log('Stoping sound')
+        setIsPlaying(false)
+        await sound.stopAsync()
     }
     useEffect(() => {
         return sound
@@ -26,7 +32,36 @@ const Recordings = ({navigation}) =>{
           : undefined;
       }, [sound]);
 
-    
+    const startRecording = async ()=>{
+        try{
+            console.log('requesting permissions')
+            await Audio.requestPermissionsAsync();
+            await Audio.setAudioModeAsync({
+                allowsRecordingIOS:true,
+                playsInSilentModeIOS:true,
+            });
+            console.log('Starting recording..')
+            const recording = new Audio.Recording();
+            await recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+            await recording.startAsync();
+            setRecording(recording);
+            setIsRecording(true)
+            console.log('recording started')
+        }
+        catch(err)
+        {
+            console.log('Failed to start recording', err);    
+        }
+    }
+    const stopRecording = async ()=>{
+        console.log('Stopppin recording');
+        setRecording(undefined)
+        setIsRecording(false)
+        await recording.stopAndUnloadAsync();
+        const uri = recording.getURI(); 
+        setRecordings(uri)
+        console.log('Recording stopped and stored at', uri);
+    }
     return(
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
@@ -61,11 +96,11 @@ const Recordings = ({navigation}) =>{
                         />
 
                         <ButtonStopNote
-                            icon={isPlaying ? 'pause-circle':'play-circle'}
+                            icon={isPlaying ? 'stop-circle':'play-circle'}
                             color='white'
                             size={40}     
                             callback= {()=>{
-                                isPlaying ? console.log("jj"):playSound()
+                                isPlaying ? stopSound():playSound()
                             }}           
                         />
 
@@ -74,7 +109,7 @@ const Recordings = ({navigation}) =>{
                            color='red'
                            size={30}
                            callback={()=>
-                            isRecording ? onStopRecord() : onStartRecord()
+                            isRecording ? stopRecording() : startRecording()
                         }
                         />
 
