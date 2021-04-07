@@ -33,7 +33,9 @@
     "react-native-web": "^0.15.5",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.3",
-    "expo-file-system": "~9.3.0"
+    "expo-file-system": "~9.3.0",
+    "expo-permissions": "~10.0.0",
+    "expo-intent-launcher": "~8.4.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

@@ -5,6 +5,8 @@ import { ButtonStopNote } from '../components/Button'
 import { TextNote } from '../components/ButtonText'
 import {firebase} from '../firebase'
 import * as FileSystem from 'expo-file-system';
+import * as Permissions from 'expo-permissions';
+import * as IntentLauncher from 'expo-intent-launcher'
 //https://docs.expo.io/versions/latest/sdk/audio/
 import {Audio} from 'expo-av'
 const Recordings = ({navigation}) =>{
@@ -42,6 +44,7 @@ const Recordings = ({navigation}) =>{
                 allowsRecordingIOS:true,
                 playsInSilentModeIOS:true,
             });
+            await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
             console.log('Starting recording..')
             const recording = new Audio.Recording();
             await recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
@@ -61,8 +64,22 @@ const Recordings = ({navigation}) =>{
         setIsRecording(false)
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI(); 
-        setRecordings(uri)
         console.log('Recording stopped and stored at', uri);
+        
+        //Content from uri
+        FileSystem.getContentUriAsync(uri)
+        .then((cURI)=>{
+            console.log(cURI)
+            setRecordings(cURI)
+            IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
+                data: cURI,
+                flags: 1,
+            });
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+
         uploadFile()
     }
 
@@ -70,16 +87,15 @@ const Recordings = ({navigation}) =>{
         //Upload file
         const storage = firebase.storage()
         const storageRef = storage.ref()
-        const audioRef = storageRef.child('jeffUpload.m4a');
+        const audioRef = storageRef.child('jeffUpload1.m4a');
         console.log(`Audioref: ${audioRef}`)
         const metadata = {
             contentType:'audio/m4a'
         }
-        audioRef.put(recordings).then((snapshot)=>{
-            console.log(snapshot)
+        audioRef.put(recordings,metadata).then((snapshot)=>{
             console.log('Uploaded a blob or a file')
+            downloadFile()
         })
-        downloadFile()
         
     }
     const downloadFile = ()=>{
