@@ -4,9 +4,9 @@ import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
 import { TextNote } from '../components/ButtonText'
 import {firebase} from '../firebase'
+import * as FileSystem from 'expo-file-system';
 //https://docs.expo.io/versions/latest/sdk/audio/
 import {Audio} from 'expo-av'
-import { block, event } from 'react-native-reanimated'
 const Recordings = ({navigation}) =>{
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
@@ -75,9 +75,11 @@ const Recordings = ({navigation}) =>{
         const metadata = {
             contentType:'audio/m4a'
         }
-        audioRef.put(recordings,metadata).then((snapshot)=>{
+        audioRef.put(recordings).then((snapshot)=>{
+            console.log(snapshot)
             console.log('Uploaded a blob or a file')
         })
+        downloadFile()
         
     }
     const downloadFile = ()=>{
