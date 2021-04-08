@@ -4,17 +4,15 @@ import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
 import { TextNote } from '../components/ButtonText'
 import {firebase} from '../firebase'
-import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
-import * as IntentLauncher from 'expo-intent-launcher'
 //https://docs.expo.io/versions/latest/sdk/audio/
 import {Audio} from 'expo-av'
 const Recordings = ({navigation}) =>{
+    
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [sound, setSound] = useState();
     const [recording, setRecording] = useState();
-    const [recordings, setRecordings] = useState('')
     const playSound = async()=>{
         console.log('Loading Sound');
         const {sound} = await Audio.Sound.createAsync(require('../../assets/jeff.mp3'))
@@ -65,59 +63,78 @@ const Recordings = ({navigation}) =>{
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI(); 
         console.log('Recording stopped and stored at', uri);
-        
-        //Content from uri
-        FileSystem.getContentUriAsync(uri)
-        .then((cURI)=>{
-            console.log(cURI)
-            setRecordings(cURI)
-            IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
-                data: cURI,
-                flags: 1,
-            });
-        })
-        .catch((error)=>{
-            console.log(error)
-        })
-
-        uploadFile()
+        uploadFile(uri)
     }
 
-    const uploadFile = ()=>{
+    const uploadFile = async (uri)=>{
         //Upload file
-        const storage = firebase.storage()
-        const storageRef = storage.ref()
-        const audioRef = storageRef.child('jeffUpload1.m4a');
-        console.log(`Audioref: ${audioRef}`)
-        const metadata = {
-            contentType:'audio/m4a'
-        }
-        audioRef.put(recordings,metadata).then((snapshot)=>{
-            console.log('Uploaded a blob or a file')
-            downloadFile()
-        })
-        
-    }
-    const downloadFile = ()=>{
-        const storage = firebase.storage()
-        const pathReference = storage.ref('jeffUpload.m4a')
-        const storageRef = storage.ref()
-        storageRef.child('jeffUpload.m4a').getDownloadURL()
-        .then((url)=>{
-            const xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.onload = (event)=>{
-                const blob = xhr.response
+        try{
+            const blob = await new Promise((resolve,reject)=>{
+                const xhr = new XMLHttpRequest();
+                xhr.onload = ()=>{
+                    try
+                    {
+                        resolve(xhr.response)
+                    }
+                    catch(error)
+                    {
+                        console.log(`error: ${error}`)
+                    }
+                };
+                xhr.onerror = (e)=>{
+                    console.log(e);
+                    reject(new TypeError("Network request failed"))
+                };
+                xhr.responseType = "blob"
+                xhr.open("GET", uri,true)
+                xhr.send(null)
+            })
+            if (blob != null)
+            {
+                const uriParts = uri.split(".")
+                const fileType = uriParts[uriParts.length - 1];
+                firebase
+                .storage()
+                .ref()
+                .child(`Audio/porfis.${fileType}`)
+                .put(blob,{
+                    contentType: `audio/${fileType}`
+                })
+                .then(()=>{
+                    console.log('sent')
+                })
+                .catch((error)=>{
+                    console.log(error);
+                })
             }
-            xhr.open('GET',url)
-            xhr.send()
-            console.log(url)
+            else
+            {
+                console.log('error with blob');
+            }
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
+    }
+    const downloadFile = async ()=>{
+        const storage = firebase.storage()
+        const storageRef = storage.ref()
+        let fileURL;
+        storageRef.child('Audio/jeff.mp3').getDownloadURL()
+        .then((url)=>{
+            fetch(url)
+            .then((response)=>{
+                return response
+            })
+            .then((res)=>{
+                setFirebaseAudio(res._bodyInit)
+            })
         })
         .catch((error)=>{
             console.log(error)
-        })
-        
-
+        })    
+        getFile(fileURL)
     }
     return(
         <View style={styles.container}>
