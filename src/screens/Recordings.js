@@ -11,29 +11,31 @@ const Recordings = ({navigation}) =>{
     
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [sound, setSound] = useState();
+    const [sound, setSound] = useState('');
     const [recording, setRecording] = useState();
     const playSound = async()=>{
-        console.log('Loading Sound');
-        const {sound} = await Audio.Sound.createAsync(require('../../assets/jeff.mp3'))
-        setSound(sound)
-        setIsPlaying(true)
-        console.log('Playing Sound')
-        await sound.playAsync();
+        // console.log('Loading Sound');
+        // // const {sound} = await Audio.Sound.createAsync(require('../../assets/jeff.mp3'))
+        // const soundObject = new Audio.Sound()
+        // try
+        // {
+        //     await soundObject.loadAsync({sound})
+        //     await soundObject.playAsync();
+        // }
+        // catch(error)
+        // {
+        //     console.log(error);
+        // }
+        // // setSound(sound)
+        // setIsPlaying(true)
+        // console.log('Playing Sound')
+        downloadFile()
     }
     const stopSound = async ()=>{
         console.log('Stoping sound')
         setIsPlaying(false)
         await sound.stopAsync()
     }
-    useEffect(() => {
-        return sound
-          ? () => {
-              console.log('Unloading Sound');
-              sound.unloadAsync(); }
-          : undefined;
-      }, [sound]);
-
     const startRecording = async ()=>{
         try{
             console.log('requesting permissions')
@@ -65,7 +67,7 @@ const Recordings = ({navigation}) =>{
         console.log('Recording stopped and stored at', uri);
         uploadFile(uri)
     }
-
+    //https://dev.to/lankinen/expo-audio-upload-recording-to-firebase-storage-and-download-it-later-25o6
     const uploadFile = async (uri)=>{
         //Upload file
         try{
@@ -102,6 +104,7 @@ const Recordings = ({navigation}) =>{
                 })
                 .then(()=>{
                     console.log('sent')
+                    downloadFile()
                 })
                 .catch((error)=>{
                     console.log(error);
@@ -118,23 +121,22 @@ const Recordings = ({navigation}) =>{
         }
     }
     const downloadFile = async ()=>{
-        const storage = firebase.storage()
-        const storageRef = storage.ref()
-        let fileURL;
-        storageRef.child('Audio/jeff.mp3').getDownloadURL()
-        .then((url)=>{
-            fetch(url)
-            .then((response)=>{
-                return response
-            })
-            .then((res)=>{
-                setFirebaseAudio(res._bodyInit)
-            })
-        })
-        .catch((error)=>{
-            console.log(error)
-        })    
-        getFile(fileURL)
+        const uri = await firebase
+        .storage()
+        .ref(`Audio/porfis.m4a`)
+        .getDownloadURL()
+        console.log(`uri: ${uri}`)
+        const soundObject = new Audio.Sound()
+        try
+        {
+            await soundObject.loadAsync({uri})
+            await soundObject.playAsync()
+            setIsPlaying(true)
+        }
+        catch (error) 
+        {
+            console.log(error);
+        }
     }
     return(
         <View style={styles.container}>
