@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {View,  ScrollView,StyleSheet, Text} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
 import { TextNote } from '../components/ButtonText'
-import {firebase} from '../firebase'
 import * as Permissions from 'expo-permissions';
+import {firebase} from '../firebase'
+import {Context as RecordingContext} from '../providers/RecordingContext'
+import moment from 'moment'
 //https://docs.expo.io/versions/latest/sdk/audio/
 import {Audio} from 'expo-av'
 const Recordings = ({navigation}) =>{
-    
+    const {state, createRecording, getRecordings } = useContext(RecordingContext);
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [sound, setSound] = useState('');
     const [recording, setRecording] = useState();
     const playSound = async()=>{
-        // console.log('Loading Sound');
-        // // const {sound} = await Audio.Sound.createAsync(require('../../assets/jeff.mp3'))
-        // const soundObject = new Audio.Sound()
-        // try
-        // {
-        //     await soundObject.loadAsync({sound})
-        //     await soundObject.playAsync();
-        // }
-        // catch(error)
-        // {
-        //     console.log(error);
-        // }
-        // // setSound(sound)
-        // setIsPlaying(true)
-        // console.log('Playing Sound')
-        downloadFile()
+        getRecordings()
     }
     const stopSound = async ()=>{
         console.log('Stoping sound')
@@ -65,12 +51,11 @@ const Recordings = ({navigation}) =>{
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI(); 
         console.log('Recording stopped and stored at', uri);
-        uploadFile(uri)
+        upload(uri)
     }
-    //https://dev.to/lankinen/expo-audio-upload-recording-to-firebase-storage-and-download-it-later-25o6
-    const uploadFile = async (uri)=>{
-        //Upload file
-        try{
+    const upload = async (uri)=>{
+        try
+        {
             const blob = await new Promise((resolve,reject)=>{
                 const xhr = new XMLHttpRequest();
                 xhr.onload = ()=>{
@@ -94,17 +79,30 @@ const Recordings = ({navigation}) =>{
             if (blob != null)
             {
                 const uriParts = uri.split(".")
+                const fileName = moment().format('MMMM Do YYYY, h:mm:ss a');
                 const fileType = uriParts[uriParts.length - 1];
                 firebase
                 .storage()
                 .ref()
-                .child(`Audio/porfis.${fileType}`)
+                .child(`Audio/${fileName}.${fileType}`)
                 .put(blob,{
                     contentType: `audio/${fileType}`
                 })
                 .then(()=>{
                     console.log('sent')
-                    downloadFile()
+                
+                    const recordingID = firebase.firestore().collection("Audios").doc().id
+                    firebase
+                    .firestore()
+                    .collection("Audios")
+                    .doc()
+                    .set({
+                        id: recordingID,
+                        recordingURL: state.recordings,
+                        fileName: `${fileName}.${fileType}`
+                    })
+                    
+
                 })
                 .catch((error)=>{
                     console.log(error);
@@ -120,24 +118,7 @@ const Recordings = ({navigation}) =>{
             console.log(error)
         }
     }
-    const downloadFile = async ()=>{
-        const uri = await firebase
-        .storage()
-        .ref(`Audio/porfis.m4a`)
-        .getDownloadURL()
-        console.log(`uri: ${uri}`)
-        const soundObject = new Audio.Sound()
-        try
-        {
-            await soundObject.loadAsync({uri})
-            await soundObject.playAsync()
-            setIsPlaying(true)
-        }
-        catch (error) 
-        {
-            console.log(error);
-        }
-    }
+    
     return(
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
