@@ -5,12 +5,14 @@ import { ButtonStopNote } from '../components/Button'
 import { TextNote } from '../components/ButtonText'
 import * as Permissions from 'expo-permissions';
 import {firebase} from '../firebase'
-import {Context as RecordingContext} from '../providers/RecordingContext'
+import {Context as ProjectContext} from '../providers/ProjectContext'
+import {Context as AuthContext} from '../providers/AuthContext'
 import moment from 'moment'
-//https://docs.expo.io/versions/latest/sdk/audio/
 import {Audio} from 'expo-av'
+//https://docs.expo.io/versions/latest/sdk/audio/
 const Recordings = ({navigation}) =>{
-    const {state, createRecording, getRecordings } = useContext(RecordingContext);
+    const {updateProject, state:projectState} = useContext(ProjectContext)
+    const {state} = useContext(AuthContext)
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [recording, setRecording] = useState();
@@ -53,13 +55,12 @@ const Recordings = ({navigation}) =>{
         console.log('Recording stopped and stored at', uri);
         //upload(uri)
         const uriParts = uri.split(".")
-        const fileName = moment().format('MMMM Do YYYY, h:mm:ss a');
-        const fileType = uriParts[uriParts.length - 1];
-        createRecording(uri,`${fileName}.${fileType}`)
+        upload(uri)
 
 
     }
     const upload = async (uri)=>{
+        console.log(projectState.currentProject.id)
         try
         {
             const blob = await new Promise((resolve,reject)=>{
@@ -98,22 +99,31 @@ const Recordings = ({navigation}) =>{
                     console.log('sent')
                 
                     const storageURL = `Audio/${fileName}.${fileType}`
-                    
-                    const recordingID = firebase.firestore().collection("Audios").doc().id
-                    firebase
-                    .firestore()
-                    .collection("Audios")
-                    .doc('GMewGC8wgvp5WyZoIc9j')
-                    .set({
-                        id: recordingID,
-                        fileName: `${fileName}.${fileType}`
-                    })
-                    .then(()=>{
-                        const recordingsRef = firebase.firestore().collection("Audios").doc(recordingID)
-                        recordingsRef.update({
-                            recordingPaths: firebase.firestore.FieldValue.arrayUnion(storageURL)
-                        })
-                    })
+                     //Agreando la ruta del audio al documento del proyecto
+                     updateProject
+                     (
+                        projectState.currentProject.id, 
+                        projectState.currentProject.title,
+                        projectState.currentProject.timestamp,
+                        projectState.currentProject.note,
+                        storageURL
+                     )
+                    // para agregar audios
+                    // const recordingID = firebase.firestore().collection("Audios").doc().id
+                    // firebase
+                    // .firestore()
+                    // .collection("Audios")
+                    // .doc('GMewGC8wgvp5WyZoIc9j')
+                    // .set({
+                    //     id: recordingID,
+                    //     fileName: `${fileName}.${fileType}`
+                    // })
+                    // .then(()=>{
+                    //     // const recordingsRef = firebase.firestore().collection("Audios").doc(recordingID)
+                    //     // recordingsRef.update({
+                    //     //     recordingPaths: firebase.firestore.FieldValue.arrayUnion(storageURL)
+                    //     // })
+                    // })
                     
                 })
                 .catch((error)=>{
