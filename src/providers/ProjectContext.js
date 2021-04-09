@@ -86,10 +86,15 @@ const getProjects = (dispatch) => (userID)=>{
     )
 }
 
-const updateProject = (dispatch) => (id,title,author,timestamp,note, recording)=>{
+const updateProject = (dispatch) => (id,title,timestamp,note, recording)=>{
     projectsRef
     .doc(id)
-    .update({title,author,timestamp,note, recording})
+    .update({
+        title,
+        timestamp,
+        note, 
+        recording
+    })
     .then(()=>{
         dispatch({
             type:"updateProject",
