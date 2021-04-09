@@ -51,7 +51,13 @@ const Recordings = ({navigation}) =>{
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI(); 
         console.log('Recording stopped and stored at', uri);
-        upload(uri)
+        //upload(uri)
+        const uriParts = uri.split(".")
+        const fileName = moment().format('MMMM Do YYYY, h:mm:ss a');
+        const fileType = uriParts[uriParts.length - 1];
+        createRecording(uri,`${fileName}.${fileType}`)
+
+
     }
     const upload = async (uri)=>{
         try
@@ -91,18 +97,24 @@ const Recordings = ({navigation}) =>{
                 .then(()=>{
                     console.log('sent')
                 
+                    const storageURL = `Audio/${fileName}.${fileType}`
+                    
                     const recordingID = firebase.firestore().collection("Audios").doc().id
                     firebase
                     .firestore()
                     .collection("Audios")
-                    .doc()
+                    .doc('GMewGC8wgvp5WyZoIc9j')
                     .set({
                         id: recordingID,
-                        recordingURL: state.recordings,
                         fileName: `${fileName}.${fileType}`
                     })
+                    .then(()=>{
+                        const recordingsRef = firebase.firestore().collection("Audios").doc(recordingID)
+                        recordingsRef.update({
+                            recordingPaths: firebase.firestore.FieldValue.arrayUnion(storageURL)
+                        })
+                    })
                     
-
                 })
                 .catch((error)=>{
                     console.log(error);
