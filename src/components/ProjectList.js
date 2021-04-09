@@ -7,6 +7,7 @@ const ProjecList = ({navigation, projects})=>{
     const {state, setCurrentProject} = useContext(ProjectContext)
      
     const handleSelectProject = (project)=>{
+        console.log(project);
         setCurrentProject(project)
         navigation.navigate('note')
     }

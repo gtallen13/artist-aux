@@ -27,7 +27,7 @@ const recordingReducer = (state, action)=>{
 }
 
 //https://dev.to/lankinen/expo-audio-upload-recording-to-firebase-storage-and-download-it-later-25o6
-const createRecording = (dispatch) = (uri,fileName)=>{
+const createRecording = (dispatch) => (uri,fileName)=>{
     aver(uri,fileName)
 }
 
@@ -101,7 +101,7 @@ const aver = async (uri,fileName)=>{
     }
 }
 
-const getRecordings = (dispatch) = async () =>{
+const getRecordings = (dispatch) => async () =>{
     const uri = await firebase
         .storage()
         .ref(`Audio/April 8th 2021, 10:51:43 am.m4a`)
