@@ -19,6 +19,11 @@ const projectReducer = (state,action)=>{
                 ...state,
                 projects: action.payload
             } 
+        case "setCurrentProject":
+            return {
+                ...state,
+                currentProject:action.payload
+            }
         case "updateProject":
             return{
                 ...state,
@@ -28,7 +33,9 @@ const projectReducer = (state,action)=>{
                         return{
                             ...project,
                             title: action.payload.project.title,
-                            timestamp: action.payload.project.timestamp
+                            timestamp: action.payload.project.timestamp,
+                            note:action.payload.project.timestamp,
+                            recording: action.payload.project.recording,
                         }
                     }
                     return project
@@ -65,7 +72,7 @@ const getProjects = (dispatch) => (userID)=>{
         querySnapshot.forEach((doc)=>{
             const project = doc.data();
             project.id = doc.id;
-            project.push(project)
+            projects.push(project)
         });
         dispatch({type:"getProjects", payload:projects})
         dispatch({type:"feedback", payload:"Your project was saved!"});
@@ -77,14 +84,14 @@ const getProjects = (dispatch) => (userID)=>{
     )
 }
 
-const updateProject = (dispatch) => (title,author,timestamp)=>{
+const updateProject = (dispatch) => (title,author,timestamp,note, recording)=>{
     projectsRef
     .doc(id)
-    .update({title,author,timestamp})
+    .update({title,author,timestamp,note, recording})
     .then(()=>{
         dispatch({
             type:"updateProject",
-            payload: {project:{title,author,timestamp}},
+            payload: {project:{title,author,timestamp,note, recording}},
         });
         dispatch({type:"feedback", payload:"Project Updated"})
     })
@@ -92,16 +99,21 @@ const updateProject = (dispatch) => (title,author,timestamp)=>{
         dispatch({type:"feedback", payload:error.message})
     });
 }
-
+const setCurrentProject = (dispatch) => (project) =>{
+    dispatch({type:"setCurrentProject", payload:project})
+}
 export const {Provider, Context} = createDataContext(
     projectReducer,
     {
         createProject,
         getProjects,
+        updateProject,
+        setCurrentProject,
     },
     {
         projects:[],
         feedback:"",
+        currentProject:{id:"", title:"",timestamp:""}
         
     }
 )
