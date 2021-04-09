@@ -17,8 +17,33 @@ const Recordings = ({navigation}) =>{
     const [isPlaying, setIsPlaying] = useState(false)
     const [recording, setRecording] = useState();
     const playSound = async()=>{
-        getRecordings()
+        const uri = await firebase
+            .storage()
+            .ref(projectState.currentProject.recording)
+            .getDownloadURL()
+            console.log(`uri: ${uri}`)
+            
+            const soundObject = new Audio.Sound()
+            
+            try
+            {
+                await soundObject.loadAsync({uri})
+                await soundObject.playAsync()
+                soundObject.getStatusAsync()
+                .then((res)=>{
+                    console.log(res.durationMillis)
+                })
+                .catch((error)=>{
+                    console.log(error);
+                })
+                setIsPlaying(true)
+            }
+            catch (error) 
+            {
+                console.log(error);
+            }
     }
+
     const stopSound = async ()=>{
         console.log('Stoping sound')
         setIsPlaying(false)
@@ -53,11 +78,7 @@ const Recordings = ({navigation}) =>{
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI(); 
         console.log('Recording stopped and stored at', uri);
-        //upload(uri)
-        const uriParts = uri.split(".")
         upload(uri)
-
-
     }
     const upload = async (uri)=>{
         console.log(projectState.currentProject.id)
@@ -140,7 +161,28 @@ const Recordings = ({navigation}) =>{
             console.log(error)
         }
     }
-    
+    const getRecordings = async () =>{
+        const uri = await firebase
+            .storage()
+            .ref(projectState.currentProject.recording)
+            .getDownloadURL()
+            console.log(`uri: ${uri}`)
+            
+            const soundObject = new Audio.Sound()
+            setSound(soundObject)
+            console.log("not playing");
+            try
+            {
+                await soundObject.loadAsync({uri})
+                await soundObject.playAsync()
+                setIsPlaying(true)
+            }
+            catch (error) 
+            {
+                console.log(error);
+            }
+    }
+
     return(
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
