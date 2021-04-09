@@ -23,7 +23,7 @@ const MyProjects = ({navigation}) =>{
     const handlerCreateProject = (name)=>{
         setProjectName(name)
         const timestamp = moment().format('MMMM Do YYYY, h:mm:ss a');
-        createProject(name,state.user.id,timestamp)
+        createProject(name,state.user.id,timestamp,"","")
         setVisiblePrompt(false)
         navigation.navigate('note')
     }
