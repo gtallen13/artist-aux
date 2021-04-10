@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import {Provider as AuthProvider} from './src/providers/AuthContext'
 import {Provider as RecordingProvider} from './src/providers/RecordingContext'
 import {Provider as ProjectProvider} from './src/providers/ProjectContext'
@@ -8,7 +8,9 @@ export default function App() {
   return (
     <AuthProvider>
       <ProjectProvider>
-        <Navigation/>
+        <RecordingProvider>
+          <Navigation/>
+        </RecordingProvider>
       </ProjectProvider>
     </AuthProvider>
   );
