@@ -48,13 +48,13 @@ const projectReducer = (state,action)=>{
 
 const projectsRef = firebase.firestore().collection("Projects")
 
-const createProject = (dispatch)=>(title,author,timestamp,note,recording)=>{
+const createProject = (dispatch)=>(title,author,timestamp,note,recordings)=>{
     const data ={
         title,
         userID: author,
         timestamp,
         note,
-        recording,
+        recordings,
     }
     projectsRef
     .add(data)
@@ -86,14 +86,18 @@ const getProjects = (dispatch) => (userID)=>{
     )
 }
 
-const updateProject = (dispatch) => (id,title,author,timestamp,note, recording)=>{
+const updateProject = (dispatch) => (id,title,timestamp, note)=>{
     projectsRef
+
     .doc(id)
-    .update({title,author,timestamp,note, recording})
+    .update({ 
+        title,
+        timestamp, 
+        note})
     .then(()=>{
         dispatch({
             type:"updateProject",
-            payload: {project:{title,author,timestamp,note, recording}},
+            payload: {project:{id, title,timestamp, note}},
         });
         dispatch({type:"feedback", payload:"Project Updated"})
     })

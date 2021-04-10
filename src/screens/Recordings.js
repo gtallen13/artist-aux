@@ -13,7 +13,7 @@ const Recordings = ({navigation}) =>{
                     <Icon style={styles.headerIcons} 
                             name="chevron-left" 
                             type="font-awesome" 
-                            onPress={()=>navigation.navigate('projects')}
+                            onPress={()=>navigation.navigate('note')}
                     />
                     <Text style={styles.headerTitle}>Recordings</Text>
               </View>

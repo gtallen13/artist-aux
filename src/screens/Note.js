@@ -1,29 +1,58 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {View, TextInput, ScrollView,StyleSheet, Text} from 'react-native'
-import { ButtonStopNote } from '../components/Button'
+import { ButtonStopNote, HeaderButton} from '../components/Button'
 import { ButtonText } from '../components/ButtonText'
-import {Icon} from 'react-native-elements'
+import {Icon} from 'react-native-elements';
+
+import { Context as ProjectContext } from "../providers/ProjectContext";
 
 const Note = ({navigation}) => {
-    const note = navigation.getParam('note')
-   
-    const handleOpenRecordings = () =>{
-        navigation.navigate('recording')
+   const {state,getProjects, updateProject } = useContext(ProjectContext); 
+   const [note, setNote] = useState("");
+ 
+   useEffect(() => {
+    if (state.currentProject.id) {
+      setNote(state.currentProject.note);
     }
+  }, [state.currentProject]);
+
+    const handleSaveNote = () =>
+    {
+        updateProject(
+            state.currentProject.id, 
+            state.currentProject.title,
+            state.currentProject.timestamp,
+            note,
+          
+            
+        );  
+    };
     return(
         
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
-              <Icon style={styles.headerIcons} name="chevron-left" type="font-awesome" onPress={()=>navigation.navigate('projects')}/>
+              <Icon style={styles.headerIcons} 
+              name="chevron-left" 
+              type="font-awesome"  
+              onPress={()=>navigation.navigate('projects')}/> 
+
                 <Text style={styles.headerTitle}>Note</Text>
+                <HeaderButton
+                        icon="save"
+                        type="font-awesome"
+                        callback={handleSaveNote}/>
+                      
               </View>
               
               <View style={styles.noteContainer}>
                        <ScrollView>
                             <TextInput
                             multiline={true}
+                            textAlignVertical="top"
                             style={styles.note}
                             placeholder={"Escribe una nota"}
+                            value={note}
+                            onChangeText={setNote}
                             /> 
                        </ScrollView>
                        
