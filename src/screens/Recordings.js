@@ -1,25 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {View,  ScrollView,StyleSheet, Text} from 'react-native'
+import {View,StyleSheet, Text} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
-import { TextNote } from '../components/ButtonText'
 import * as Permissions from 'expo-permissions';
 import {firebase} from '../firebase'
 import {Context as ProjectContext} from '../providers/ProjectContext'
 import {Context as AuthContext} from '../providers/AuthContext'
+import {Context as RecordingContext} from '../providers/RecordingContext'
 import moment from 'moment'
 import {Audio} from 'expo-av'
+import AudioList from '../components/Audio/AudioList'
 //https://docs.expo.io/versions/latest/sdk/audio/
 const Recordings = ({navigation}) =>{
-    const {updateProject, state:projectState} = useContext(ProjectContext)
+    const {updateProject, getProjects, state:projectState} = useContext(ProjectContext)
+    const {state:recordingState} = useContext(RecordingContext)
     const {state} = useContext(AuthContext)
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [recording, setRecording] = useState();
+    
+    useEffect(()=>{
+        getProjects(state.user.id)
+    },[])   
     const playSound = async()=>{
         const uri = await firebase
             .storage()
-            .ref(projectState.currentProject.recording)
+            .ref(recordingState.currentRecording)
             .getDownloadURL()
             console.log(`uri: ${uri}`)
             
@@ -128,24 +134,7 @@ const Recordings = ({navigation}) =>{
                         projectState.currentProject.timestamp,
                         projectState.currentProject.note,
                         storageURL
-                     )
-                    // para agregar audios
-                    // const recordingID = firebase.firestore().collection("Audios").doc().id
-                    // firebase
-                    // .firestore()
-                    // .collection("Audios")
-                    // .doc('GMewGC8wgvp5WyZoIc9j')
-                    // .set({
-                    //     id: recordingID,
-                    //     fileName: `${fileName}.${fileType}`
-                    // })
-                    // .then(()=>{
-                    //     // const recordingsRef = firebase.firestore().collection("Audios").doc(recordingID)
-                    //     // recordingsRef.update({
-                    //     //     recordingPaths: firebase.firestore.FieldValue.arrayUnion(storageURL)
-                    //     // })
-                    // })
-                    
+                     )    
                 })
                 .catch((error)=>{
                     console.log(error);
@@ -189,14 +178,13 @@ const Recordings = ({navigation}) =>{
                     <Icon style={styles.headerIcons} 
                             name="chevron-left" 
                             type="font-awesome" 
-                            onPress={()=>navigation.navigate('projects')}
+                            onPress={()=>navigation.goBack()}
                     />
                     <Text style={styles.headerTitle}>Recordings</Text>
               </View>
               
               <View style={styles.recording}>
-                    <ScrollView>
-                    </ScrollView>
+                    <AudioList recordings={projectState.currentProject}/>
               </View>
               
               <View style={styles.buttomRecorging}>
@@ -240,10 +228,7 @@ const Recordings = ({navigation}) =>{
                             color='white'
                             size={30}
                         />
-               
-
                     </View>
-                    <TextNote text = 'Note' fontSize={16} color = 'white' callback={()=> navigation.navigate('note')}/>
               </View>
                
         </View>  
@@ -272,15 +257,14 @@ const styles = StyleSheet.create({
     },
     recording: {
         flex: 9,
-        backgroundColor: '#E9E9E9',
-        textAlignVertical: 'top',
-        color: 'white',
-       
+        backgroundColor: '#E9E9E9',       
     },
   
     buttomRecorging:{
-        flex: 4,
         backgroundColor: 'black',
+        justifyContent:'center',
+        alignItems:'center',
+        padding:20,
       
     },
     barSong:{
