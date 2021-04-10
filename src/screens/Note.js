@@ -23,7 +23,7 @@ const Note = ({navigation}) => {
             state.currentProject.title,
             state.currentProject.timestamp,
             note,
-          
+            state.currentProject.recording
             
         );  
     };

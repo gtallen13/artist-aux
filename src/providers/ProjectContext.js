@@ -86,20 +86,22 @@ const getProjects = (dispatch) => (userID)=>{
     )
 }
 
-const updateProject = (dispatch) => (id,title,timestamp, note)=>{
+const updateProject = (dispatch) => (id,title,timestamp, note, recording)=>{
     projectsRef
 
     .doc(id)
     .update({ 
         title,
         timestamp, 
-        note})
+        note, 
+        recording})
     .then(()=>{
         dispatch({
             type:"updateProject",
-            payload: {project:{id, title,timestamp, note}},
+            payload: {project:{id, title,timestamp, note, recording}},
         });
         dispatch({type:"feedback", payload:"Project Updated"})
+
     })
     .catch((error)=>{
         dispatch({type:"feedback", payload:error.message})
