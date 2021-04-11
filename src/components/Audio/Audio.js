@@ -1,38 +1,31 @@
 import React from 'react'
-import { View,Text } from 'react-native'
-import {StyleSheet} from 'react-native'
+import {Text,StyleSheet,Dimensions} from 'react-native'
 import {Card} from 'react-native-elements'
-import {Icon} from 'react-native-elements'
-
+const {height} = Dimensions.get('screen')
 const Audio = ({title})=>{
-    
     return (
         <Card containerStyle={styles.container}>
-            <Card.Title style={styles.title}>{title}</Card.Title>
-            <View style={styles.audioContainer}>
-            </View>
+            <Text style={styles.title}>{title.split('/')[1]}</Text>
         </Card>
     )
 }
 const styles = StyleSheet.create({
     container:{
+        height: height*.1,
         flex:1,
+        justifyContent:'center',
+        alignItems:'flex-start',
         backgroundColor:"#000",
         borderRadius:10,
     },
     audioContainer:{
-        justifyContent:'center',
-        alignItems:'flex-start',
+        alignItems:'flex-end',
     },
     title:{
         textAlign:'left',
         color:"#fff",
-        fontSize:15,   
+        fontSize:20,   
     },
-    icon:{  
-        flexDirection:'row',
-        justifyContent:"center"
-    }
 })
 
-export default Audio
+export  {Audio}
