@@ -12,17 +12,13 @@ import {Audio} from 'expo-av'
 import AudioList from '../components/Audio/AudioList'
 //https://docs.expo.io/versions/latest/sdk/audio/
 const Recordings = ({navigation}) =>{
-    const {updateProject, getProjects, state:projectState} = useContext(ProjectContext)
-    const {state:recordingState} = useContext(RecordingContext)
+    const {state:projectState} = useContext(ProjectContext)
+    const {state:recordingState, newRecording} = useContext(RecordingContext)
     const {state} = useContext(AuthContext)
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [recording, setRecording] = useState();
     
-    useEffect(()=>{
-        getProjects(state.user.id)
-    },[])   
-
     
     const playSound = async()=>{
         const uri = await firebase
@@ -124,15 +120,8 @@ const Recordings = ({navigation}) =>{
                     console.log('sent')
                 
                     const storageURL = `Audio/${fileName}.${fileType}`
-                     //Agreando la ruta del audio al documento del proyecto
-                     updateProject
-                     (
-                        projectState.currentProject.id, 
-                        projectState.currentProject.title,
-                        projectState.currentProject.timestamp,
-                        projectState.currentProject.note,
-                        storageURL
-                     )    
+                     //Agregando la ruta del audio al documento del proyecto
+                     newRecording(projectState.currentProject.id, storageURL)  
                 })
                 .catch((error)=>{
                     console.log(error);
