@@ -86,15 +86,13 @@ const getProjects = (dispatch) => (userID)=>{
     )
 }
 
-const updateProject = (dispatch) => (id,title,timestamp, note, recording)=>{
+const updateProject = (dispatch) => (id,title,timestamp, note)=>{
     projectsRef
-
     .doc(id)
     .update({
         title,
         timestamp,
         note, 
-        recordings: firebase.firestore.FieldValue.arrayUnion(recording)
     })
     .then(()=>{
         dispatch({
