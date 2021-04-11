@@ -90,15 +90,16 @@ const updateProject = (dispatch) => (id,title,timestamp, note, recording)=>{
     projectsRef
 
     .doc(id)
-    .update({ 
+    .update({
         title,
-        timestamp, 
+        timestamp,
         note, 
-        recording})
+        recordings: firebase.firestore.FieldValue.arrayUnion(recording)
+    })
     .then(()=>{
         dispatch({
             type:"updateProject",
-            payload: {project:{id, title,timestamp, note, recording}},
+            payload: {project:{id,title,timestamp,note, recording}},
         });
         dispatch({type:"feedback", payload:"Project Updated"})
 

@@ -1,8 +1,6 @@
 import React from 'react'
-import {Dimensions, StyleSheet,View,Text} from 'react-native'
-import moment from 'moment'
+import { StyleSheet,View,Text} from 'react-native'
 import { Card } from 'react-native-elements'
-const {width} = Dimensions.get('screen')
 const Project = ({title, timestamp})=>{
     return(
         <Card containerStyle={styles.container}>

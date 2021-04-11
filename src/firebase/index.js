@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import '@firebase/auth';
 import '@firebase/firestore';
+import '@firebase/storage'
 import getEnvVars from '../../enviroment'
 
 const {apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId} = getEnvVars();
