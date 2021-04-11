@@ -5,7 +5,7 @@ import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
 import { ToggleTextInput} from '../components/TextInputButton'
 import {Context as AuthContext} from '../providers/AuthContext';
-import DialogInput from 'react-native-dialog-input'
+import Dialog from "react-native-dialog";
 
 
 
@@ -14,6 +14,7 @@ const MyProfilePage = ({navigation}) => {
     const {signout, update ,state } = useContext(AuthContext);
     const [newUsername, setNewUsername] = useState(state.user.username);
     const [newEmail, setNewEmail] = useState(state.user.email);
+    const [currentPassword, setCurrentPassword] = useState('')
     const [visiblePrompt, setVisiblePrompt] = useState(false);
 
 
@@ -60,16 +61,23 @@ const MyProfilePage = ({navigation}) => {
                     <ButtonLogin text={"Save"} callback={()=>setVisiblePrompt(true)}/>
                 </View>
             </View>
-                <DialogInput
-                isDialogVisible={visiblePrompt}
-                message={"Enter your current password"}
-                hintInput ={"*****"}
-                textInputProps={{secureTextEntry:true}}
-                submitInput={ (passwordCred) => {
-                    handlerUpdateProfile(passwordCred)
-                } }
-                closeDialog={ () => {setVisiblePrompt(false)}}>
-                </DialogInput>
+            <Dialog.Container visible={visiblePrompt} onBackdropPress={()=>setVisiblePrompt(false)}>
+                <Dialog.Title>Confirm Password</Dialog.Title>
+                <Dialog.Description>Please enter your current password</Dialog.Description>
+                <Dialog.Input
+                secureTextEntry={true}
+                onChangeText={setCurrentPassword}
+                value={currentPassword}
+                wrapperStyle={styles.dialogInput}
+                />
+                <Dialog.Button 
+                label="Cancel" 
+                onPress={()=>setVisiblePrompt(false)}/>
+                <Dialog.Button 
+                label="Confirm" 
+                bold={true}
+                onPress={()=>handlerUpdateProfile(currentPassword)}/>
+            </Dialog.Container>
         </ScrollView> 
     )
     
@@ -114,6 +122,11 @@ const styles = StyleSheet.create({
         fontSize:25,
         fontWeight:'600',
     },
+    dialogInput:{
+        borderBottomColor:"#5bb1b0",
+        borderBottomWidth:1,
+
+    }
 
 })
 
