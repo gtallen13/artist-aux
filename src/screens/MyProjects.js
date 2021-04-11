@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import {InputSearch} from '../components/searchBar'
 import {Context as ProjectContext} from '../providers/ProjectContext'
 import {Context as AuthContext} from '../providers/AuthContext'
-import DialogInput from 'react-native-dialog-input'
+import Dialog from 'react-native-dialog'
 import moment from 'moment'
 import ProjectList from '../components/ProjectList'
 const MyProjects = ({navigation}) =>{
@@ -35,15 +35,24 @@ const MyProjects = ({navigation}) =>{
                 <Text style={styles.headerTitle}>My Projects</Text>
                 <Icon style={styles.headerIcons} size={40}  name="plus" type="font-awesome" onPress={()=>setVisiblePrompt(true)}/>
             </View>
-            <DialogInput
-                isDialogVisible={visiblePrompt}
-                message={"Enter the project's name:"}
-                hintInput ={projectName}
-                submitInput={ (name) => {
-                    handlerCreateProject(name)
-                } }
-                closeDialog={ () => {setVisiblePrompt(false)}}>
-            </DialogInput>
+            <Dialog.Container visible={visiblePrompt}>
+                <Dialog.Title>Enter the project's name</Dialog.Title>
+                <Dialog.Input
+                value={projectName}
+                onChangeText={setProjectName}
+                wrapperStyle={styles.dialogInput}
+                />
+                <Dialog.Button
+                label="Cancel"
+                onPress={ () => {setVisiblePrompt(false)}}
+                />
+                <Dialog.Button
+                label="Confirm"
+                bold={true}
+                onPress={() =>handlerCreateProject(projectName)}
+                />
+                
+            </Dialog.Container>
             <View style={styles.searchContainer}>
                 <InputSearch iconName='search'/>
             </View>
@@ -78,6 +87,11 @@ const styles = StyleSheet.create({
         fontSize:25,
         fontWeight:'600',
     },
+    dialogInput:{
+        borderBottomColor:"#5bb1b0",
+        borderBottomWidth:1,
+
+    }
 })
 
 export default MyProjects;
