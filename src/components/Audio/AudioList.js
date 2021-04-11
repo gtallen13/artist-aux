@@ -1,28 +1,44 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {FlatList, StyleSheet, Text, TouchableOpacity,View} from 'react-native'
-import {Context as RecordingContext} from '../../providers/RecordingContext';
-import Audio from './Audio'
-const AudioList = ({recordings})=>{
-    const {state, setCurrentRecording} = useContext(RecordingContext)
-    const [recordingList, setRecordingList] = useState(recordings.recordings)
-    //mostrar la lista de recordings
-    const handleSelectRecording = (recording)=>{
-        setCurrentRecording(recording)
-    }
+import {firebase} from '../../firebase'
+import {Context as RecordingContext} from '../../providers/RecordingContext'
+import {Context as ProjectContext} from '../../providers/ProjectContext' 
+import {Audio as AudioCard} from './Audio'
+import {Audio} from 'expo-av'
+//https://www.npmjs.com/package/react-native-dialog
+import Dialog from "react-native-dialog";
 
-    const playSound = async()=>{
+const AudioList = ({recordings})=>{
+    const {state, deleteRecording} = useContext(RecordingContext)
+    const {state:projectState} = useContext(ProjectContext)
+    const [recordingList, setRecordingList] = useState(recordings.recordings)
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [visiblePrompt, setVisiblePrompt] = useState(false)
+    const [selectedRecording, setSelectedRecording] = useState()
+
+    const handlerLongPress = (recording)=>{
+        setSelectedRecording(recording)
+        setVisiblePrompt(true)
+    }
+    const handlerDeleteRecording = () => {
+        console.log(selectedRecording)
+        deleteRecording(projectState.currentProject.id, selectedRecording)
+        setVisiblePrompt(false)
+    }
+    const playSound = async (recording) =>{
+        const audioURL = recording.split('/')
         const uri = await firebase
-            .storage()
-            .ref(recordingState.currentRecording)
-            .getDownloadURL()
-            console.log(`uri: ${uri}`)
-            
-            const soundObject = new Audio.Sound()
-            
-            try
-            {
+        .storage()
+        .ref(audioURL[0])
+        .child(audioURL[1])
+        .getDownloadURL()
+        console.log(`uri: ${uri}`)            
+        const soundObject = new Audio.Sound() 
+        try
+        {
                 await soundObject.loadAsync({uri})
                 await soundObject.playAsync()
+                // setIsPlaying(true)
                 soundObject.getStatusAsync()
                 .then((res)=>{
                     console.log(res.durationMillis)
@@ -30,19 +46,22 @@ const AudioList = ({recordings})=>{
                 .catch((error)=>{
                     console.log(error);
                 })
-                setIsPlaying(true)
-            }
-            catch (error) 
-            {
-                console.log(error);
-            }
+        }
+        catch (error) 
+        {
+            console.log(error);
+        }
+    }
+    const stopSound = async ()=>{
+        console.log('Stoping sound')
+        // await soundObject.stopAsync()
+        setIsPlaying(false)
     }
     const emptyFlatList = (
         <View style={styles.emptyRecordings}>
             <Text>You have no recordings yet</Text>
         </View>
     )
-    
     return (
         <View style={styles.container}>
             <FlatList
@@ -51,13 +70,25 @@ const AudioList = ({recordings})=>{
             keyExtractor={item=>item}
             renderItem={({item})=>(
                 <>
-                    <TouchableOpacity onPress={()=>handleSelectRecording(item)}>
-                        <Audio
+                    <TouchableOpacity onLongPress={()=>handlerLongPress(item)} onPress={()=> isPlaying ? stopSound():playSound(item)}>
+                        <AudioCard
                         title={item}/>
                     </TouchableOpacity>   
                 </>
             )}
             />
+            <Dialog.Container visible={visiblePrompt} onBackdropPress={()=>setVisiblePrompt(false)}>
+                <Dialog.Title>Delete Recording</Dialog.Title>
+                <Dialog.Description>Do you really wanna delete this masterpiece?</Dialog.Description>
+                <Dialog.Button 
+                label="Cancel" 
+                onPress={()=>setVisiblePrompt(false)}/>
+                <Dialog.Button 
+                label="Delete" 
+                color="#97221F"
+                bold={true}
+                onPress={()=>handlerDeleteRecording()}/>
+            </Dialog.Container>
         </View>
     )
 }
