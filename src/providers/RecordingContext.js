@@ -19,6 +19,11 @@ const recordingReducer = (action, state)=>{
                 ...state,
                 recordingDeleted:true,
             }
+        case "newRecording":
+            return {
+                ...state,
+                recordingAdded: true
+            }
         default:
             return state
     }
@@ -26,6 +31,19 @@ const recordingReducer = (action, state)=>{
 const projectsRef = firebase.firestore().collection("Projects")
 const setCurrentRecording = (dispatch)=>(recording)=>{
     dispatch({type:"setCurrentRecording", payload:recording})
+}
+const newRecording = (dispatch) => (id,recording)=>{
+    projectsRef
+    .doc(id)
+    .update({
+        recordings: firebase.firestore.FieldValue.arrayUnion(recording)
+    })
+    .then(()=>{
+        dispatch({type:"newRecording"})
+    })
+    .catch((error)=>{
+        dispatch({type:"feedback" ,payload:{feedback:error.message}})
+    })
 }
 const deleteRecording=(dispatch)=>(id,recording)=>{
     projectsRef
@@ -45,10 +63,12 @@ export const {Provider, Context} = createDataContext(
     recordingReducer,
     {
         setCurrentRecording,
-        deleteRecording
+        deleteRecording,
+        newRecording
     },
     {
         currentRecording:{title:""},
         recordingDeleted:false,
+        recordingAdded:false,
     }
 )
