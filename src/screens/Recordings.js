@@ -22,6 +22,8 @@ const Recordings = ({navigation}) =>{
     useEffect(()=>{
         getProjects(state.user.id)
     },[])   
+
+    
     const playSound = async()=>{
         const uri = await firebase
             .storage()
@@ -50,11 +52,7 @@ const Recordings = ({navigation}) =>{
             }
     }
 
-    const stopSound = async ()=>{
-        console.log('Stoping sound')
-        setIsPlaying(false)
-        await sound.stopAsync()
-    }
+    
     const startRecording = async ()=>{
         try{
             console.log('requesting permissions')
@@ -150,28 +148,6 @@ const Recordings = ({navigation}) =>{
             console.log(error)
         }
     }
-    const getRecordings = async () =>{
-        const uri = await firebase
-            .storage()
-            .ref(projectState.currentProject.recording)
-            .getDownloadURL()
-            console.log(`uri: ${uri}`)
-            
-            const soundObject = new Audio.Sound()
-            setSound(soundObject)
-            console.log("not playing");
-            try
-            {
-                await soundObject.loadAsync({uri})
-                await soundObject.playAsync()
-                setIsPlaying(true)
-            }
-            catch (error) 
-            {
-                console.log(error);
-            }
-    }
-
     return(
         <View style={styles.container}>
               <View style={styles.headerContainer}>    
