@@ -1,20 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {View, TextInput, ScrollView,StyleSheet, Text} from 'react-native'
+import {View, TextInput,StyleSheet, Text} from 'react-native'
 import { ButtonStopNote, HeaderButton} from '../components/Button'
 import { ButtonText } from '../components/ButtonText'
 import {Icon} from 'react-native-elements';
-
 import { Context as ProjectContext } from "../providers/ProjectContext";
 
 const Note = ({navigation}) => {
-   const {state,getProjects, updateProject } = useContext(ProjectContext); 
-   const [note, setNote] = useState("");
- 
-   useEffect(() => {
-    if (state.currentProject.id) {
-      setNote(state.currentProject.note);
-    }
-  }, [state.currentProject]);
+    const {state,getProjects, updateProject } = useContext(ProjectContext); 
+    const [note, setNote] = useState("");
+    
+    useEffect(() => {
+        if (state.currentProject.id) {
+        setNote(state.currentProject.note);
+        }
+    }, [state.currentProject]);
 
     const handleSaveNote = () =>
     {
@@ -22,9 +21,7 @@ const Note = ({navigation}) => {
             state.currentProject.id, 
             state.currentProject.title,
             state.currentProject.timestamp,
-            note,
-            state.currentProject.recording
-            
+            note
         );  
     };
     return(
@@ -45,17 +42,14 @@ const Note = ({navigation}) => {
               </View>
               
               <View style={styles.noteContainer}>
-                       <ScrollView>
-                            <TextInput
-                            multiline={true}
-                            textAlignVertical="top"
-                            style={styles.note}
-                            placeholder={"Escribe una nota"}
-                            value={note}
-                            onChangeText={setNote}
-                            /> 
-                       </ScrollView>
-                       
+                    <TextInput
+                    multiline={true}
+                    textAlignVertical="top"
+                    style={styles.note}
+                    placeholder={"Escribe una nota"}
+                    value={note}
+                    onChangeText={setNote}
+                    /> 
               </View>
               <View style={styles.barButtom}>
                     <View style={styles.viewPlay}>
