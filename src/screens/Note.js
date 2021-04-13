@@ -4,10 +4,12 @@ import { ButtonStopNote, HeaderButton} from '../components/Button'
 import { ButtonText } from '../components/ButtonText'
 import {Icon} from 'react-native-elements';
 import { Context as ProjectContext } from "../providers/ProjectContext";
+import { useTheme } from '@react-navigation/native';
 
 const Note = ({navigation}) => {
     const {state,getProjects, updateProject } = useContext(ProjectContext); 
     const [note, setNote] = useState("");
+    const { colors } = useTheme();
     
     useEffect(() => {
         if (state.currentProject.id) {
@@ -24,23 +26,23 @@ const Note = ({navigation}) => {
             note
         );  
     };
-    return(
-        
-        <View style={styles.container}>
-              <View style={styles.headerContainer}>    
-              <Icon style={styles.headerIcons} 
-              name="chevron-left" 
-              type="font-awesome"  
-              onPress={()=>navigation.navigate('projects')}/> 
 
-                <Text style={styles.headerTitle}>Note</Text>
+    return(        
+        <View style={[styles.container, {backgroundColor: colors.background}]}>
+              <View style={styles.headerContainer}>    
+              <Icon 
+                color = {colors.text}
+                style={styles.headerIcons} 
+                name="chevron-left" 
+                type="font-awesome"  
+                onPress={()=>navigation.navigate('projects')}                 
+              /> 
+                <Text style={[styles.headerTitle, {color: colors.text}]}>Note</Text>
                 <HeaderButton
                         icon="save"
                         type="font-awesome"
-                        callback={handleSaveNote}/>
-                      
-              </View>
-              
+                        callback={handleSaveNote}/>                      
+              </View>              
               <View style={styles.noteContainer}>
                     <TextInput
                     multiline={true}
@@ -58,22 +60,14 @@ const Note = ({navigation}) => {
                           <ButtonStopNote
                             icon='play-circle'
                             color='white'
-                          />
-                          
+                          />                          
                           <ButtonStopNote
                             icon='circle'
                             color='red'
                           />
-
                     </View>
-
               </View>
-               
-        </View>  
-             
-             
-
-       
+        </View>      
     )
 }
 
@@ -101,8 +95,7 @@ const styles = StyleSheet.create({
         flex: 11,
         backgroundColor: '#E9E9E9',
         textAlignVertical: 'top',
-        color: 'white',
-       
+        color: 'white',       
     },
     note:{
         height:400,
@@ -125,10 +118,8 @@ const styles = StyleSheet.create({
       borderLeftWidth:3,
       borderLeftColor:'white',
       width:10,
-      height:50,
-       
-    },
-  
+      height:50     
+    }
 })
 
 export default Note;

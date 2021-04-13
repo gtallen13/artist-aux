@@ -2,18 +2,22 @@ import React, { useEffect } from 'react'
 import {Dimensions, StyleSheet, View, Text,ScrollView} from 'react-native'
 import { Image} from 'react-native-elements'
 import {Button} from '../components/Button'
+import { useTheme } from '@react-navigation/native';
+
 const {width,height} = Dimensions.get('screen');
+
 const StartPage = ({navigation}) =>
 {
+    const { colors } = useTheme();
+    
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Artist
-                    <Text style={styles.titleTextSpan}>Aux</Text>
-                    
+                    <Text style={[styles.titleTextSpan, {color: colors.text}]}>Aux</Text>
                 </Text>
                 <Text style={styles.border}></Text>
-                <Text style={styles.subTitle}>Record Anywhere</Text>
+                <Text style={[styles.subTitle, {color: colors.text}]}>Record Anywhere</Text>
             </View>
             <View style={styles.logoContainer}>
                 <Image 

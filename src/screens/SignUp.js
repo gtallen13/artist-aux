@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {ButtonLogin} from '../components/Button';
-import {ButtonText, ButtonGoogle} from '../components/ButtonText';
+import {ButtonText} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton';
 import {validate} from 'email-validator'
 import {Alert} from '../components/Alert'
 import {Context as AuthContext} from "../providers/AuthContext";
-
+import { useTheme } from '@react-navigation/native';
 
 const SignUp = ({navigation}) =>{
     const {state, signup} = useContext(AuthContext);
@@ -19,6 +19,7 @@ const SignUp = ({navigation}) =>{
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmPasswordError,setConfirmPasswordError] = useState('');
     const [error, setError] = useState('');
+    const { colors } = useTheme();
 
     useEffect(()=>{
         if (state.errorMessage) clearErrorMessage()
@@ -55,12 +56,11 @@ const SignUp = ({navigation}) =>{
         signup(email, password, username);
     };
     return(
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
             <View>
-                    <Text style={styles.text_title}>Sign Up</Text>
-                    <Text style={styles.border}></Text>
+                <Text style={styles.text_title}>Sign Up</Text>
+                <Text style={styles.border}></Text>
             </View>
-                
                 <View style={styles.inputText}>
                     {error ? <Alert type="error" title={error}/>:null}
                     {/* Username */}
@@ -104,13 +104,10 @@ const SignUp = ({navigation}) =>{
                 </View> 
             <View style={styles.buttonSignIn}>
                 <ButtonLogin callback={handlerSignUp} text={"Sign Up"}/>
-            </View>
-            <View >
-                <ButtonGoogle logingoogle={"Sign Up With Google"} />                
             </View>  
-            <Text style={styles.buttonLogin}>
-                Already registered? <View>
-                <ButtonText text={"Log In"} callback={()=> navigation.navigate('login')} color="#5bb1b0"/>
+            <Text style={[styles.buttonLogin, {color: colors.text}]}> Already registered? 
+                <View>
+                    <ButtonText text={"Log In"} callback={()=> navigation.navigate('login')} color="#5bb1b0"/>
                 </View>
             </Text>
             

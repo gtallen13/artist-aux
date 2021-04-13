@@ -4,6 +4,7 @@ import {ButtonIcon} from '../components/TextInputButton'
 import {ButtonLogin} from '../components/Button'
 import {firebase} from '../firebase';
 import {Alert} from '../components/Alert';
+import { useTheme } from '@react-navigation/native';
 
 const ChangePasswordPage = ({navigation}) => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -14,6 +15,7 @@ const ChangePasswordPage = ({navigation}) => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('')
+    const { colors } = useTheme();
 
     const handleValidCurrentPassword = (val) => {
         if (val === '') setCurrentPasswordError(true)
@@ -61,7 +63,7 @@ const ChangePasswordPage = ({navigation}) => {
     }
 
    return(
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
         <View style={styles.inputText}> 
             {error ? <Alert type="error" title={error}/>:null}
             {success ? <Alert type="success" title={success}/>:null}

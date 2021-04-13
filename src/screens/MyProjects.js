@@ -7,7 +7,11 @@ import {Context as AuthContext} from '../providers/AuthContext'
 import Dialog from 'react-native-dialog'
 import moment from 'moment'
 import ProjectList from '../components/ProjectList'
+import { useTheme } from '@react-navigation/native';
+
 const MyProjects = ({navigation}) =>{
+
+    const { colors } = useTheme();
 
     const {createProject, getProjects, state:projectState} = useContext(ProjectContext)
     const {state} = useContext(AuthContext)
@@ -29,11 +33,25 @@ const MyProjects = ({navigation}) =>{
     }
 
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: colors.background}]}>
             <View style={styles.headerContainer}>
-                <Icon style={styles.headerIcons} size={40} name="user" type="font-awesome" onPress={handleOpenProfile}/>
-                <Text style={styles.headerTitle}>My Projects</Text>
-                <Icon style={styles.headerIcons} size={40}  name="plus" type="font-awesome" onPress={()=>setVisiblePrompt(true)}/>
+                <Icon 
+                    color = {colors.text}
+                    style={styles.headerIcons} 
+                    size={40} 
+                    name="user" 
+                    type="font-awesome" 
+                    onPress={handleOpenProfile}                  
+                />
+                <Text style={[styles.headerTitle, {color: colors.text}]}>My Projects</Text>
+                <Icon 
+                    color = {colors.text}
+                    style={styles.headerIcons} 
+                    size={40}  
+                    name="plus" 
+                    type="font-awesome" 
+                    onPress={()=>setVisiblePrompt(true)}             
+                />
             </View>
             <Dialog.Container visible={visiblePrompt}>
                 <Dialog.Title>Enter the project's name</Dialog.Title>
@@ -90,7 +108,6 @@ const styles = StyleSheet.create({
     dialogInput:{
         borderBottomColor:"#5bb1b0",
         borderBottomWidth:1,
-
     }
 })
 

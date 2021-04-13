@@ -1,6 +1,5 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native'
-import { Icon } from 'react-native-elements'
 
 const ButtonText = ({text, color,fontSize, callback})=> {
     return(
@@ -18,22 +17,8 @@ const TextNote = ({text, color, fontSize, callback}) => {
     )
 }
 
-const ButtonGoogle = ({logingoogle})=>{
-    return (
-        <TouchableOpacity styles={styles.iconGoogle}>
-            <Text style={styles.buttonGoogle}>   
-            <Icon containerStyle={{marginRight:10}} name='google'
-            type='font-awesome'
-            color='#517fa4'
-            />{logingoogle}</Text>
-        </TouchableOpacity>
-    )
-}
-
-
 const styles = StyleSheet.create({    
     textbutton:{
-    
         fontSize: 13,
         fontWeight: '700',
         color:'#5BB1B0',   
@@ -41,7 +26,6 @@ const styles = StyleSheet.create({
         marginRight:20,
         borderBottomWidth:2,
         borderBottomColor: '#5bb1b0'
-            
     },
     textbutto:{
         fontSize: 13,
@@ -49,18 +33,10 @@ const styles = StyleSheet.create({
         color:'#5BB1B0',     
         marginRight:20,
         textAlign:'right'
-        
-    },
-
-    buttonGoogle:{
-        fontSize: 15,
-        fontWeight: '500',
-        color:'#16307c',   
     },
     textContainer:{
         margin:10,
-     
     }
 })
 
-export {ButtonText,ButtonGoogle, TextNote}
+export {ButtonText, TextNote}

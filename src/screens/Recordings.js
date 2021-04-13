@@ -11,6 +11,8 @@ import moment from 'moment'
 import {Audio} from 'expo-av'
 import AudioList from '../components/Audio/AudioList'
 //https://docs.expo.io/versions/latest/sdk/audio/
+import { useTheme } from '@react-navigation/native';
+
 const Recordings = ({navigation}) =>{
     const {state:projectState} = useContext(ProjectContext)
     const {state:recordingState, newRecording} = useContext(RecordingContext)
@@ -18,7 +20,7 @@ const Recordings = ({navigation}) =>{
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [recording, setRecording] = useState();
-    
+    const { colors } = useTheme();
     
     const playSound = async()=>{
         const uri = await firebase
@@ -138,12 +140,14 @@ const Recordings = ({navigation}) =>{
         }
     }
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: colors.background}]}>
               <View style={styles.headerContainer}>    
-                    <Icon style={styles.headerIcons} 
-                            name="chevron-left" 
-                            type="font-awesome" 
-                            onPress={()=>navigation.goBack()}
+                    <Icon 
+                        style={styles.headerIcons}
+                        color = {colors.text} 
+                        name="chevron-left" 
+                        type="font-awesome" 
+                        onPress={()=>navigation.goBack()}
                     />
                     <Text style={styles.headerTitle}>Recordings</Text>
               </View>

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {StyleSheet, Text, View, TextInput,  ScrollView} from 'react-native'
 import {ButtonLogin} from "../components/Button"
-import {ButtonText, ButtonGoogle} from '../components/ButtonText';
+import {ButtonText} from '../components/ButtonText';
 import {ButtonIcon} from '../components/TextInputButton'
 import {validate} from 'email-validator'
 import {firebase} from '../firebase'
 import {Alert} from '../components/Alert'
 import {Context as AuthContext} from '../providers/AuthContext'
 import { ActivityIndicator } from 'react-native';
-
+import { useTheme } from '@react-navigation/native';
 
 const LoginPage = ({navigation}) =>{
 
@@ -19,8 +19,9 @@ const LoginPage = ({navigation}) =>{
    const [error, setError] = useState('');
    const [isLoading, setIsLoading] = useState(false) //indicador de carga cuando el usuario le de a Login
    const {state, signin, ClearErrorMessage} = useContext(AuthContext);
-
    
+   const { colors } = useTheme();
+
    useEffect(()=>{
        if (state.errorMessage) ClearErrorMessage();
     },[]);
@@ -68,7 +69,7 @@ const LoginPage = ({navigation}) =>{
   }
 
     return(
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
                 {/* Titulo*/}
                 <View>    
                     <Text style={styles.text_title}>Login</Text>
@@ -109,27 +110,17 @@ const LoginPage = ({navigation}) =>{
                     (<ActivityIndicator size="small" color="#5BB1B0"/>)
                     :null}
                 </View>
-                
-                {/*Boton para login con google*/}
-                <View>
-                    <ButtonGoogle logingoogle={"Login Google"}/>                
-                </View>
                 {/*Boton hacia SigUp */}
                 <View style={styles.buttonSigup}>
-                    <Text> Don't have an account?
+                    <Text style={[{color: colors.text}]}> Don't have an account?
                         <ButtonText text={"Sign Up"}  callback={()=> navigation.navigate('signUp')} color="#5BB1B0"/>
                     </Text>
                 </View>
-           
-        </ScrollView> 
-     
+        </ScrollView>  
     )
 }
 
-
-
-const styles = StyleSheet.create({
-    
+const styles = StyleSheet.create({ 
     container:{
        flex:1,
         justifyContent:'center',
@@ -139,8 +130,7 @@ const styles = StyleSheet.create({
     scrollView:{
      
         backgroundColor:'#ecedeb',
-    },
-   
+    },   
     text_title:{
         textAlign: 'center',
         fontSize:40,
@@ -155,8 +145,7 @@ const styles = StyleSheet.create({
         width:100,
         backgroundColor:'#5BB1B0',
         justifyContent:'center',
-        alignItems:'center',
-        
+        alignItems:'center',        
     },
     inputText:{
         marginTop:35,         
@@ -164,8 +153,7 @@ const styles = StyleSheet.create({
     email:{
         color:'#a0a29f',
         fontSize:14,   
-        marginTop:10,
-        
+        marginTop:10,        
     },
     password:{
         color:'#a0a29f',
@@ -176,9 +164,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 10,
         borderRadius: 10,
-       
         height:50,
-     
     },
     buttonforgot:{
        marginLeft:180,
@@ -186,8 +172,7 @@ const styles = StyleSheet.create({
     },
     buttonSigup:{
         marginTop:10, 
-    },
-   
+    },   
 })
 
 export default LoginPage;

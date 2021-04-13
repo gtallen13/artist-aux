@@ -3,7 +3,6 @@ import {StyleSheet, View, TouchableOpacity, TextInput} from 'react-native'
 import {Icon} from 'react-native-elements'
 
 
-
 const ButtonIcon = (
     {
         iconName, 
@@ -27,12 +26,32 @@ const ButtonIcon = (
                     name={iconName}
                     type='font-awesome'
                     color='black'
-                    onPress={()=>{secureText ? setSecureText(false):setSecureText(true)}}
-                   
+                    onPress={()=>{secureText ? setSecureText(false):setSecureText(true)}}                   
             />
             </TouchableOpacity>
         </View>
        
+    )
+}
+ 
+const ChangePasswordInput = (
+    {
+        callback
+    }) => {
+    return (
+        <View style={styles.styleButtonPassword}> 
+            <TextInput 
+            style = {styles.inputPassword}
+            value='*******'
+            />
+            <TouchableOpacity style={styles.passwordInput} onPress={callback}>
+                <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
+                    name='edit'
+                    type='font-awesome'
+                    color='black'
+            />
+            </TouchableOpacity>
+        </View>       
     )
 }
 
@@ -57,7 +76,7 @@ const ToggleTextInput = (
             onBlur={onBlur}
             placeholder="text"
             ref={textInput}/>
-            <TouchableOpacity style={styles.passwordInput}>
+            <TouchableOpacity style={styles.passwordInput} onPress={callback}>
                 <Icon style = {styles.icon} containerStyle={{marginRight:10 , backgroundColor:'white'}}
                     name='edit'
                     type='font-awesome'
@@ -72,9 +91,6 @@ const ToggleTextInput = (
        
     )
 }
-
-
-
 
 const styles = StyleSheet.create({
     styleButtonPassword:{
@@ -95,4 +111,4 @@ const styles = StyleSheet.create({
  
 })
 
-export {ButtonIcon, ToggleTextInput};
+export {ButtonIcon, ToggleTextInput, ChangePasswordInput};

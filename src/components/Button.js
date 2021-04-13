@@ -1,11 +1,17 @@
 import React from 'react';
 import {View,TouchableOpacity, Text, StyleSheet, Dimensions} from 'react-native'
 import { Icon } from 'react-native-elements';
+import { useTheme } from '@react-navigation/native';
+
+
 const {width} = Dimensions.get('screen');
+
+
 const Button = ({title,callback})=> {
+    const { colors } = useTheme();
     return (
         <TouchableOpacity style={styles.buttonContainer} onPress={callback}>
-            <Text style={styles.buttonText}>{title}</Text>
+            <Text style={[styles.buttonText, {color: colors.text}]}>{title}</Text>
         </TouchableOpacity>        
     )    
 }
