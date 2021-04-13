@@ -3,6 +3,7 @@ import {Dimensions, StyleSheet, View, Text,ScrollView} from 'react-native'
 import { Image} from 'react-native-elements'
 import {Button} from '../components/Button'
 import { useTheme } from '@react-navigation/native';
+import {  } from 'react-native';
 
 const {width,height} = Dimensions.get('screen');
 
@@ -11,26 +12,26 @@ const StartPage = ({navigation}) =>
     const { colors } = useTheme();
     
     return (
-        <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Artist
-                    <Text style={[styles.titleTextSpan, {color: colors.text}]}>Aux</Text>
-                </Text>
-                <Text style={styles.border}></Text>
-                <Text style={[styles.subTitle, {color: colors.text}]}>Record Anywhere</Text>
-            </View>
-            <View style={styles.logoContainer}>
-                <Image 
-                style={styles.logo}
-                source={require('../../assets/logo.png')}/>
-            </View>
-            <View style={styles.buttonContainer}>
-                <Button title={"Log in"} callback={()=>navigation.navigate('Login')}/>
-                <Button title={"Sign Up"} callback={()=>navigation.navigate('SignUp')}/>
-            </View>
-            <View style={styles.LineBottomPage}/>
-          
-        </ScrollView>
+            <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.titleText}>Artist
+                                <Text style={[styles.titleTextSpan, {color: colors.text}]}>Aux</Text>
+                            </Text>
+                            <Text style={styles.border}></Text>
+                            <Text style={[styles.subTitle, {color: colors.text}]}>Record Anywhere</Text>
+                        </View>
+                        <View style={styles.logoContainer}>
+                            <Image 
+                            style={styles.logo}
+                            source={require('../../assets/logo.png')}/>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button title={"Log in"} callback={()=>navigation.navigate('Login')}/>
+                            <Button title={"Sign Up"} callback={()=>navigation.navigate('SignUp')}/>
+                        </View>
+                        <View style={styles.LineBottomPage}/>
+         </ScrollView>
+       
     )
 }
 const styles = StyleSheet.create({
