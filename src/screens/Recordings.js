@@ -139,6 +139,7 @@ const Recordings = ({navigation}) =>{
             console.log(error)
         }
     }
+    
     return(
         <View style={[styles.container, {backgroundColor: colors.background}]}>
               <View style={styles.headerContainer}>    
@@ -149,16 +150,13 @@ const Recordings = ({navigation}) =>{
                         type="font-awesome" 
                         onPress={()=>navigation.goBack()}
                     />
-                    <Text style={styles.headerTitle}>Recordings</Text>
-              </View>
-              
+                    <Text style={[styles.headerTitle, {color: colors.text}]}>Recordings</Text>
+              </View>              
               <View style={styles.recording}>
                     <AudioList recordings={projectState.currentProject}/>
-              </View>
-              
+              </View>              
               <View style={styles.buttomRecorging}>
-                    <View style={styles.barSong}>
-                        
+                    <View style={styles.barSong}>                        
                     </View>
                     <View style={styles.buttomBar}>
                         <ButtonStopNote
@@ -167,13 +165,11 @@ const Recordings = ({navigation}) =>{
                             size={30}
                             callback={()=>downloadFile()}
                         />
-
                         <ButtonStopNote
                             icon='retweet'
                             color='white'
                             size={30}
                         />
-
                         <ButtonStopNote
                             icon={isPlaying ? 'stop-circle':'play-circle'}
                             color='white'
@@ -182,7 +178,6 @@ const Recordings = ({navigation}) =>{
                                 isPlaying ? stopSound():playSound()
                             }}           
                         />
-
                         <ButtonStopNote
                            icon={isRecording ?  'stop' :'circle'}
                            color='red'
@@ -191,7 +186,6 @@ const Recordings = ({navigation}) =>{
                             isRecording ? stopRecording() : startRecording()
                         }
                         />
-
                         <ButtonStopNote 
                             icon='step-forward'
                             color='white'
