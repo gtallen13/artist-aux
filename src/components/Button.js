@@ -23,13 +23,16 @@ const ButtonLogin = ({text,callback}) => {
         </TouchableOpacity>
     )
 }
-const HeaderButton = ({icon, callback}) =>{
+const HeaderButton = ({icon, callback, size}) =>{
+    const { colors } = useTheme();
     return(
         <View style={styles.headerButton}>
             <TouchableOpacity onPress={callback}>
                 <Icon
+                color = {colors.text}
                 name={icon}
-                type="font-awesome"/>
+                type="font-awesome"
+                size={size}/>
             </TouchableOpacity>
         </View>
     )
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
     },
     headerButton:{
-        margin:10
+        margin:10,
     },
     buttonStop:{
         marginRight:10,

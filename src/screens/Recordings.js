@@ -147,50 +147,29 @@ const Recordings = ({navigation}) =>{
                         style={styles.headerIcons}
                         color = {colors.text} 
                         name="chevron-left" 
-                        type="font-awesome" 
+                        type="font-awesome"
+                        size={35}
                         onPress={()=>navigation.goBack()}
                     />
                     <Text style={[styles.headerTitle, {color: colors.text}]}>Recordings</Text>
+                    
               </View>              
               <View style={styles.recording}>
                     <AudioList recordings={projectState.currentProject}/>
-              </View>              
+              </View>  
+                          
               <View style={styles.buttomRecorging}>
-                    <View style={styles.barSong}>                        
-                    </View>
+                   
                     <View style={styles.buttomBar}>
-                        <ButtonStopNote
-                            icon='step-backward'
-                            color='white'
-                            size={30}
-                            callback={()=>downloadFile()}
-                        />
-                        <ButtonStopNote
-                            icon='retweet'
-                            color='white'
-                            size={30}
-                        />
-                        <ButtonStopNote
-                            icon={isPlaying ? 'stop-circle':'play-circle'}
-                            color='white'
-                            size={40}     
-                            callback= {()=>{
-                                isPlaying ? stopSound():playSound()
-                            }}           
-                        />
                         <ButtonStopNote
                            icon={isRecording ?  'stop' :'circle'}
                            color='red'
-                           size={30}
+                           size={100}
                            callback={()=>
                             isRecording ? stopRecording() : startRecording()
                         }
                         />
-                        <ButtonStopNote 
-                            icon='step-forward'
-                            color='white'
-                            size={30}
-                        />
+                    
                     </View>
               </View>
                
@@ -224,7 +203,7 @@ const styles = StyleSheet.create({
     },
   
     buttomRecorging:{
-        backgroundColor: 'black',
+        backgroundColor: '#E9E9E9',
         justifyContent:'center',
         alignItems:'center',
         padding:20,

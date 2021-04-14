@@ -12,17 +12,19 @@ export default function App() {
   LongTimers();
   
   return (
-    <SafeAreaProvider>
+   
     <ThemeProvider>
       <AuthProvider>
         <ProjectProvider>
           <RecordingProvider>
+            <SafeAreaProvider>
                 <Navigation/>
+              </SafeAreaProvider>
           </RecordingProvider>
         </ProjectProvider>
       </AuthProvider>
     </ThemeProvider>
-    </SafeAreaProvider>
+
     
   );
 }

@@ -34,13 +34,16 @@ const Note = ({navigation}) => {
                 color = {colors.text}
                 style={styles.headerIcons} 
                 name="chevron-left" 
-                type="font-awesome"  
+                size={35}  
+                type="font-awesome" 
+             
                 onPress={()=>navigation.navigate('projects')}                 
               /> 
                 <Text style={[styles.headerTitle, {color: colors.text}]}>Note</Text>
                 <HeaderButton
                         icon="save"
-                        type="font-awesome"
+                        type="font-awesome" 
+                        size={35}
                         callback={handleSaveNote}/>                      
               </View>              
               <View style={styles.noteContainer}>
@@ -55,16 +58,10 @@ const Note = ({navigation}) => {
               </View>
               <View style={styles.barButtom}>
                     <View style={styles.viewPlay}>
-                    <ButtonText text = 'Recordings' fontSize={12} color = 'white' callback={()=> navigation.navigate('recording')}/>
-                        <View style={styles.leftbar}/>
-                          <ButtonStopNote
-                            icon='play-circle'
-                            color='white'
-                          />                          
-                          <ButtonStopNote
-                            icon='circle'
-                            color='red'
-                          />
+                    <ButtonText text = 'Recordings' 
+                        fontSize={18} 
+                        color = 'white' 
+                        callback={()=> navigation.navigate('recording')}/>
                     </View>
               </View>
         </View>      
@@ -74,14 +71,16 @@ const Note = ({navigation}) => {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        
     },
     headerContainer:{
         flex:1,
         flexDirection:'row',
         alignItems:'center',
+
+        
     },
     headerIcons:{
-        flex:1,
         paddingLeft:5,
     },
     headerTitle:{
@@ -90,12 +89,15 @@ const styles = StyleSheet.create({
         fontSize:25,
         fontWeight:'600',
         paddingRight:30,
+     
+        
     },
     noteContainer: {
-        flex: 11,
+        flex: 8,
         backgroundColor: '#E9E9E9',
         textAlignVertical: 'top',
         color: 'white',       
+
     },
     note:{
         height:400,
@@ -103,8 +105,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     barButtom:{
-        flex: 2,
+        flex: 1,
         backgroundColor: '#E9E9E9',
+        paddingTop:15
     },
      viewPlay:{
         backgroundColor:'black',

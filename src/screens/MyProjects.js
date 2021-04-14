@@ -38,7 +38,7 @@ const MyProjects = ({navigation}) =>{
                 <Icon 
                     color = {colors.text}
                     style={styles.headerIcons} 
-                    size={40} 
+                    size={45} 
                     name="user" 
                     type="font-awesome" 
                     onPress={handleOpenProfile}                  
@@ -47,7 +47,7 @@ const MyProjects = ({navigation}) =>{
                 <Icon 
                     color = {colors.text}
                     style={styles.headerIcons} 
-                    size={40}  
+                    size={45}  
                     name="plus" 
                     type="font-awesome" 
                     onPress={()=>setVisiblePrompt(true)}             
@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
     },
     headerIcons:{
         flex:1,
-        padding:10,
+        paddingLeft:10,
+        paddingRight:10,
     },
     headerTitle:{
         flex:1,
