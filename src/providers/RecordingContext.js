@@ -24,6 +24,12 @@ const recordingReducer = (action, state)=>{
                 ...state,
                 recordingAdded: true
             }
+        case "getRecordings":
+            return {
+                ...state,
+                recordings: action.payload.recordings,
+                loadingRecordings: action.payload.loading
+            }
         default:
             return state
     }
@@ -39,7 +45,8 @@ const newRecording = (dispatch) => (id,recording)=>{
         recordings: firebase.firestore.FieldValue.arrayUnion(recording)
     })
     .then(()=>{
-        dispatch({type:"newRecording"})
+        dispatch({type:"newRecording"});
+        dispatch({type:"feeback", payload:"Recording Added"});
     })
     .catch((error)=>{
         dispatch({type:"feedback" ,payload:{feedback:error.message}})
@@ -59,16 +66,37 @@ const deleteRecording=(dispatch)=>(id,recording)=>{
         dispatch({type:"feedback", payload:error.message})
     })
 }
+
+//Para obtener el arreglo de recordings
+//https://stackoverflow.com/questions/62036521/how-to-get-an-array-from-firestore-with-javascript
+const getRecordings = (dispatch) => async (projectID)=>{
+    projectsRef.doc(projectID).get("recordings")
+    .then((queryResult)=>{
+        const data = queryResult.data().recordings;
+        dispatch({type:"getRecordings", payload:{recordings:data, loading:false}});
+    })
+    .catch((error)=>{
+        dispatch({type:"feedback", payload:error.message});
+        console.log(error);
+    })
+}
+const clearFeedback = (dispatch) => ()=>{
+    dispatch({type:"feedback", payload:""});
+}
 export const {Provider, Context} = createDataContext(
     recordingReducer,
     {
         setCurrentRecording,
         deleteRecording,
-        newRecording
+        newRecording,
+        getRecordings,
     },
     {
+        feedback:"",
         currentRecording:{title:""},
         recordingDeleted:false,
         recordingAdded:false,
+        recordings:[],
+        loadingRecordings:true,
     }
 )

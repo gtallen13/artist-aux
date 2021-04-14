@@ -9,53 +9,65 @@ import {Audio} from 'expo-av'
 import Dialog from "react-native-dialog";
 
 const AudioList = ({recordings})=>{
-    const {state, deleteRecording} = useContext(RecordingContext)
+    const {state, deleteRecording,getRecordings} = useContext(RecordingContext)
     const {state:projectState} = useContext(ProjectContext)
-    const [recordingList, setRecordingList] = useState(recordings.recordings)
-    const [isPlaying, setIsPlaying] = useState(false)
     const [visiblePrompt, setVisiblePrompt] = useState(false)
     const [selectedRecording, setSelectedRecording] = useState()
+    const [sound, setSound] = useState(new Audio.Sound());
+    const [audioStatus, setAudioStatus] = useState(false);
+    const [soundToPlay, setSoundToPlay] = useState();
 
+    useEffect(()=>{
+        getRecordings(projectState.currentProject.id);
+    },[])
     const handlerLongPress = (recording)=>{
         setSelectedRecording(recording)
         setVisiblePrompt(true)
     }
+    const handleTogglePlay=(recording)=>{
+        setSoundToPlay(recording);
+        setAudioStatus(!audioStatus);
+    }
+
+    //play/stop sound
+    //https://snack.expo.io/@mrarich/blessed-soylent
+    useEffect(()=>{
+        (async ()=>{
+            console.log(`status: ${audioStatus}`);
+            if (audioStatus)
+            {
+                playSound();
+            }
+            else
+            {
+                await sound.stopAsync();
+                await sound.unloadAsync();
+            }
+
+        })()
+    },[audioStatus])
     const handlerDeleteRecording = () => {
         console.log(selectedRecording)
         deleteRecording(projectState.currentProject.id, selectedRecording)
         setVisiblePrompt(false)
     }
-    const playSound = async (recording) =>{
-        const audioURL = recording.split('/')
+    const playSound = async () =>{
+        const audioURL = soundToPlay.split('/')
         const uri = await firebase
         .storage()
         .ref(audioURL[0])
         .child(audioURL[1])
         .getDownloadURL()
         console.log(`uri: ${uri}`)            
-        const soundObject = new Audio.Sound() 
         try
         {
-                await soundObject.loadAsync({uri})
-                await soundObject.playAsync()
-                // setIsPlaying(true)
-                soundObject.getStatusAsync()
-                .then((res)=>{
-                    console.log(res.durationMillis)
-                })
-                .catch((error)=>{
-                    console.log(error);
-                })
+            await sound.loadAsync({uri})
+            await sound.playAsync()
         }
         catch (error) 
         {
             console.log(error);
         }
-    }
-    const stopSound = async ()=>{
-        console.log('Stoping sound')
-        // await soundObject.stopAsync()
-        setIsPlaying(false)
     }
     const emptyFlatList = (
         <View style={styles.emptyRecordings}>
@@ -66,11 +78,11 @@ const AudioList = ({recordings})=>{
         <View style={styles.container}>
             <FlatList
             emptyFlatList={emptyFlatList}
-            data={recordingList}
+            data={recordings}
             keyExtractor={item=>item}
             renderItem={({item})=>(
                 <>
-                    <TouchableOpacity onLongPress={()=>handlerLongPress(item)} onPress={()=> isPlaying ? stopSound():playSound(item)}>
+                    <TouchableOpacity onLongPress={()=>handlerLongPress(item)} onPress={()=> handleTogglePlay(item)}>
                         <AudioCard
                         title={item}/>
                     </TouchableOpacity>   

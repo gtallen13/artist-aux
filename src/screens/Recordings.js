@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import {View,StyleSheet, Text} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { ButtonStopNote } from '../components/Button'
-import * as Permissions from 'expo-permissions';
 import {firebase} from '../firebase'
 import {Context as ProjectContext} from '../providers/ProjectContext'
-import {Context as AuthContext} from '../providers/AuthContext'
 import {Context as RecordingContext} from '../providers/RecordingContext'
 import moment from 'moment'
 import {Audio} from 'expo-av'
@@ -15,13 +13,15 @@ import { useTheme } from '@react-navigation/native';
 
 const Recordings = ({navigation}) =>{
     const {state:projectState} = useContext(ProjectContext)
-    const {state:recordingState, newRecording} = useContext(RecordingContext)
-    const {state} = useContext(AuthContext)
+    const {state:recordingState, newRecording, getRecordings} = useContext(RecordingContext)
     const [isRecording, setIsRecording] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [recording, setRecording] = useState();
     const { colors } = useTheme();
     
+    useEffect(()=>{
+        getRecordings(projectState.currentProject.id);
+    },[recordingState.recordings])
     const playSound = async()=>{
         const uri = await firebase
             .storage()
@@ -59,7 +59,6 @@ const Recordings = ({navigation}) =>{
                 allowsRecordingIOS:true,
                 playsInSilentModeIOS:true,
             });
-            await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
             console.log('Starting recording..')
             const recording = new Audio.Recording();
             await recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
@@ -155,7 +154,7 @@ const Recordings = ({navigation}) =>{
                     
               </View>              
               <View style={styles.recording}>
-                    <AudioList recordings={projectState.currentProject}/>
+                <AudioList recordings={recordingState.recordings}/>
               </View>  
                           
               <View style={styles.buttomRecorging}>                   
@@ -179,6 +178,7 @@ const Recordings = ({navigation}) =>{
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        backgroundColor:"red"
     },
     headerContainer:{
         flex:1,
