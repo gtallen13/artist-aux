@@ -24,6 +24,11 @@ const projectReducer = (state,action)=>{
                 ...state,
                 currentProject:action.payload
             }
+        case "deleteProject":
+            return{
+                ...state,
+                projectDeleted:true,
+            }
         case "updateProject":
             return{
                 ...state,
@@ -86,6 +91,20 @@ const getProjects = (dispatch) => (userID)=>{
     )
 }
 
+const deleteProject=(dispatch)=> (id)=>{
+    projectsRef
+    .doc(id)
+    .delete()
+    .then(() =>{
+        dispatch({type:"feedback", payload:"Recording Deleted"})
+        dispatch({type:"deleteProject"})
+    })
+    .catch((error)=>{
+        dispatch({type:"feedback", payload:error.message})
+    })
+    
+}
+
 const updateProject = (dispatch) => (id,title,timestamp, note)=>{
     projectsRef
     .doc(id)
@@ -114,6 +133,7 @@ export const {Provider, Context} = createDataContext(
     {
         createProject,
         getProjects,
+        deleteProject,
         updateProject,
         setCurrentProject,
     },

@@ -1,15 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {FlatList,StyleSheet,Text, TouchableOpacity,View} from 'react-native'
 import {Context as ProjectContext} from '../providers/ProjectContext'
 import Project from './Project'
+import Dialog from "react-native-dialog";
 
 const ProjecList = ({navigation, projects})=>{
     const {state, setCurrentProject} = useContext(ProjectContext)
-     
+    const {deleteProject} = useContext(ProjectContext)
+    const [selectedProject, setSelectedProject] = useState()
+    const [visiblePrompt, setVisiblePrompt] = useState(false)
+    
     const handleSelectProject = (project)=>{
         setCurrentProject(project)
+        setVisiblePrompt(true)
         navigation.navigate('note')
     }
+
+    const handlerDeleteProject = () => {
+        console.log(selectedProject)
+        deleteProject(state.currentProject.id, selectedProject)
+        setVisiblePrompt(false)
+    }
+
     const emptyFlatList = (
         <View style={styles.emptyProjects}>
             <Text>You don't have any projects yet...</Text>
@@ -32,6 +44,18 @@ const ProjecList = ({navigation, projects})=>{
                     </>
                 )}
             />
+            <Dialog.Container visible={visiblePrompt} onBackdropPress={()=>setVisiblePrompt(false)}>
+                <Dialog.Title>Delete Project</Dialog.Title>
+                <Dialog.Description>Do you really wanna delete this masterpiece?</Dialog.Description>
+                <Dialog.Button 
+                label="Cancel" 
+                onPress={()=>setVisiblePrompt(false)}/>
+                <Dialog.Button 
+                label="Delete" 
+                color="#97221F"
+                bold={true}
+                onPress={()=>handlerDeleteProject()}/>
+            </Dialog.Container>
         </View>
     )
 }
