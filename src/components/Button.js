@@ -58,16 +58,12 @@ const styles = StyleSheet.create({
         borderColor: '#5bb1b0',
         borderRadius: 10,
         marginBottom:20,
-
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.9,
-        shadowRadius: 2,
   
     },
     buttonText: {
         textAlign:'center',
         fontSize:20,
+        fontWeight:'bold',
     },
     buttonLogin: {
         width: width*.9,
@@ -76,11 +72,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom:20,  
         marginTop:30, 
-        
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.9,
-        shadowRadius: 2,
 
         textShadowColor:'#585858',
         textShadowOffset:{width: 1, height: 1},
@@ -90,7 +81,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:20,
         color:'white',
-        fontWeight:'600'
+        fontWeight:'bold'
     },
     headerButton:{
         margin:10

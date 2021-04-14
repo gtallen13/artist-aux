@@ -127,13 +127,9 @@ const styles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#ecedeb'
     },
-    scrollView:{
-     
-        backgroundColor:'#ecedeb',
-    },   
     text_title:{
         textAlign: 'center',
-        fontSize:40,
+        fontSize:60,
         color:'#5bb1b0',
         fontWeight:'600',
         textShadowColor:'#585858',
@@ -141,8 +137,8 @@ const styles = StyleSheet.create({
         textShadowRadius:1,
     },
     border:{
-        height:3,
-        width:100,
+        height:4,
+        width:135,
         backgroundColor:'#5BB1B0',
         justifyContent:'center',
         alignItems:'center',        

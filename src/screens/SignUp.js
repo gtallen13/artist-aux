@@ -106,9 +106,7 @@ const SignUp = ({navigation}) =>{
                 <ButtonLogin callback={handlerSignUp} text={"Sign Up"}/>
             </View>  
             <Text style={[styles.buttonLogin, {color: colors.text}]}> Already registered? 
-                <View>
                     <ButtonText text={"Log In"} callback={()=> navigation.navigate('login')} color="#5bb1b0"/>
-                </View>
             </Text>
             
         </ScrollView>
@@ -125,7 +123,7 @@ const styles = StyleSheet.create({
     },
     text_title:{
         textAlign: 'center',
-        fontSize: 40,
+        fontSize: 60,
         color:'#5bb1b0',
         fontWeight:'600',
         textShadowColor:'#585858',
@@ -133,8 +131,8 @@ const styles = StyleSheet.create({
         textShadowRadius:1,
     },
     border:{
-        height: 3,
-        width: 140,
+        height: 4,
+        width: 185,
         backgroundColor: '#5BB1B0'
     },
     inputText:{
@@ -143,6 +141,7 @@ const styles = StyleSheet.create({
     titlePlacerHolder:{
         color:'#a0a29f',
         fontSize:14,
+        marginTop:10,
     },
     inputs:{
         backgroundColor: 'white',

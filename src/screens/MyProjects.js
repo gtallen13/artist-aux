@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {View, StyleSheet,Text,ScrollView} from 'react-native'
 import { Icon } from 'react-native-elements';
-import {InputSearch} from '../components/searchBar'
 import {Context as ProjectContext} from '../providers/ProjectContext'
 import {Context as AuthContext} from '../providers/AuthContext'
 import Dialog from 'react-native-dialog'
@@ -33,7 +32,8 @@ const MyProjects = ({navigation}) =>{
     }
 
     return(
-        <View style={[styles.container, {backgroundColor: colors.background}]}>
+        <ScrollView>
+ <View style={[styles.container, {backgroundColor: colors.background}]}>
             <View style={styles.headerContainer}>
                 <Icon 
                     color = {colors.text}
@@ -71,23 +71,18 @@ const MyProjects = ({navigation}) =>{
                 />
                 
             </Dialog.Container>
-            <View style={styles.searchContainer}>
-                <InputSearch iconName='search'/>
-            </View>
             
             <ProjectList projects={projectState.projects} navigation={navigation}/>
-        </View>
+        </View> 
+    </ScrollView>
     );
-};
+
+  
+ };      
 const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'#ecedeb',
-    },
-    searchContainer:{
-        marginTop:30,
-        justifyContent:'flex-start',
-        alignItems:'center',         
     },
     headerContainer:{
         marginTop:40,
@@ -103,7 +98,7 @@ const styles = StyleSheet.create({
         flex:1,
         textAlign:'center',
         fontSize:25,
-        fontWeight:'600',
+        fontWeight:'bold',
     },
     dialogInput:{
         borderBottomColor:"#5bb1b0",

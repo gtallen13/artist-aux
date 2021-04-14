@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
     },
     border:{
         height:5,
-        width:70,
+        width:75,
         backgroundColor:'#5BB1B0',
-        marginLeft:125,
+        marginLeft:110,
         
     },
     subTitle:{
