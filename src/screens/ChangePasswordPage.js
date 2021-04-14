@@ -18,7 +18,7 @@ const ChangePasswordPage = ({navigation}) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('')
     const { colors } = useTheme();
-    const {changePassword, signout} = useContext(AuthContext);
+    const {signout} = useContext(AuthContext);
 
     const handleValidCurrentPassword = (val) => {
         if (val === '') setCurrentPasswordError(true)
@@ -52,7 +52,6 @@ const ChangePasswordPage = ({navigation}) => {
                 handleReauthenticate(currentPassword).then(() => {
                     let user = firebase.auth().currentUser;
                     user.updatePassword(newPassword).then(() => {
-                    changePassword();
                     signout();
                     }).catch ((error) => {
                         setError(error.message)

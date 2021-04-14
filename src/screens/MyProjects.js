@@ -28,7 +28,6 @@ const MyProjects = ({navigation}) =>{
         const timestamp = moment().format('MMMM Do YYYY, h:mm:ss a');
         createProject(name,state.user.id,timestamp,"","")
         setVisiblePrompt(false)
-        navigation.navigate('note')
     }
 
     return(
