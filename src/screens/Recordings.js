@@ -185,20 +185,23 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         alignItems:'center',
+        padding:10,
+        paddingBottom:0,
+    
     },
     headerIcons:{
         flex:1,
-        paddingLeft:5,
+        marginLeft:20,
     },
     headerTitle:{
         flex:1,
         textAlign:'center',
         fontSize:25,
-        fontWeight:'600',
+        fontWeight:'bold',
         paddingRight:30,
     },
     recording: {
-        flex: 9,
+        flex: 7,
         backgroundColor: '#E9E9E9',       
     },
   
@@ -206,13 +209,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#E9E9E9',
         justifyContent:'center',
         alignItems:'center',
-        padding:20,
+        padding:30,
       
     },
-    barSong:{
-        flex:3,
-    },
-
     buttomBar:{
 
         flexDirection:'row',

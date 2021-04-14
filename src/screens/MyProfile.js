@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, Switch} from 'react-native';
-import {Avatar, Icon} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 import {ButtonText} from '../components/ButtonText';
 import {ButtonLogin} from '../components/Button';
 import { ToggleTextInput, ChangePasswordInput} from '../components/TextInputButton'
@@ -8,6 +8,7 @@ import {Context as AuthContext} from '../providers/AuthContext';
 import Dialog from "react-native-dialog";
 import { useTheme } from '@react-navigation/native';
 import { Context as ThemeContext} from '../providers/ThemeContext';
+import { color } from 'react-native-reanimated';
 
 const MyProfilePage = ({navigation}) => {    
     const {signout, update ,state } = useContext(AuthContext);
@@ -43,13 +44,17 @@ const MyProfilePage = ({navigation}) => {
             <View style={styles.headerContainer}>
                 <Icon 
                     style={styles.headerIcons}
-                    color = {colors.text} 
+                    color = {colors.text}
+                    size={35} 
                     name="chevron-left" 
                     type="font-awesome" 
                     onPress={()=>navigation.navigate('projects')}          
                 />
-                <Text style={[styles.headerTitle, {color: colors.text}]}>My Projects</Text>
-                    <ButtonText text = 'Logout' fontSize={20} color='#5BB1B0' callback= {()=>{signout()}}/>
+                <Text style={[styles.headerTitle, {color: colors.text}]}>My Profile</Text>
+                    <ButtonText text = 'Logout' 
+                        fontSize={20} 
+                        color='#5BB1B0' 
+                        callback= {()=>{signout()}}/>
             </View>
             <View style={styles.editContainer}>
                 <Icon
@@ -59,6 +64,18 @@ const MyProfilePage = ({navigation}) => {
                     type="font-awesome"                    
                 />
                     <View style={styles.inputText}>
+                        <View style={styles.jaguar}>
+                            {/**Modo oscuro */}
+                            <Text style={[styles.textDarkMode, {color: colors.text}]}>Dark Mode
+                            </Text>
+                                <Switch style={styles.switch}
+                                    trackColor={{ false: "#767577", true: "#ffffff" }}
+                                    thumbColor={themeState.theme ? "#5bb1b0" : "#f4f3f4"}
+                                    ios_backgroundColor="#3e3e3e"
+                                    onValueChange={handlerToggleTheme}
+                                    value={themeState.theme}
+                                />
+                        </View> 
                             {/* Username */}
                         <Text style={styles.titlePlacerHolder}>Username:</Text>
                             <ToggleTextInput 
@@ -80,15 +97,7 @@ const MyProfilePage = ({navigation}) => {
                 <View>
                     <ButtonLogin text={"Save"} callback={()=>setVisiblePrompt(true)}/>
                 </View>
-                <View style={styles.jaguar}>
-                    <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={themeState.theme ? "#f5dd4b" : "#f4f3f4"}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={handlerToggleTheme}
-                        value={themeState.theme}
-                    />
-                </View> 
+               
             </View>
             <Dialog.Container visible={visiblePrompt} onBackdropPress={()=>setVisiblePrompt(false)}>
                 <Dialog.Title>Confirm Password</Dialog.Title>
@@ -117,20 +126,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#ecedeb'
     },
     editContainer:{
-        flex:8,
+        flex:9,
         justifyContent:'center',
         alignItems:'center',
-    },
-    headerIcons:{
-        flex:1,
-        padding:10,
-    },
-    ChangeImg:{
-        padding: 10
     },
     titlePlacerHolder:{
         color:'#a0a29f',
         fontSize:12,
+        marginTop:20,
     },
     inputs:{
         padding: 10
@@ -140,21 +143,33 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-around',
         alignItems:'center',
+        paddingLeft:10,
+        paddingTop:10,
+        
+     
     },
     headerIcons:{
         flex:1,
-        padding:10,
+       
     },
     headerTitle:{
         flex:1,
         textAlign:'center',
         fontSize:25,
-        fontWeight:'600',
+        fontWeight:'bold',
+        paddingLeft:10,
+    },
+    textDarkMode:{
+        fontSize:18,
+        marginRight:10,
+       
     },
     jaguar:{
-        flex: 1,
+        flexDirection: 'row',
         alignItems: "center",
-        justifyContent: "center"
+    
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     },
     dialogInput:{
         borderBottomColor:"#5bb1b0",

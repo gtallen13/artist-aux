@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         alignItems:'center',
-
+        padding:10,
+        paddingBottom:0,
         
     },
     headerIcons:{
@@ -87,13 +88,13 @@ const styles = StyleSheet.create({
         flex:1,
         textAlign:'center',
         fontSize:25,
-        fontWeight:'600',
+        fontWeight:'bold',
         paddingRight:30,
      
         
     },
     noteContainer: {
-        flex: 8,
+        flex: 9,
         backgroundColor: '#E9E9E9',
         textAlignVertical: 'top',
         color: 'white',       
@@ -117,12 +118,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         height: 51
     },
-    leftbar:{
-      borderLeftWidth:3,
-      borderLeftColor:'white',
-      width:10,
-      height:50     
-    }
+    
 })
 
 export default Note;
