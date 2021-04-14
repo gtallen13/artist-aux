@@ -32,7 +32,7 @@ const MyProjects = ({navigation}) =>{
     }
 
     return(
-        <ScrollView>
+      
  <View style={[styles.container, {backgroundColor: colors.background}]}>
             <View style={styles.headerContainer}>
                 <Icon 
@@ -74,7 +74,7 @@ const MyProjects = ({navigation}) =>{
             
             <ProjectList projects={projectState.projects} navigation={navigation}/>
         </View> 
-    </ScrollView>
+
     );
 
   

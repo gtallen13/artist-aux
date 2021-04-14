@@ -40,7 +40,7 @@ const projectReducer = (state,action)=>{
                             title: action.payload.project.title,
                             timestamp: action.payload.project.timestamp,
                             note:action.payload.project.timestamp,
-                            recording: action.payload.project.recording,
+        
                         }
                     }
                     return project
@@ -82,7 +82,7 @@ const getProjects = (dispatch) => (userID)=>{
             projects.push(project)
         });
         dispatch({type:"getProjects", payload:projects})
-        dispatch({type:"feedback", payload:"Your project was saved!"});
+       
     },
     (error)=>{
         dispatch({type:"feedback", payload:error.message})
@@ -90,6 +90,9 @@ const getProjects = (dispatch) => (userID)=>{
     }
     )
 }
+const clearMessage = (dispatch) => () => {
+    dispatch({ type: "feedback", payload: "" });
+  };
 
 const deleteProject=(dispatch)=> (id)=>{
     projectsRef
@@ -116,9 +119,9 @@ const updateProject = (dispatch) => (id,title,timestamp, note)=>{
     .then(()=>{
         dispatch({
             type:"updateProject",
-            payload: {project:{id,title,timestamp,note, recording}},
+            payload: {project:{id,title,timestamp,note}},
         });
-        dispatch({type:"feedback", payload:"Project Updated"})
+        dispatch({type:"feedback", payload:"Your note was updated"})
 
     })
     .catch((error)=>{
@@ -136,6 +139,7 @@ export const {Provider, Context} = createDataContext(
         deleteProject,
         updateProject,
         setCurrentProject,
+        clearMessage,
     },
     {
         projects:[],

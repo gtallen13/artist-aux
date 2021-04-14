@@ -214,6 +214,7 @@ export const {Provider, Context} = createDataContext(
         persistLogin,
         ClearErrorMessage,
         update,
+ 
     },
     {
         user:{},

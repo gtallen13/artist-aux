@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {Dimensions, StyleSheet, View, Text,ScrollView} from 'react-native'
 import { Image} from 'react-native-elements'
 import {Button} from '../components/Button'
@@ -10,9 +10,10 @@ const {width,height} = Dimensions.get('screen');
 const StartPage = ({navigation}) =>
 {
     const { colors } = useTheme();
-    
+  
+ 
     return (
-            <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
+            <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>     
                         <View style={styles.titleContainer}>
                             <Text style={styles.titleText}>Artist
                                 <Text style={[styles.titleTextSpan, {color: colors.text}]}>Aux</Text>

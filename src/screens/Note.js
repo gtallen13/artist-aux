@@ -6,9 +6,10 @@ import {Icon} from 'react-native-elements';
 import { Context as ProjectContext } from "../providers/ProjectContext";
 import { useTheme } from '@react-navigation/native';
 import {Alert} from '../components/Alert'
+import Toast from 'react-native-toast-message';
 
 const Note = ({navigation}) => {
-    const {state,getProjects, updateProject } = useContext(ProjectContext); 
+    const {state,getProjects, updateProject, clearMessage } = useContext(ProjectContext); 
     const [note, setNote] = useState("");
     const { colors } = useTheme();
     const [success, setSuccess] = useState('')
@@ -19,6 +20,22 @@ const Note = ({navigation}) => {
         }
     }, [state.currentProject]);
 
+    useEffect(() => {
+        if (state.currentProject.id) {
+        setNote(state.currentProject.note);
+        }
+    }, [state.currentProject]);
+
+    useEffect(() =>{
+        if (state.feedback){
+            Toast.show({
+                text2:state.feedback
+            })
+            clearMessage() 
+        }
+        
+    }, [state.feedback]);
+
     const handleSaveNote = () =>
     {
 
@@ -28,6 +45,7 @@ const Note = ({navigation}) => {
                 state.currentProject.timestamp,
                 note,
                 setSuccess('Yas')
+                
             );  
       
        
@@ -35,6 +53,7 @@ const Note = ({navigation}) => {
 
     return(        
         <View style={[styles.container, {backgroundColor: colors.background}]}>
+            
               <View style={styles.headerContainer}>    
               <Icon 
                 color = {colors.text}
@@ -51,7 +70,8 @@ const Note = ({navigation}) => {
                         type="font-awesome" 
                         size={30}
                         callback={handleSaveNote}/>                      
-              </View>              
+              </View>      
+              <Toast ref={(ref) => Toast.setRef(ref)} />        
               <View style={styles.noteContainer}>
                     <TextInput
                     multiline={true}

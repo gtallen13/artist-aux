@@ -158,7 +158,7 @@ const Recordings = ({navigation}) =>{
                     <AudioList recordings={projectState.currentProject}/>
               </View>  
                           
-              <View style={[styles.buttomRecorging, {backgroundColor: colors.background}]}>                   
+              <View style={styles.buttomRecorging}>                   
                     <View style={styles.buttomBar}>
                         <ButtonStopNote
                            icon={isRecording ?  'stop' :'circle'}

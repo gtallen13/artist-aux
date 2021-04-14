@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {StyleSheet, Text, View,ScrollView} from 'react-native'
 import {ButtonIcon} from '../components/TextInputButton'
 import {ButtonLogin} from '../components/Button'
 import {firebase} from '../firebase';
 import {Alert} from '../components/Alert';
 import { useTheme } from '@react-navigation/native';
+import { Context as AuthContext } from "../providers/AuthContext";
+
 
 const ChangePasswordPage = ({navigation}) => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -16,6 +18,7 @@ const ChangePasswordPage = ({navigation}) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('')
     const { colors } = useTheme();
+    const {changePassword, signout} = useContext(AuthContext);
 
     const handleValidCurrentPassword = (val) => {
         if (val === '') setCurrentPasswordError(true)
@@ -49,8 +52,8 @@ const ChangePasswordPage = ({navigation}) => {
                 handleReauthenticate(currentPassword).then(() => {
                     let user = firebase.auth().currentUser;
                     user.updatePassword(newPassword).then(() => {
-                    setSuccess('Password was changed');
-                    navigation.navigate('start');
+                    changePassword();
+                    signout();
                     }).catch ((error) => {
                         setError(error.message)
                         console.log(error.message);
@@ -66,7 +69,7 @@ const ChangePasswordPage = ({navigation}) => {
     <ScrollView contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}>
         <View style={styles.inputText}> 
             {error ? <Alert type="error" title={error}/>:null}
-            {success ? <Alert type="success" title={success}/>:null}
+           
             <Text style={styles.oldPassword}>Old Password</Text>
                 <ButtonIcon  
                 callback={()=> console.log("Press")} 
