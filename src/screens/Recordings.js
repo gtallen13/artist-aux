@@ -148,7 +148,7 @@ const Recordings = ({navigation}) =>{
                         color = {colors.text} 
                         name="chevron-left" 
                         type="font-awesome"
-                        size={35}
+                        size={30}
                         onPress={()=>navigation.goBack()}
                     />
                     <Text style={[styles.headerTitle, {color: colors.text}]}>Recordings</Text>
@@ -158,8 +158,7 @@ const Recordings = ({navigation}) =>{
                     <AudioList recordings={projectState.currentProject}/>
               </View>  
                           
-              <View style={styles.buttomRecorging}>
-                   
+              <View style={[styles.buttomRecorging, {backgroundColor: colors.background}]}>                   
                     <View style={styles.buttomBar}>
                         <ButtonStopNote
                            icon={isRecording ?  'stop' :'circle'}

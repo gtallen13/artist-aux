@@ -45,7 +45,7 @@ const MyProfilePage = ({navigation}) => {
                 <Icon 
                     style={styles.headerIcons}
                     color = {colors.text}
-                    size={35} 
+                    size={30} 
                     name="chevron-left" 
                     type="font-awesome" 
                     onPress={()=>navigation.navigate('projects')}          

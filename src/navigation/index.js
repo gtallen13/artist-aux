@@ -68,10 +68,10 @@ const Navigation = () => {
                   options={{
                     headerTransparent: true,
                     headerStyle: {backgroundColor: '#ecedeb'},
-                    headerTitle: false,
+                    headerTitle: "",
                     headerShown: true,
                     headerBackImage:() => (<Icon 
-                      size={25}
+                      size={30}
                       color = {appTheme.colors.text}
                       name='chevron-left' 
                       type='font-awesome'/>),

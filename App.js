@@ -7,12 +7,11 @@ import Navigation from './src/navigation/'
 import LongTimers from './src/utils/LongTimer';
 import {Provider as ThemeProvider} from './src/providers/ThemeContext';
 
-
 export default function App() {
   LongTimers();
   
   return (
-   
+    <>
     <ThemeProvider>
       <AuthProvider>
         <ProjectProvider>
@@ -24,7 +23,7 @@ export default function App() {
         </ProjectProvider>
       </AuthProvider>
     </ThemeProvider>
-
-    
+ 
+    </>
   );
 }

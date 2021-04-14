@@ -67,7 +67,7 @@ const ChangePasswordPage = ({navigation}) => {
         <View style={styles.inputText}> 
             {error ? <Alert type="error" title={error}/>:null}
             {success ? <Alert type="success" title={success}/>:null}
-            <Text style={styles.email}>Old Password</Text>
+            <Text style={styles.oldPassword}>Old Password</Text>
                 <ButtonIcon  
                 callback={()=> console.log("Press")} 
                 iconName='eye-slash' 
@@ -122,13 +122,15 @@ const styles = StyleSheet.create({
      inputText:{
         marginTop:35,
     },
-    email:{
+    oldPassword:{
         color:'#a0a29f',
-        fontSize:14,   
+        fontSize:14,
+           
     },
     password:{
         color:'#a0a29f',
         fontSize:14,
+        marginTop:30,
     },
 })
 

@@ -5,11 +5,13 @@ import { ButtonText } from '../components/ButtonText'
 import {Icon} from 'react-native-elements';
 import { Context as ProjectContext } from "../providers/ProjectContext";
 import { useTheme } from '@react-navigation/native';
+import {Alert} from '../components/Alert'
 
 const Note = ({navigation}) => {
     const {state,getProjects, updateProject } = useContext(ProjectContext); 
     const [note, setNote] = useState("");
     const { colors } = useTheme();
+    const [success, setSuccess] = useState('')
     
     useEffect(() => {
         if (state.currentProject.id) {
@@ -19,12 +21,16 @@ const Note = ({navigation}) => {
 
     const handleSaveNote = () =>
     {
-        updateProject(
-            state.currentProject.id, 
-            state.currentProject.title,
-            state.currentProject.timestamp,
-            note
-        );  
+
+            updateProject(
+                state.currentProject.id, 
+                state.currentProject.title,
+                state.currentProject.timestamp,
+                note,
+                setSuccess('Yas')
+            );  
+      
+       
     };
 
     return(        
@@ -34,7 +40,7 @@ const Note = ({navigation}) => {
                 color = {colors.text}
                 style={styles.headerIcons} 
                 name="chevron-left" 
-                size={35}  
+                size={30}  
                 type="font-awesome" 
              
                 onPress={()=>navigation.navigate('projects')}                 
@@ -43,7 +49,7 @@ const Note = ({navigation}) => {
                 <HeaderButton
                         icon="save"
                         type="font-awesome" 
-                        size={35}
+                        size={30}
                         callback={handleSaveNote}/>                      
               </View>              
               <View style={styles.noteContainer}>
@@ -54,7 +60,10 @@ const Note = ({navigation}) => {
                     placeholder={"Escribe una nota"}
                     value={note}
                     onChangeText={setNote}
-                    /> 
+                   
+                  
+                    />
+                      {success ? <Alert type="success" title={success}/>:null}
               </View>
               <View style={styles.barButtom}>
                     <View style={styles.viewPlay}>
