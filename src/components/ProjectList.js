@@ -9,15 +9,20 @@ const ProjecList = ({navigation, projects})=>{
     const {deleteProject} = useContext(ProjectContext)
     const [selectedProject, setSelectedProject] = useState()
     const [visiblePrompt, setVisiblePrompt] = useState(false)
+    const [projectID, setProjectID] = useState()
     
     const handleSelectProject = (project)=>{
         setCurrentProject(project)
         navigation.navigate('note')
     }
+    const showProject = (id)  => {
+        setProjectID(id)
+        setVisiblePrompt(true)
+    }
+
 
     const handlerDeleteProject = () => {
-        console.log(selectedProject)
-        deleteProject(state.projects.id, selectedProject)
+        deleteProject(projectID)
         setVisiblePrompt(false)
     }
 
@@ -33,7 +38,7 @@ const ProjecList = ({navigation, projects})=>{
                 emptyFlatList={emptyFlatList}
                 renderItem={({item})=>(
                     <>
-                        <TouchableOpacity onLongPress={()=>setVisiblePrompt(true)} onPress={()=>{handleSelectProject(item)}}>
+                        <TouchableOpacity onLongPress={()=>showProject(item.id)} onPress={()=>{handleSelectProject(item)}}>
                             <Project
                             key={item.id}
                             title={item.title}
