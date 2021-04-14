@@ -83,7 +83,6 @@ const Note = ({navigation}) => {
                    
                   
                     />
-                      {success ? <Alert type="success" title={success}/>:null}
               </View>
               <View style={styles.barButtom}>
                     <View style={styles.viewPlay}>
@@ -140,12 +139,12 @@ const styles = StyleSheet.create({
         paddingTop:15
     },
      viewPlay:{
+
         backgroundColor:'black',
-        marginTop: 40,
         flexDirection:'row',
         justifyContent:'flex-end',
         alignItems:'center',
-        height: 51
+        padding:20
     },
     
 })

@@ -25,7 +25,7 @@ const Alert = ({ type, title }) => {
   return (
     <View style={[styles.container, { backgroundColor: background}]}>
   
-      <Text style={[styles.textColor ,  {color:colorText}]}>{title}</Text>
+      <Text style={[{color:colorText}]}>{title}</Text>
     </View>
   );
 };
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "flex-end"
-    
   }, 
 });
 
